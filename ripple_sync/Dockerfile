@@ -1,5 +1,5 @@
 # Stage 1: Build the Angular application
-FROM node:22-alpine
+FROM node:22-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -30,3 +30,4 @@ EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
