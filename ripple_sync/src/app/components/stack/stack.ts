@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 export class Stack {
   @Input() direction: 'row' | 'column' = 'column';
   @Input() gap: number = 0;
+  @Input() justify: 'space-between' | 'left' = 'left'
 }
