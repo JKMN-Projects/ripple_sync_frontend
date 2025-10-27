@@ -37,3 +37,18 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.background-gradient{
+    background: linear-gradient(135deg, #2C5282 40%, #2D3748 100%);
+    color: white;
+}
+
+button[mat-raised-button],
+a[mat-raised-button] {
+  background-color: #ff4081 !important;
+  color: white !important;
+
+  &:hover:not(:disabled) {
+    background-color: #f50057 !important;
+  }
+}

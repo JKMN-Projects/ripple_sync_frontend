@@ -1,1 +1,48 @@
-<p>home works!</p>
+<section class="hero background-gradient">
+    <div class="hero-content">
+        <h1>Profesionel Social Media Management</h1>
+        <p>Schedule, publish and track your content across multiple platforms. Streamline your workflow with intelligent automation and comprehensive analytics.</p>
+        <app-stack direction="row" [gap]="1">
+            <a matButton="filled" routerLink="/signup">Login</a>
+            <a matButton="outlined" routerLink="/features">Register</a>
+        </app-stack>    
+    </div>
+</section>
+
+<div class="main-section">
+    <section>
+        <div class="section-content">
+            <h2>Supported Platforms</h2>
+            <h5>Manage all your social media accounts in one place</h5>
+            <mat-grid-list cols="5" rowHeight="100px" gutterSize="16px">
+                <!-- TODO: Replace with actual platforms -->
+                @for (platform of ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'TikTok', 'YouTube']; track $index) {
+                    <mat-grid-tile>
+                        <div class="platform-tile">
+                            <span>{{ platform }}</span>
+                        </div>
+                    </mat-grid-tile>
+                }
+            </mat-grid-list>
+        </div>
+    </section>
+    <section></section>
+    <section></section>
+    <section></section>
+</div>
+
+<footer>
+    <section class="hero hero--small background-gradient">
+        <div class="hero-content">
+            <h1>Ready to Transform Your Social Media Strategy?</h1>
+            <p>Join profesionals who trust RippleSync for their social media management</p>
+            <app-stack direction="row" [gap]="1">
+                <a matButton="filled" routerLink="/signup">Login</a>
+                <a matButton="outlined" routerLink="/features">Register</a>
+            </app-stack>
+        </div>
+    </section>
+    <section class="footer-bottom">
+        <p>&copy; 2025 RippleSync. All rights reserved.</p>
+    </section>
+</footer>
