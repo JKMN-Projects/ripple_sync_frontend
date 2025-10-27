@@ -1,0 +1,59 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #1976d2 !important;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar-brand {
+  .brand-link {
+    color: white !important;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+
+  a, button {
+    color: white !important;
+    font-weight: 500;
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.15) !important;
+    }
+  }
+
+  button[mat-raised-button] {
+    background-color: #ff4081 !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: #f50057 !important;
+    }
+  }
+}

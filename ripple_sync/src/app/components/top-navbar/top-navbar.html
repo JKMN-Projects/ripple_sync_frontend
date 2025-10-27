@@ -1,1 +1,15 @@
-<p>top-navbar works!</p>
+<mat-toolbar color="primary" class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-brand">
+      <a routerLink="/" class="brand-link">RippleSync</a>
+    </div>
+
+    <nav class="navbar-nav">
+      @if (!authService.isAuthenticated()) {
+      <button mat-button (click)="openLoginModal()">
+        Login
+      </button>
+      }
+    </nav>
+  </div>
+</mat-toolbar>
