@@ -1,0 +1,9 @@
+<div>
+    <h1>Platform Integrations</h1>
+    <sub>Connect your social media accounts to start publishing content</sub>
+    <div class="integrations-container">
+        @for (connection of connections; track connection.id) {
+        <app-generic-integration [connection]="connection" />
+        }
+    </div>
+</div>

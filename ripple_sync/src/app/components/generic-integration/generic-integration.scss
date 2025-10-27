@@ -1,0 +1,90 @@
+.connection-card {
+  width: 280px;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+::ng-deep .mat-mdc-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+
+  &.connected {
+    background-color: #d1fae5;
+  }
+
+  .icon-placeholder {
+    width: 24px;
+    height: 24px;
+    background-color: #9ca3af;
+    border-radius: 4px;
+  }
+}
+
+::ng-deep .mat-mdc-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.status-chip {
+  font-size: 12px;
+  font-weight: 500;
+  height: 24px;
+  
+  &.connected {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+  }
+  
+  &:not(.connected) {
+    background-color: #f3f4f6 !important;
+    color: #6b7280 !important;
+  }
+}
+
+::ng-deep .mat-mdc-card-content {
+  padding-top: 8px;
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+::ng-deep .mat-mdc-card-actions {
+  padding: 0 16px 16px 16px;
+  margin: 0;
+}
+
+.action-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button-spinner {
+  display: inline-block;
+}
+
+::ng-deep .button-spinner .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: currentColor;
+}
