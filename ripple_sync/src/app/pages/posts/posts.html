@@ -1,0 +1,9 @@
+<div style="padding: 4vh;">
+    <h1 >Posts</h1>
+    <button matButton="outlined">Basic</button>
+    <div>
+        @for (post of posts; track post.id) {
+        <app-generic-post [post]="post"  />
+        }
+    </div>
+</div>
