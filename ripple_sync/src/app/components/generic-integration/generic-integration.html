@@ -19,12 +19,12 @@
   
   <mat-card-actions>
     <button 
-      matButton="filled"
+      mat-flat-button
       [color]="connection().connected ? 'connected' : 'disconnected'"
-      [disabled]="isLoading"
+      [disabled]="isLoading()"
       (click)="onToggleConnection()"
       class="action-button">
-      @if (isLoading) {
+      @if (isLoading()) {
         <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
         <span>Loading...</span>
       } @else {

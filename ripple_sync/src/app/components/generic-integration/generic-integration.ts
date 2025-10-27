@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal  } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -20,18 +20,14 @@ import { StatusChangeEvent } from '@angular/forms';
 export class GenericIntegration {
   connection = input.required<IntegrationConnection>();
 
-  isLoading = false;
+  isLoading = signal(false);
 
   constructor(private integrationService: Integration) { }
 
   onToggleConnection(): void {
-    console.log(this.isLoading);
-
-    if (this.isLoading) return;
-    console.log(this.isLoading);
+    if (this.isLoading()) return;
     const currentConnection = this.connection();
-    this.isLoading = true;
-    console.log(this.isLoading);
+    this.isLoading.set(true);
     // const action$ = currentConnection.connected
     //   ? this.integrationService.disconnect(currentConnection.id)
     //   : this.integrationService.connect(currentConnection.id);
@@ -49,7 +45,11 @@ export class GenericIntegration {
     //   }
     // });
 
-    this.isLoading = false;
-    console.log(this.isLoading);
+    setTimeout(() => {
+      console.log("is loading");
+      this.isLoading.set(false);
+      return;
+    }, 1000);
+
   }
 }
