@@ -1,6 +1,29 @@
+.page-wrapper {
+  background-color: #F3F4F6;
+  min-height: 100vh;
+}
+
+.page-header {
+  padding: 40px 40px 32px 40px;
+  background-color: #F3F4F6;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: #6B7280;
+  margin: 0;
+}
+
 .integrations-container {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
-  padding: 24px;
+  padding: 0 40px 40px 40px;
 }

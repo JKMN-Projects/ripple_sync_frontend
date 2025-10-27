@@ -1,9 +1,12 @@
-<div>
-    <h1>Platform Integrations</h1>
-    <sub>Connect your social media accounts to start publishing content</sub>
-    <div class="integrations-container">
-        @for (connection of connections; track connection.id) {
-        <app-generic-integration [connection]="connection" />
-        }
-    </div>
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Platform Integrations</h1>
+    <p class="page-subtitle">Connect your social media accounts to start publishing content</p>
+  </div>
+  
+  <div class="integrations-container">
+    @for (connection of connections; track connection.id) {
+      <app-generic-integration [connection]="connection" />
+    }
+  </div>
 </div>

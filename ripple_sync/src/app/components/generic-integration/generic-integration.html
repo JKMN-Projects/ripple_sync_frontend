@@ -3,12 +3,14 @@
     <div class="icon-container" [class.connected]="connection().connected" mat-card-avatar>
       <div class="icon-placeholder"></div>
     </div>
-    <mat-card-title>{{ connection().name }}</mat-card-title>
-    <mat-card-subtitle>
-      <mat-chip [class.connected]="connection().connected" class="status-chip">
-        {{ connection().connected ? 'Connected' : 'Not Connected' }}
-      </mat-chip>
-    </mat-card-subtitle>
+    <div class="header-content">
+      <mat-card-title>{{ connection().name }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip [class.connected]="connection().connected" class="status-chip">
+          {{ connection().connected ? 'Connected' : 'Not Connected' }}
+        </mat-chip>
+      </mat-card-subtitle>
+    </div>
   </mat-card-header>
   
   <mat-card-content>
@@ -17,8 +19,8 @@
   
   <mat-card-actions>
     <button 
-      mat-raised-button
-      [color]="connection().connected ? 'warn' : 'primary'"
+      matButton="filled"
+      [color]="connection().connected ? 'connected' : 'disconnected'"
       [disabled]="isLoading"
       (click)="onToggleConnection()"
       class="action-button">

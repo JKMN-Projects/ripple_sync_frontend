@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { GenericIntegration } from '../../components/generic-integration/generic-integration';
 import { Integration, IntegrationConnection } from '../../services/integration';
 
@@ -12,20 +12,16 @@ import { Integration, IntegrationConnection } from '../../services/integration';
 export class Integrations implements OnInit {
   connections: IntegrationConnection[] = [];
 
-  constructor(private integrationService: Integration) {}
-
-  ngOnInit(): void {
-    this.loadIntegrations();
-  }
-
-  private loadIntegrations(): void {
-    this.integrationService.getIntegrations().subscribe({
-      next: (integrations) => {
+  constructor(private integrationService: Integration) {
+    effect(() => {
+      const integrations = this.integrationService.integrations();
+      if (integrations) {
         this.connections = integrations;
-      },
-      error: (error) => {
-        console.error('Failed to load integrations:', error);
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.integrationService.getIntegrations();
   }
 }

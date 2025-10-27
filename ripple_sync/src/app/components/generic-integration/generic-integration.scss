@@ -1,76 +1,111 @@
-.connection-card {
-  width: 280px;
-  transition: box-shadow 0.2s ease;
+@use '@angular/material' as mat;
 
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
+.connection-card {
+    width: 240px;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    transition: box-shadow 0.2s ease;
+    background: #F7FAFC;
+
+    &.connected {
+        background: #F0FFF4;
+        background: linear-gradient(180deg, rgba(240, 255, 244, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        border: 1px solid #48BB78;
+    }
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 }
 
-::ng-deep .mat-mdc-card-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start !important;
+.mat-mdc-card-header {
+    display: flex;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    padding: 24px 20px 12px 20px !important;
+    gap: 12px;
+}
+
+.mat-mdc-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 !important;
+    color: #111827;
+}
+
+.mat-mdc-card-subtitle {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mat-mdc-card-content {
+    padding: 0 20px 20px 20px !important;
+}
+
+.mat-mdc-card-actions {
+    padding: 0 20px 20px 20px !important;
+    margin: 0;
 }
 
 .icon-container {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  flex-shrink: 0;
 
-  &.connected {
-    background-color: #d1fae5;
-  }
+    &.connected {
+        background-color: #D1FAE5;
+    }
 
-  .icon-placeholder {
-    width: 24px;
-    height: 24px;
-    background-color: #9ca3af;
-    border-radius: 4px;
-  }
+    &:not(.connected) {
+        background-color: #E5E7EB;
+    }
+
+    .icon-placeholder {
+        width: 32px;
+        height: 32px;
+        background-color: #9CA3AF;
+        border-radius: 8px;
+    }
 }
 
-::ng-deep .mat-mdc-card-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 4px;
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .status-chip {
-  font-size: 12px;
+    @include mat.chips-overrides((
+        outline-width: 0,
+        ));
+
+    font-size: 12px;
   font-weight: 500;
   height: 24px;
-  
-  &.connected {
-    background-color: #d1fae5 !important;
-    color: #065f46 !important;
-  }
-  
-  &:not(.connected) {
-    background-color: #f3f4f6 !important;
-    color: #6b7280 !important;
-  }
-}
+  padding: 4px 10px !important;
+  width: fit-content;
 
-::ng-deep .mat-mdc-card-content {
-  padding-top: 8px;
+    &.connected {
+        background-color: #D1FAE5 !important;
+        color: #065F46 !important;
+    }
+
+    &:not(.connected) {
+        background-color: #F3F4F6 !important;
+        color: #6B7280 !important;
+    }
 }
 
 .description {
   margin: 0;
   font-size: 14px;
-  color: #6b7280;
+  color: #6B7280;
   line-height: 1.5;
-}
-
-::ng-deep .mat-mdc-card-actions {
-  padding: 0 16px 16px 16px;
-  margin: 0;
 }
 
 .action-button {
@@ -79,12 +114,43 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 24px;
+  text-transform: none;
+
+  &[color="connected"] {
+     @include mat.button-overrides((
+        filled-container-color: #E53E3E,
+        filled-label-text-color: white
+                ));
+
+    &:hover:not(:disabled) {    
+      background-color: #5a4d4d !important;
+    }
+  }
+
+  &[color="disconnected"] {
+    @include mat.button-overrides((
+        filled-container-color: #3182CE,
+        filled-label-text-color: white,
+        ));
+
+    &:hover:not(:disabled) {
+      background-color: #3182CE !important;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
 }
 
 .button-spinner {
   display: inline-block;
-}
 
-::ng-deep .button-spinner .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: currentColor;
+  .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: currentColor;
+  }
 }
