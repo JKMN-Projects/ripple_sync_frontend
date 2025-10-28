@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ɵEmptyOutletComponent } from "@angular/router";
 
 @Component({
   selector: 'app-icon-container',
-  imports: [MatIconModule, ɵEmptyOutletComponent],
+  imports: [MatIconModule],
   templateUrl: './icon-container.html',
   styleUrl: './icon-container.scss',
 })

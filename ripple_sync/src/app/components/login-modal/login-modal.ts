@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Authentication, LoginRequest } from '../../services/authentication';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { environment } from '../../../environments/environment';
+import { IconContainer } from "../icon-container/icon-container";
 
 @Component({
   selector: 'app-login-modal',
@@ -19,7 +20,8 @@ import { environment } from '../../../environments/environment';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-  ],
+    IconContainer
+],
   templateUrl: './login-modal.html',
   styleUrl: './login-modal.scss',
 })
