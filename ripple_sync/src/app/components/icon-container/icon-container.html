@@ -1,4 +1,8 @@
 <div class="icon-container" [class.square]="shape === 'square'">
+    @if (iconName) {
     <mat-icon fontIcon="{{ iconName }}"></mat-icon>
-    <ng-component></ng-component>
+    } 
+    @else {
+    <ng-content></ng-content>
+    }
 </div>

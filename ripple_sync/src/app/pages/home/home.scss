@@ -1,14 +1,5 @@
 @use '@angular/material' as mat;
 
-article {
-    height: 100vh;
-    overflow-y: auto;
-    > * {
-        scroll-snap-type: y proximity;
-        scroll-snap-align: start;
-    }
-}
-
 .hero {
     height: 500px;
 
@@ -79,6 +70,10 @@ article {
         padding: .75rem;
         border-radius: .5rem;
 
+        mat-card-header {
+            display: block;
+        }
+
         mat-card-title {
             display: flex;
             flex-direction: column;
@@ -101,6 +96,10 @@ article {
 }
 .workflow-tile {
     text-align: center;
+    
+    mat-card-title {
+        align-items: center;
+    }
 }
 
 
