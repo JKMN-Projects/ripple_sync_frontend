@@ -3,7 +3,7 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #1976d2 !important;
+  background: linear-gradient(0deg, #CACACA, #ffffff);
 }
 
 .navbar-content {
@@ -34,7 +34,7 @@
 .navbar-nav {
   display: flex;
   align-items: center;
-
+/*
   a, button {
     color: white !important;
     font-weight: 500;
@@ -48,12 +48,13 @@
     }
   }
 
-  button[mat-raised-button] {
-    background-color: #ff4081 !important;
-    color: white !important;
+  // button[mat-raised-button] {
+  //   background-color: #ff4081 !important;
+  //   color: white !important;
 
-    &:hover:not(:disabled) {
-      background-color: #f50057 !important;
-    }
-  }
+  //   &:hover:not(:disabled) {
+  //     background-color: #f50057 !important;
+  //   }
+  // }
+  */
 }
