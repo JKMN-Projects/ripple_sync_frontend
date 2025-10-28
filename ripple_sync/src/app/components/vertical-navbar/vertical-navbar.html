@@ -1,20 +1,41 @@
 <nav class="stack">
-    <div class="brand-section stack stack--row stack--gap-sm stack--center">
+    <div class="brand-section stack stack--row stack--gap-sm stack--align-center">
         <img src="Logo.png" alt="RippleSync Logo" class="logo" />
         <h4>RippleSync</h4>
     </div>
     <mat-divider></mat-divider>
     <ul>
-        <li><a routerLink="">Dashboard</a></li>
-        <li><a routerLink="">My Posts</a></li>
-        <li><a routerLink="">Platforms</a></li>
+        <li>
+            <a routerLink="" routerLinkActive="active-link">
+                <mat-icon fontIcon="home"></mat-icon>
+                Home
+            </a>
+        </li>
+        <li>
+            <a routerLink="/dashboard" routerLinkActive="active-link">
+                <mat-icon fontIcon="dashboard"></mat-icon>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a routerLink="/my-posts" routerLinkActive="active-link">
+                <mat-icon fontIcon="art_track"></mat-icon>
+                My Posts
+            </a>
+        </li>
+        <li>
+            <a routerLink="/platforms" routerLinkActive="active-link">
+                <mat-icon fontIcon="apps"></mat-icon>
+                Platforms
+            </a>
+        </li>
     </ul>
     <mat-divider></mat-divider>
-    <button matButton="filled" class="dark">Logout</button>
-    <div class="stack stack--row stack--center avatar-section">
+    <div class="avatar-section stack stack--row stack--center stack--gap-sm">
         <app-icon-container iconName="person" size="sm"></app-icon-container>
-        <div class="">john.doe@example.com</div>
+        <div>{{ userEmail }}</div>
     </div>
     <mat-divider></mat-divider>
+    <button matButton="filled" class="dark" (click)="logout()">Logout</button>
     <button matButton="filled" class="error">Delete account</button>
 </nav>

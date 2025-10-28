@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="over" [opened]="isSidebarOpen">
+  <mat-drawer mode="over" [opened]="isSidebarOpen" (closed)="handleOnDrawerClosed()">
     <app-vertical-navbar></app-vertical-navbar>
   </mat-drawer>
   <mat-drawer-content>

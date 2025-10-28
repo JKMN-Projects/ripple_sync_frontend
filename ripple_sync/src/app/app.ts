@@ -23,4 +23,9 @@ export class App {
   get isSidebarOpen() :boolean {
     return this.sidebarService.isOpen();
   }
+  handleOnDrawerClosed(): void {
+    if (this.isSidebarOpen) {
+      this.sidebarService.close();
+    }
+  }
 }

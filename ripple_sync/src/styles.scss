@@ -23,6 +23,7 @@ html {
 	@include mat.core-overrides((
 		app-background-color: #fff
 	));
+	box-sizing: border-box;
 }
 
 
@@ -120,6 +121,16 @@ h6 {
 
 	&.stack--space-between {
 		justify-content: space-between;
+	}
+	&.stack--space-around {
+		justify-content: space-around;
+	}
+	&.stack--space-evenly {
+		justify-content: space-evenly;
+	}
+
+	&.stack--align-center {
+		align-items: center;
 	}
 
 	&.stack--gap-xs {

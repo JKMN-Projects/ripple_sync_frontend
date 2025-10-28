@@ -81,12 +81,14 @@ html {
 	@include mat.button-overrides((
 		protected-container-color: var(--mat-sys-error-container),
 		protected-label-text-color: var(--mat-sys-on-error-container),
+		protected-hover-state-layer-opacity: 0.12,
 
 		outlined-outline-color: var(--mat-sys-error-container),
 		outlined-label-text-color: var(--mat-sys-on-error-container),
 
 		filled-container-color: var(--mat-sys-error),
 		filled-label-text-color: var(--mat-sys-on-error),
+		filled-hover-state-layer-opacity: 0.12,
 
 		tonal-container-color: var(--mat-sys-error-container),
 		tonal-label-text-color: var(--mat-sys-on-error-container),

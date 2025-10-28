@@ -9,4 +9,8 @@ export class SidebarService {
   toggle(): void {
     this.isOpen.update(open => !open);
   }
+
+  close(): void {
+    this.isOpen.set(false);
+  }
 }
