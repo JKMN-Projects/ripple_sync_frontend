@@ -1,29 +1,44 @@
 <mat-card class="example-card" appearance="outlined" style="margin-bottom: 1rem;">
-    <mat-card-header>
-        <mat-card-title>
-            <h3>{{post().statusName}}</h3>
-        </mat-card-title>
-        <mat-card-subtitle>
-            <p>{{post().messageContent}}</p>
-        </mat-card-subtitle>
-        
-    </mat-card-header>
-    <mat-card-content>
-        @for (media of post().mediaAttachment; track $index) {
+    <div style="padding-left: 1rem; padding-right: 1rem;">
 
-        }
-    </mat-card-content>
-    <mat-card-footer class="card-footer">
-        <app-stack direction="row" justify="space-between">
+        <mat-card-header>
+            <mat-card-title style="width: 100%;">
+                <app-stack direction="row" justify="space-between"  >
+                    <div>
+                        <mat-chip-set>
+                            <mat-chip>{{post().statusName}}</mat-chip>
+                        </mat-chip-set>
+                    </div>
+                    <div>
+                        <button matButton>Retry</button>
+                        <button matButton>Edit</button>
+                        <button matButton>Delete</button>
+                    </div>
+                </app-stack>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <p>{{post().messageContent}}</p>
+            </mat-card-subtitle>
 
-            <mat-chip-set aria-label="Platforms">
-                @for (platform of post().platforms; track $index) 
-                {
+        </mat-card-header>
+        <mat-card-content>
+            @for (media of post().mediaAttachment; track $index) {
+            <img src="{{media}}" width="100" height="100">
+            }
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-footer class="card-footer">
+            <app-stack direction="row" justify="space-between">
+
+                <mat-chip-set aria-label="Platforms">
+                    @for (platform of post().platforms; track $index)
+                    {
                     <mat-chip>{{platform}}</mat-chip>
-                }
-            </mat-chip-set>
-            
-            <p >{{post().statusName}} {{post().timestamp | date:'dd/MM/yyyy'}}</p>
-        </app-stack>
-    </mat-card-footer>
+                    }
+                </mat-chip-set>
+
+                <p>{{post().statusName}} {{post().timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+            </app-stack>
+        </mat-card-footer>
+    </div>
 </mat-card>
