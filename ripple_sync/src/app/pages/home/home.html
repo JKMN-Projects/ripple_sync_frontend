@@ -3,8 +3,14 @@
         <h1>Profesionel Social Media Management</h1>
         <p>Schedule, publish and track your content across multiple platforms. Streamline your workflow with intelligent automation and comprehensive analytics.</p>
         <app-stack direction="row" [gap]="1">
-            <a matButton="filled" routerLink="/signup">Login</a>
-            <a matButton="outlined" routerLink="/features">Register</a>
+            <a matButton="filled" class="surface" routerLink="/features">Login</a>
+            <a matButton="outlined" class="surface" routerLink="/features">Register</a>
+            <!--
+            <a matButton="elevated" class="surface" routerLink="/signup">Login</a>
+            <a matButton="elevated" class="surface" routerLink="/signup">surface</a>
+            <a matButton="filled" class="secondary" routerLink="/features">secondary</a>
+            <a matButton="filled" class="accent" routerLink="/features">accent</a>
+            <a matButton="filled" class="error" routerLink="/features">error</a>-->
         </app-stack>    
     </div>
 </section>
@@ -37,8 +43,8 @@
             <h1>Ready to Transform Your Social Media Strategy?</h1>
             <p>Join profesionals who trust RippleSync for their social media management</p>
             <app-stack direction="row" [gap]="1">
-                <a matButton="filled" routerLink="/signup">Login</a>
-                <a matButton="outlined" routerLink="/features">Register</a>
+                <a matButton="elevated" class="surface" routerLink="/signup">Login</a>
+                <a matButton="outlined" class="surface" routerLink="/features">Register</a>
             </app-stack>
         </div>
     </section>

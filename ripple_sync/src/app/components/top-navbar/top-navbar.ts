@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../login-modal/login-modal';
+import { Stack } from "../stack/stack";
 
 @Component({
   selector: 'app-top-navbar',
@@ -18,8 +19,9 @@ import { LoginModal } from '../login-modal/login-modal';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+    Stack
+],
   templateUrl: './top-navbar.html',
   styleUrl: './top-navbar.scss',
 })
