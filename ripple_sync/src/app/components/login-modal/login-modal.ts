@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Authentication, LoginRequest } from '../../services/authentication';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login-modal',
@@ -28,8 +29,8 @@ export class LoginModal {
   private dialogRef = inject(MatDialogRef<LoginModal>);
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    email: [environment.production ? '' : 'jukman@gmail.com', [Validators.required, Validators.email]],
+    password: [environment.production ? '' : 'Kode1234!', [Validators.required, Validators.minLength(6)]]
   });
 
   isLoading = signal(false);
