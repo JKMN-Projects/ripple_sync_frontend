@@ -1,0 +1,35 @@
+<mat-card class="connection-card" [class.connected]="integration().connected">
+  <mat-card-header>
+    <div class="icon-container" [class.connected]="integration().connected" mat-card-avatar>
+      <div class="icon-placeholder"></div>
+    </div>
+    <div class="header-content">
+      <mat-card-title>{{ integration().name }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip [class.connected]="integration().connected" class="status-chip">
+          {{ integration().connected ? 'Connected' : 'Not Connected' }}
+        </mat-chip>
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <p class="description">{{ integration().description }}</p>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button 
+      mat-flat-button
+      [color]="integration().connected ? 'connected' : 'disconnected'"
+      [disabled]="isLoading()"
+      (click)="onToggleConnection()"
+      class="action-button">
+      @if (isLoading()) {
+        <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+        <span>Loading...</span>
+      } @else {
+        <span>{{ integration().connected ? 'Disconnect' : 'Connect Account' }}</span>
+      }
+    </button>
+  </mat-card-actions>
+</mat-card>

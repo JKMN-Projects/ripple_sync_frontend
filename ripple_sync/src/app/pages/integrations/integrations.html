@@ -1,0 +1,12 @@
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1 class="page-title">Platform Integrations</h1>
+    <p class="page-subtitle">Connect your social media accounts to start publishing content</p>
+  </div>
+  
+  <div class="integrations-container">
+    @for (integration of integrations(); track integration.platformId) {
+      <app-generic-integration [integration]="integration" />
+    }
+  </div>
+</div>

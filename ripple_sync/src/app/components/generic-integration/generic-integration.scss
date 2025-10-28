@@ -1,0 +1,155 @@
+@use '@angular/material' as mat;
+
+.connection-card {
+  width: 340px;
+  min-height: 280px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  transition: box-shadow 0.2s ease;
+  background: #F7FAFC;
+  display: flex;
+  flex-direction: column;
+
+  &.connected {
+    background: linear-gradient(180deg, rgba(240, 255, 244, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    border: 1px solid #48BB78;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .mat-mdc-card-header {
+    display: flex;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    padding: 24px 20px 12px 20px !important;
+    gap: 12px;
+  }
+
+  .mat-mdc-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 !important;
+    color: #111827;
+  }
+
+  .mat-mdc-card-subtitle {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mat-mdc-card-content {
+    padding: 0 20px 20px 20px !important;
+    flex: 1;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 0 20px 20px 20px !important;
+    margin: 0;
+  }
+}
+
+.icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.connected {
+    background-color: #D1FAE5;
+  }
+
+  &:not(.connected) {
+    background-color: #E5E7EB;
+  }
+
+  .icon-placeholder {
+    width: 32px;
+    height: 32px;
+    background-color: #9CA3AF;
+    border-radius: 8px;
+  }
+}
+
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.status-chip {
+  @include mat.chips-overrides((
+    outline-width: 0,
+  ));
+
+  font-size: 12px;
+  font-weight: 500;
+  height: 24px;
+  padding: 4px 10px !important;
+  width: fit-content;
+
+  &.connected {
+    background-color: #D1FAE5 !important;
+    color: #065F46 !important;
+  }
+
+  &:not(.connected) {
+    background-color: #F3F4F6 !important;
+    color: #6B7280 !important;
+  }
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+.action-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 24px !important;
+  text-transform: none;
+
+  &.disconnect-button {
+    background-color: #EC4899 !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: #DB2777 !important;
+    }
+  }
+
+  &.connect-button {
+    background-color: #3182CE !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: #2C5282 !important;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.button-spinner {
+  display: inline-block;
+
+  .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: currentColor;
+  }
+}
