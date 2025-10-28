@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../login-modal/login-modal';
 import { Stack } from "../stack/stack";
+import { SidebarService } from '../../services/sidebar-service';
 
 @Component({
   selector: 'app-top-navbar',
@@ -29,6 +30,7 @@ export class TopNavbar {
   private dialog = inject(MatDialog);
   private router = inject(Router);
   authService = inject(Authentication);
+  private sidebarService = inject(SidebarService);
 
   openLoginModal(): void {
     const dialogRef = this.dialog.open(LoginModal, {
@@ -42,6 +44,10 @@ export class TopNavbar {
         this.router.navigate(['/']); // Change route when post list component is implemented
       }
     })
+  }
+
+  toggleDrawer(): void {
+    this.sidebarService.toggle();
   }
 
   logout(): void {

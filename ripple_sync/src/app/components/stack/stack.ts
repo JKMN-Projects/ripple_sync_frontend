@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './stack.scss',
 })
 export class Stack {
-  @Input() direction: 'row' | 'column' = 'column';
-  @Input() gap: number = 0;
-  @Input() justify: 'space-between' | 'left' = 'left'
+  direction = input<'row' | 'column'>('column');
+  gap = input<number>(0);
+  justify = input<'space-between' | 'left' | 'center'>('left');
+  alignItems = input<'center' | 'flex-start'>('flex-start');
 }

@@ -117,12 +117,15 @@ html {
 	@include mat.button-overrides((
 		protected-container-color: var(--mat-sys-surface-container),
 		protected-label-text-color: #2D4261,
-
+		protected-hover-state-layer-opacity: 0.12,
+		
 		outlined-outline-color: var(--mat-sys-surface-container),
 		outlined-label-text-color: var(--mat-sys-surface-container),
-
+		outlined-hover-state-layer-opacity: 0.16,
+		
 		filled-container-color: var(--mat-sys-surface),
 		filled-label-text-color: #2D4261,
+		filled-hover-state-layer-opacity: 0.12,
 
 		tonal-container-color: var(--mat-sys-surface-container),
 		tonal-label-text-color: var(--mat-sys-on-surface-container),

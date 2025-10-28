@@ -14,3 +14,10 @@
   min-height: 100vh;
 }
 
+
+mat-drawer-container {
+  @include mat.sidenav-overrides((
+    container-width: 300px,
+    container-shape: .5rem,
+  ));
+}
