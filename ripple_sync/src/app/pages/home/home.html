@@ -1,54 +1,222 @@
-<section class="hero background-gradient">
-    <div class="hero-content">
-        <h1>Profesionel Social Media Management</h1>
-        <p>Schedule, publish and track your content across multiple platforms. Streamline your workflow with intelligent automation and comprehensive analytics.</p>
-        <app-stack direction="row" [gap]="1">
-            <a matButton="filled" class="surface" routerLink="/features">Login</a>
-            <a matButton="outlined" class="surface" routerLink="/features">Register</a>
-            <!--
-            <a matButton="elevated" class="surface" routerLink="/signup">Login</a>
-            <a matButton="elevated" class="surface" routerLink="/signup">surface</a>
-            <a matButton="filled" class="secondary" routerLink="/features">secondary</a>
-            <a matButton="filled" class="accent" routerLink="/features">accent</a>
-            <a matButton="filled" class="error" routerLink="/features">error</a>-->
-        </app-stack>    
-    </div>
-</section>
-
-<div class="main-section">
-    <section>
-        <div class="section-content">
-            <h2>Supported Platforms</h2>
-            <h5>Manage all your social media accounts in one place</h5>
-            <mat-grid-list cols="5" rowHeight="100px" gutterSize="16px">
-                <!-- TODO: Replace with actual platforms -->
-                @for (platform of ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'TikTok', 'YouTube']; track $index) {
-                    <mat-grid-tile>
-                        <div class="platform-tile">
-                            <span>{{ platform }}</span>
-                        </div>
-                    </mat-grid-tile>
-                }
-            </mat-grid-list>
-        </div>
-    </section>
-    <section></section>
-    <section></section>
-    <section></section>
-</div>
-
-<footer>
-    <section class="hero hero--small background-gradient">
+<article>
+    <section class="hero background-gradient">
         <div class="hero-content">
-            <h1>Ready to Transform Your Social Media Strategy?</h1>
-            <p>Join profesionals who trust RippleSync for their social media management</p>
+            <h1>Profesionel Social Media Management</h1>
+            <p>Schedule, publish and track your content across multiple platforms. Streamline your workflow with intelligent automation and comprehensive analytics.</p>
             <app-stack direction="row" [gap]="1">
-                <a matButton="elevated" class="surface" routerLink="/signup">Login</a>
+                <a matButton="filled" class="surface" routerLink="/features">Login</a>
                 <a matButton="outlined" class="surface" routerLink="/features">Register</a>
-            </app-stack>
+            </app-stack>    
         </div>
     </section>
-    <section class="footer-bottom">
-        <p>&copy; 2025 RippleSync. All rights reserved.</p>
-    </section>
-</footer>
+
+    <div class="main-section">
+        <section>
+            <div class="section-content">
+                <h2>Supported Platforms</h2>
+                <h5>Manage all your social media accounts in one place</h5>
+                <mat-grid-list cols="5" rowHeight="100px" gutterSize="16px">
+                    <!-- TODO: Replace with actual platforms -->
+                    @for (platform of ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'TikTok', 'YouTube']; track $index) {
+                        <mat-grid-tile>
+                            <div class="platform-tile">
+                                <span>{{ platform }}</span>
+                            </div>
+                        </mat-grid-tile>
+                    }
+                </mat-grid-list>
+            </div>
+        </section>
+        <section>
+            <div class="section-content">
+                <h2>Enterprise-Grade Featues</h2>
+                <h5>Built for professionals who demand reliability and performance</h5>
+                <div class="tile-grid">
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="schedule" shape="square"></app-icon-container>
+                                Smart Scheduling
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Plan your content calendar with precision. Schedule posts in advance and let the system automatically publish at those exact times.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="publish" shape="square"></app-icon-container>
+                                Multi-Platform Publishing
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Create once, publish everywhere. Distribute content across all connected platforms with a single workflow.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="analytics" shape="square"></app-icon-container>
+                                Real-Time Analytics
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Track post performance, monitor engagement metrics, and gain insights into your social media presence.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="security" shape="square"></app-icon-container>
+                                Security
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Protect your content with our advanced security features. Rest easy knowing your social media presence is safe with us.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </section>
+        <section>
+            
+            <div class="section-content">
+                <h2>Simple Workflow</h2>
+                <h5>Get started in minutes with our intuitive platform</h5>
+                <div class="tile-grid">
+                    <mat-card class="tile workflow-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container>1</app-icon-container>
+                                Register & Login
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Create your account with secure authentication and start managing your social presence.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile workflow-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container>2</app-icon-container>
+                                Connect Platforms
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Link your social media accounts using OAuth secure integration.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile workflow-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container>3</app-icon-container>
+                                Create Content
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Compose posts, add media, and select target platforms.                             </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile workflow-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container>4</app-icon-container>
+                                Schedule or Publish
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Choose to publish immediately or schedule for optimal timing.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="section-content">
+                <h2>Comprehensive Dashboard</h2>
+                <h5>Monitor your social media performance at a glance</h5>
+                <div class="tile-grid">
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="analytics" shape="square"></app-icon-container>
+                                Performance metrics
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Track engagement, reach, and growth across all platforms with detailed analytics and reporting.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="art_track" shape="square"></app-icon-container>
+                                Content Management
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                View all posts with status indicators. Filter by scheduled, processing, posted or failed.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="tile feature-tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <app-icon-container iconName="insights" shape="square"></app-icon-container>
+                                Platform Insights
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Compare performance across different social networks and identify your top-performing content.
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <section class="hero hero--small background-gradient">
+            <div class="hero-content">
+                <h1>Ready to Transform Your Social Media Strategy?</h1>
+                <p>Join profesionals who trust RippleSync for their social media management</p>
+                <app-stack direction="row" [gap]="1">
+                    <a matButton="elevated" class="surface" routerLink="/signup">Login</a>
+                    <a matButton="outlined" class="surface" routerLink="/features">Register</a>
+                </app-stack>
+            </div>
+        </section>
+        <section class="footer-bottom">
+            <p>&copy; 2025 RippleSync. All rights reserved.</p>
+        </section>
+    </footer>
+</article>

@@ -3,7 +3,7 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(0deg, #CACACA, #ffffff);
+  background: linear-gradient(180deg, #ffffff 0%, #CACACA 100%);
 }
 
 .navbar-content {
@@ -17,17 +17,20 @@
 }
 
 .navbar-brand {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 45px;
+    margin-right: 0.5rem;
+  }
+
   .brand-link {
-    color: white !important;
+    color: #2D4261 !important;
     text-decoration: none;
     font-size: 1.25rem;
-    font-weight: 600;
     display: flex;
     align-items: center;
-
-    &:hover {
-      opacity: 0.85;
-    }
   }
 }
 
