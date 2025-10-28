@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>Login</h2>
+<h2 mat-dialog-title>
+  <app-icon-container iconName="login" shape="square" ></app-icon-container>
+  Login
+</h2>
 
 <mat-dialog-content>
   <form [formGroup]="loginForm">
@@ -7,7 +10,7 @@
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
         @if (emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)) {
-        <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+          <mat-error>{{ getEmailErrorMessage() }}</mat-error>
         }
       </mat-form-field>
 
@@ -16,18 +19,18 @@
         <input matInput type="password" formControlName="password" placeholder="Enter your password"
           autocomplete="current-password" />
         @if (passwordControl?.invalid && (passwordControl?.dirty || passwordControl?.touched)) {
-        <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+          <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
         }
       </mat-form-field>
     </div>
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" [disabled]="isLoading()">
+<mat-dialog-actions>
+  <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
     Cancel
   </button>
-  <button mat-raised-button color="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
+  <button matButton="filled" class="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
     @if (isLoading()) {
     <mat-spinner diameter="20"></mat-spinner>
     } @else {

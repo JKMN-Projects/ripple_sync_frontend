@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+html {
+    @include mat.dialog-overrides((
+        container-min-width: min(100%, 450px),
+        content-padding: .5rem,
+        with-actions-content-padding: .5rem,
+        actions-padding: .5rem 1rem,
+    ));
+}
+
+mat-dialog-container {
+    .mat-mdc-dialog-inner-container > div {
+        padding: 1rem;
+    }
+
+    .mat-mdc-dialog-title {
+        &::before {
+            content: none;
+        }
+    }
+
+}

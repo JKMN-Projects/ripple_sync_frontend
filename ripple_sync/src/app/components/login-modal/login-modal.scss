@@ -1,9 +1,17 @@
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 1rem;
+}
 .form-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 300px;
-  padding: 1rem 0;
+  margin-top: 1rem;
 }
 
 .full-width {
@@ -20,15 +28,27 @@
 }
 
 mat-dialog-actions {
-  padding: 1rem 0 0 0;
   gap: 0.5rem;
-
-  button {
-    min-width: 80px;
-  }
+  flex-direction: column-reverse;
 
   mat-spinner {
     display: inline-block;
     margin: 0 auto;
   }
+
+  button {
+    min-width: 80px;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  @media screen and (min-width: 400px) {
+    flex-direction: row;
+    justify-content: flex-end;
+
+    button {
+      width: auto;
+    }
+  }
+
 }
