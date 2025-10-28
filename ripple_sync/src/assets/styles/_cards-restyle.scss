@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+
+.secondary {
+    @include mat.card-overrides((
+        outlined-outline-color: var(--mat-sys-secondary-container)
+    ));
+}

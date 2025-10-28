@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+
+.surface {
+
+	@include mat.toolbar-overrides((
+		container-background-color: var(--mat-sys-surface),
+		container-text-color: var(--mat-sys-on-surface),
+	));
+}
+
