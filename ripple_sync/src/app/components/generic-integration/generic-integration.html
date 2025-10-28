@@ -1,26 +1,26 @@
-<mat-card class="connection-card" [class.connected]="connection().connected">
+<mat-card class="connection-card" [class.connected]="integration().connected">
   <mat-card-header>
-    <div class="icon-container" [class.connected]="connection().connected" mat-card-avatar>
+    <div class="icon-container" [class.connected]="integration().connected" mat-card-avatar>
       <div class="icon-placeholder"></div>
     </div>
     <div class="header-content">
-      <mat-card-title>{{ connection().name }}</mat-card-title>
+      <mat-card-title>{{ integration().name }}</mat-card-title>
       <mat-card-subtitle>
-        <mat-chip [class.connected]="connection().connected" class="status-chip">
-          {{ connection().connected ? 'Connected' : 'Not Connected' }}
+        <mat-chip [class.connected]="integration().connected" class="status-chip">
+          {{ integration().connected ? 'Connected' : 'Not Connected' }}
         </mat-chip>
       </mat-card-subtitle>
     </div>
   </mat-card-header>
   
   <mat-card-content>
-    <p class="description">{{ connection().description }}</p>
+    <p class="description">{{ integration().description }}</p>
   </mat-card-content>
   
   <mat-card-actions>
     <button 
       mat-flat-button
-      [color]="connection().connected ? 'connected' : 'disconnected'"
+      [color]="integration().connected ? 'connected' : 'disconnected'"
       [disabled]="isLoading()"
       (click)="onToggleConnection()"
       class="action-button">
@@ -28,7 +28,7 @@
         <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
         <span>Loading...</span>
       } @else {
-        <span>{{ connection().connected ? 'Disconnect' : 'Connect Account' }}</span>
+        <span>{{ integration().connected ? 'Disconnect' : 'Connect Account' }}</span>
       }
     </button>
   </mat-card-actions>

@@ -17,22 +17,16 @@ import { StatusChangeEvent } from '@angular/forms';
   templateUrl: './generic-integration.html',
   styleUrl: './generic-integration.scss'
 })
-export class GenericIntegration implements AfterViewInit {
-  connection = input.required<IntegrationDto>();
-
-
+export class GenericIntegration {
+  integration = input.required<IntegrationDto>();
+ 
   integrationService = inject(Integration)
 
   isLoading = signal(false);
 
-  ngAfterViewInit(): void {
-    console.log("generic");
-    console.log(this.connection());
-  }
-
   onToggleConnection(): void {
     if (this.isLoading()) return;
-    const currentIntegration = this.connection();
+    const currentIntegration = this.integration();
     this.isLoading.set(true);
 
     if (currentIntegration.connected) {

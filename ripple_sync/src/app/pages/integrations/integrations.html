@@ -5,7 +5,7 @@
   </div>
   
   <div class="integrations-container">
-    @for (integration of integrations; track integration.platformId) {
+    @for (integration of integrations(); track integration.platformId) {
       <app-generic-integration [integration]="integration" />
     }
   </div>

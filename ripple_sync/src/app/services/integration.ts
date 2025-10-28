@@ -1,10 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-export interface IntegrationReponseDto {
+export interface IntegrationResponseDto {
   data: Array<IntegrationDto>;
 }
 
@@ -20,85 +20,42 @@ export interface IntegrationDto {
   providedIn: 'root'
 })
 export class Integration {
-
   private integrationsSignal = signal<IntegrationDto[] | null>(null);
   readonly integrations = this.integrationsSignal.asReadonly();
 
-  constructor(private http: HttpClient) { }
+  http = inject(HttpClient)
 
   /// Retrieves all integrations from the API
   getIntegrations() {
-    if (true) {
-      const integrationsShell = [
-        {
-          platformId: 1,
-          name: "Twitter",
-          description: "Share updates on Twitter",
-          connected: true,
-          imageUrl: ''
-        },
-        {
-          platformId: 2,
-          name: "Facebook",
-          description: "Create posts on Facebook",
-          connected: false,
-          imageUrl: ''
-        },
-        {
-          platformId: 3,
-          name: "LinkedIn",
-          description: "Share professional updates on LinkedIn",
-          connected: true,
-          imageUrl: ''
-        },
-        {
-          platformId: 4,
-          name: "Instagram",
-          description: "Post photos and stories on Instagram",
-          connected: true,
-          imageUrl: ''
-        }
-      ];
-
-      this.integrationsSignal.set(integrationsShell ?? []);
-
-      return;
-    }
-    else {
-      this.http.get<IntegrationReponseDto>(`${environment.apiUrl}/integrations`, { observe: 'response' })
-        .pipe(
-          tap({
-            next: response => {
-              if (response.status === 200) {
-                console.log(response.body);
-                console.log(response.body?.data);
-                
-                this.integrationsSignal.set(response.body?.data ?? []);
-                console.log(this.integrations);
-              }
-            },
-            error: (error) => {
-              console.error('Failed to load integrations:', error);
-              this.integrationsSignal.set([]);
+    this.http.get<IntegrationResponseDto>(`${environment.apiUrl}/integrations`, { observe: 'response' })
+      .pipe(
+        tap({
+          next: response => {
+            if (response.status === 200) {
+              this.integrationsSignal.set(response.body?.data ?? []);
             }
-          })
-          ,
-          catchError(err => {
-            console.error('Error fetching integrations', err);
-            return of([]);
-          }),
-        )
-        .subscribe();
-    }
+          },
+          error: (error) => {
+            console.error('Failed to load integrations:', error);
+            this.integrationsSignal.set([]);
+          }
+        })
+        ,
+        catchError(err => {
+          console.error('Error fetching integrations', err);
+          return of([]);
+        }),
+      )
+      .subscribe();
   }
 
-  connectIntegration(platformId:number, accessToken:string) {
+  connectIntegration(platformId: number, accessToken: string) {
     interface ConnectIntegrationReq {
       platformId: number;
       accessToken: string;
     }
 
-    let connectReq:ConnectIntegrationReq = {
+    let connectReq: ConnectIntegrationReq = {
       platformId,
       accessToken
     }
