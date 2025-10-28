@@ -1,9 +1,9 @@
-import { Component, input, signal  } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, input, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Integration, IntegrationConnection } from '../../services/integration';
+import { Integration, IntegrationDto } from '../../services/integration';
 import { StatusChangeEvent } from '@angular/forms';
 
 @Component({
@@ -17,39 +17,30 @@ import { StatusChangeEvent } from '@angular/forms';
   templateUrl: './generic-integration.html',
   styleUrl: './generic-integration.scss'
 })
-export class GenericIntegration {
-  connection = input.required<IntegrationConnection>();
+export class GenericIntegration implements AfterViewInit {
+  connection = input.required<IntegrationDto>();
+
+
+  integrationService = inject(Integration)
 
   isLoading = signal(false);
 
-  constructor(private integrationService: Integration) { }
+  ngAfterViewInit(): void {
+    console.log("generic");
+    console.log(this.connection());
+  }
 
   onToggleConnection(): void {
     if (this.isLoading()) return;
-    const currentConnection = this.connection();
+    const currentIntegration = this.connection();
     this.isLoading.set(true);
-    // const action$ = currentConnection.connected
-    //   ? this.integrationService.disconnect(currentConnection.id)
-    //   : this.integrationService.connect(currentConnection.id);
 
-    // action$.subscribe({
-    //   next: (success) => {
-    //     if (success) {
-    //       currentConnection.connected = !currentConnection.connected;
-    //     }
-    //     this.isLoading = false;
-    //   },
-    //   error: (error) => {
-    //     console.error('Connection toggle failed:', error);
-    //     this.isLoading = false;
-    //   }
-    // });
+    if (currentIntegration.connected) {
+      this.integrationService.disconnectIntegration(currentIntegration.platformId)
+    } else {
+      this.integrationService.connectIntegration(currentIntegration.platformId, ":)");
+    }
 
-    setTimeout(() => {
-      console.log("is loading");
-      this.isLoading.set(false);
-      return;
-    }, 1000);
-
+    this.isLoading.set(false);
   }
 }

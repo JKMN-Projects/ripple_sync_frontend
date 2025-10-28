@@ -5,8 +5,8 @@
   </div>
   
   <div class="integrations-container">
-    @for (connection of connections; track connection.id) {
-      <app-generic-integration [connection]="connection" />
+    @for (integration of integrations; track integration.platformId) {
+      <app-generic-integration [integration]="integration" />
     }
   </div>
 </div>

@@ -1,6 +1,6 @@
-import { Component, effect, OnInit } from '@angular/core';
+import { Component, effect, inject, Inject, OnInit } from '@angular/core';
 import { GenericIntegration } from '../../components/generic-integration/generic-integration';
-import { Integration, IntegrationConnection } from '../../services/integration';
+import { Integration, IntegrationDto } from '../../services/integration';
 
 @Component({
   selector: 'app-integrations',
@@ -10,13 +10,18 @@ import { Integration, IntegrationConnection } from '../../services/integration';
   styleUrl: './integrations.scss'
 })
 export class Integrations implements OnInit {
-  connections: IntegrationConnection[] = [];
+  integrations: IntegrationDto[] = [];
 
-  constructor(private integrationService: Integration) {
+  integrationService = inject(Integration);
+
+  constructor() {
     effect(() => {
+     
       const integrations = this.integrationService.integrations();
       if (integrations) {
-        this.connections = integrations;
+        this.integrations = integrations; 
+        console.log("intergration site");
+        console.log(this.integrations);
       }
     });
   }
