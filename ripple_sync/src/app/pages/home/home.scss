@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+
+
 .hero {
     height: 500px;
 
@@ -63,4 +66,9 @@
     font-size: 0.9em;
     color: #afafaf;
     background-color: #2D3748;
+}
+
+.background-gradient {
+	background: linear-gradient(135deg, #2C5282 40%, #2D3748 100%);
+	color: white;
 }
