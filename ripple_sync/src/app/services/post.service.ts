@@ -19,9 +19,8 @@ export class PostService {
         id: 1,
         messageContent: 'My first post!',
         statusName: 'published',
-        mediaAttachment: [
-        ],
-        timestamp: 1698345600000,
+        mediaAttachment: [],
+        timestamp: 1761571800000,
         platforms: ['twitter', 'facebook', 'linkedin'],
       },
       {
@@ -29,15 +28,15 @@ export class PostService {
         messageContent: 'Announcement: More Info Soon',
         statusName: 'scheduled',
         mediaAttachment: [''],
-        timestamp: 1698432000000,
+        timestamp: 1761571800000,
         platforms: ['instagram', 'facebook'],
       },
       {
         id: 3,
         messageContent: 'Drafted posts that i dont know what the caption should be',
         statusName: 'draft',
-        mediaAttachment: [""],
-        timestamp: 1698518400000,
+        mediaAttachment: [''],
+        timestamp: 1761571800000,
         platforms: ['linkedin', 'twitter'],
       },
     ];

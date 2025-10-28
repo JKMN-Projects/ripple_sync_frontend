@@ -7,15 +7,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../interfaces/post';
 import { Stack } from "../stack/stack";
+import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-generic-post',
-  imports: [MatCardModule, MatButtonModule, MatChipsModule, MatProgressSpinnerModule, DatePipe, Stack],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    DatePipe,
+    Stack,
+    MatDividerModule,
+  ],
   templateUrl: './generic-post.html',
   styleUrl: './generic-post.scss',
 })
 export class GenericPost {
-  constructor(private postService: PostService){}
+  constructor(private postService: PostService) {}
   post = input.required<Post>();
-
- 
 }

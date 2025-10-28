@@ -1,6 +1,8 @@
 <div style="padding: 4vh;">
-    <h1 >Posts</h1>
-    <button matButton="outlined">Basic</button>
+    <app-stack direction="row" justify="space-between">
+        <h1 >Posts</h1>
+        <button matButton="outlined">+ New Post</button>
+    </app-stack>
     <div>
         @for (post of posts; track post.id) {
         <app-generic-post [post]="post"  />
