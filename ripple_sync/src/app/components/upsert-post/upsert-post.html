@@ -1,1 +1,60 @@
-<p>upsert-post works!</p>
+<h2 mat-dialog-title>{{(checkIfEdit() ? "Edit" : "Create") + " post"}}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="postFormGroup">
+    <div class="form-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Message content</mat-label>
+        <textarea matInput formControlName="message" placeholder="Enter a message"></textarea>
+        @if (messageControl?.invalid && (messageControl?.dirty || messageControl?.touched)) {
+        <mat-error>{{ getMessageErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+
+      <h3>Select platforms</h3>
+      <mat-chip-listbox formControlName="platforms" multiple>
+        @for (integration of integrations(); track integration?.platformId) {
+        <mat-chip-option [value]="integration.name">{{ integration.name }}</mat-chip-option>
+        }
+      </mat-chip-listbox>
+
+      <h3>Publishing options</h3>
+      <mat-chip-listbox formControlName="timestampType">
+        @for (option of timestampOptions; track option.value) {
+        <mat-chip-option [value]="option.value" (click)="onChipSelect(option.value)">
+          @if (option.value == timestampTypes.Scheduled && formattedScheduledDate()) {
+            {{ formattedScheduledDate() }}
+          } @else {
+            {{ option.label }}
+          }
+        </mat-chip-option>
+        }
+      </mat-chip-listbox>
+
+      @if (showDatePicker()) {
+      <div class="date-time-picker-container">
+        <mat-form-field appearance="outline" class="date-picker">
+          <mat-label>Select date</mat-label>
+          <input matInput [matDatepicker]="picker" [value]="getSelectedDate()" (dateChange)="onDateTimeChange($event)">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="time-picker">
+          <mat-label>Select time</mat-label>
+          <input matInput type="time" [value]="getFormattedTime()" (change)="onTimeChange($event)">
+        </mat-form-field>
+      </div>
+      }
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">
+    Cancel
+  </button>
+  <button mat-raised-button color="primary" [disabled]="postFormGroup.invalid" (click)="submit()">
+    Login
+  </button>
+</mat-dialog-actions>
