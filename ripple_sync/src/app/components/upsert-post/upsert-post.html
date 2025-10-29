@@ -11,6 +11,39 @@
         }
       </mat-form-field>
 
+      <mat-card class="upload-card full-width">
+        <div class="drop-zone" [class.dragging]="isDragging()" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)">
+          <mat-icon class="upload-icon">cloud_upload</mat-icon>
+          <p>Drag & drop your images here</p>
+          <p><strong>or</strong></p>
+
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            Select Files
+          </button>
+
+          <input #fileInput type="file" multiple accept=".jpg,.jpeg,.png" (change)="onFileSelect($event)" hidden />
+        </div>
+
+        <mat-divider class="divider"></mat-divider>
+
+        @if (previews().length > 0) {
+        <div class="preview-grid">
+          @for (preview of previews(); track $index; let i = $index) {
+          <div class="preview-item">
+            <img [src]="preview" alt="Preview {{ i + 1 }}" />
+            <button mat-icon-button color="warn" aria-label="Remove image" (click)="removeFile(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+        } @else {
+        <p class="placeholder-text">No images selected yet.</p>
+        }
+
+      </mat-card>
+
       <h3>Select platforms</h3>
       <mat-chip-listbox formControlName="platforms" multiple>
         @for (integration of integrations(); track integration?.platformId) {
@@ -23,9 +56,9 @@
         @for (option of timestampOptions; track option.value) {
         <mat-chip-option [value]="option.value" (click)="onChipSelect(option.value)">
           @if (option.value == timestampTypes.Scheduled && formattedScheduledDate()) {
-            {{ formattedScheduledDate() }}
+          {{ formattedScheduledDate() }}
           } @else {
-            {{ option.label }}
+          {{ option.label }}
           }
         </mat-chip-option>
         }

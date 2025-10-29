@@ -12,6 +12,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateAdapter, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { DateTime } from 'luxon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 enum TimestampTypes {
   Now = 1,
@@ -31,6 +34,9 @@ enum TimestampTypes {
     MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
+    MatDividerModule,
+    MatCardModule,
   ],
   providers: [
     { provide: DateAdapter, useClass: NativeDateAdapter },
@@ -45,20 +51,21 @@ export class UpsertPost implements OnInit {
   private postService = inject(PostService);
   private integrationService = inject(Integration);
   private dialogRef = inject(MatDialogRef<UpsertPost>);
-  integrations = signal<IntegrationDto[] | null>([]);
-
-  fruits = ['Apple', 'Banana', 'Cherry', 'Grapes'];
 
   readonly timestampTypes = TimestampTypes;
+
+  integrations = signal<IntegrationDto[] | null>([]);
+  showDatePicker = signal(false);
+  formattedScheduledDate = signal('');
+  files = signal<File[]>([]);
+  previews = signal<string[]>([]);
+  isDragging = signal(false);
 
   readonly timestampOptions = [
     { label: 'Now', value: TimestampTypes.Now },
     { label: 'Scheduled', value: TimestampTypes.Scheduled },
     { label: 'Draft', value: TimestampTypes.Draft }
   ];
-
-  showDatePicker = signal(false);
-  formattedScheduledDate = signal('');
 
   postFormGroup = this.fb.group({
     message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
@@ -90,8 +97,6 @@ export class UpsertPost implements OnInit {
 
   constructor() {
     effect(() => {
-      console.log(this.integrationService.integrations()?.filter(i => i.connected == true) ?? null);
-
       this.integrations.set(
         this.integrationService.integrations()?.filter(i => i.connected == true) ?? null)
     })
@@ -99,7 +104,6 @@ export class UpsertPost implements OnInit {
 
   ngOnInit(): void {
     this.integrationService.getIntegrations();
-    // Call getIntegrations
 
     if (this.checkIfEdit()) {
       this.assignFormValues();
@@ -110,7 +114,6 @@ export class UpsertPost implements OnInit {
     this.timestampTypeControl?.setValue(type);
 
     if (type === TimestampTypes.Now) {
-      // Set current timestamp
       const now = DateTime.now();
       this.timestampControl?.setValue(now.toMillis());
       this.formattedScheduledDate.set('');
@@ -132,11 +135,9 @@ export class UpsertPost implements OnInit {
   onDateTimeChange(event: any) {
     const selectedDate = event.value;
     if (selectedDate) {
-      // Get current timestamp to preserve the time
       const currentTimestamp = this.timestampControl?.value;
       let dateTime = DateTime.fromJSDate(selectedDate);
 
-      // If we already have a timestamp, preserve its time
       if (currentTimestamp) {
         const currentDateTime = DateTime.fromMillis(currentTimestamp);
         dateTime = dateTime.set({
@@ -159,12 +160,10 @@ export class UpsertPost implements OnInit {
       const [hours, minutes] = timeValue.split(':').map(Number);
       const currentTimestamp = this.timestampControl?.value;
 
-      // Get the current date or use today
       let dateTime = currentTimestamp
         ? DateTime.fromMillis(currentTimestamp)
         : DateTime.now();
 
-      // Set the new time
       dateTime = dateTime.set({ hour: hours, minute: minutes, second: 0, millisecond: 0 });
       this.timestampControl?.setValue(dateTime.toMillis());
       this.formattedScheduledDate.set(dateTime.toFormat('MMM dd, yyyy HH:mm'));
@@ -220,5 +219,53 @@ export class UpsertPost implements OnInit {
 
   cancel(): void {
     this.dialogRef.close();
+  }
+
+  onFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    this.handleFiles(input.files);
+    input.value = '';
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    this.isDragging.set(false);
+
+    if (event.dataTransfer?.files) {
+      this.handleFiles(event.dataTransfer.files);
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    this.isDragging.set(true);
+  }
+
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    this.isDragging.set(false);
+  }
+
+  private handleFiles(fileList: FileList): void {
+    const acceptedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    Array.from(fileList).forEach(file => {
+      if (acceptedTypes.includes(file.type)) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const result = e.target?.result as string;
+          this.files.update(arr => [...arr, file]);
+          this.previews.update(arr => [...arr, result]);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  removeFile(index: number): void {
+    this.files.update(arr => arr.filter((_, i) => i !== index));
+    this.previews.update(arr => arr.filter((_, i) => i !== index));
   }
 }
