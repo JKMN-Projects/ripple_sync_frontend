@@ -1,47 +1,40 @@
-import { Injectable, signal } from '@angular/core';
-import { Post } from '../interfaces/post';
+import { inject, Injectable, signal } from '@angular/core';
+import {  PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CreatePostDto } from '../interfaces/create-post-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
-  private posts = signal<Post[]>([])
+  private postsSignal = signal<PostDto[] | null>(null);
+  http = inject(HttpClient);
+  readonly posts = this.postsSignal.asReadonly();
 
-  constructor(private http: HttpClient) { }
-
-  GetPosts(): Observable<Post[]> {
-    const posts: Post[] = [
-      {
-        id: 1,
-        messageContent: 'My first post!',
-        statusName: 'published',
-        mediaAttachment: [],
-        timestamp: 1761571800000,
-        platforms: ['twitter', 'facebook', 'linkedin'],
-      },
-      {
-        id: 2,
-        messageContent: 'Announcement: More Info Soon',
-        statusName: 'scheduled',
-        mediaAttachment: [''],
-        timestamp: 1761571800000,
-        platforms: ['instagram', 'facebook'],
-      },
-      {
-        id: 3,
-        messageContent: 'Drafted posts that i dont know what the caption should be',
-        statusName: 'draft',
-        mediaAttachment: [''],
-        timestamp: 1761571800000,
-        platforms: ['linkedin', 'twitter'],
-      },
-    ];
-    const postsBehavior = new BehaviorSubject(posts).asObservable()
-    return postsBehavior
+  /// Retrieves all integrations from the API
+  getPostsByUser() {
+    this.http
+      .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, { observe: 'response' })
+      .pipe(
+        tap({
+          next: (response) => {
+            if (response.status === 200) {
+              this.postsSignal.set(response.body?.data ?? []);
+            }
+          },
+          error: (error) => {
+            console.error('Failed to load integrations:', error);
+            this.postsSignal.set([]);
+          },
+        }),
+        catchError((err) => {
+          console.error('Error fetching integrations', err);
+          return of([]);
+        })
+      )
+      .subscribe();
   }
 
   createPost(post: CreatePostDto) {
