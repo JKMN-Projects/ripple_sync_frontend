@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TopNavbar } from './components/top-navbar/top-navbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -16,7 +16,7 @@ import { VerticalNavbar } from "./components/vertical-navbar/vertical-navbar";
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('ripple_sync');
   private sidebarService = inject(SidebarService);
   
@@ -28,4 +28,9 @@ export class App {
       this.sidebarService.close();
     }
   }
+
+  ngOnInit(): void {
+    // TODO: Check authentication status on app init
+  }
+
 }

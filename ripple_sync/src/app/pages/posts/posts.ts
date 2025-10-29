@@ -4,12 +4,11 @@ import { MatAnchor, MatButton } from "@angular/material/button";
 import { Post } from '../../interfaces/post';
 import { PostService } from '../../services/post.service';
 import { GenericPost } from "../../components/generic-post/generic-post";
-import { Stack } from "../../components/stack/stack";
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [MatButton, MatGridListModule, MatAnchor, GenericPost, Stack],
+  imports: [MatButton, MatGridListModule, MatAnchor, GenericPost],
   templateUrl: './posts.html',
   styleUrl: './posts.scss',
 })

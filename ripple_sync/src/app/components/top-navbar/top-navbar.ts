@@ -8,7 +8,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../login-modal/login-modal';
-import { Stack } from "../stack/stack";
 import { SidebarService } from '../../services/sidebar-service';
 
 @Component({
@@ -20,8 +19,7 @@ import { SidebarService } from '../../services/sidebar-service';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule,
-    Stack
+    MatDialogModule
 ],
   templateUrl: './top-navbar.html',
   styleUrl: './top-navbar.scss',
