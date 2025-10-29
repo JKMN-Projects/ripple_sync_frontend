@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatAnchor, MatButton } from "@angular/material/button";
 import { PostDto } from '../../interfaces/postDto';
@@ -13,7 +13,8 @@ import { GenericPost } from "../../components/generic-post/generic-post";
   styleUrl: './posts.scss',
 })
 export class Posts implements OnInit {
-  posts: PostDto[] = [];
+  postsService = inject(PostService);
+  posts = this.postsService.posts;
 
   constructor(private postService: PostService) {}
 

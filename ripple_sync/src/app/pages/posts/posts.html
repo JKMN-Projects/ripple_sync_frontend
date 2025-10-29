@@ -4,7 +4,7 @@
         <button matButton="outlined">+ New Post</button>
     </div>
     <div>
-        @for (post of posts; track post.id) {
+        @for (post of posts(); track post.id) {
         <app-generic-post [post]="post"  />
         }
     </div>
