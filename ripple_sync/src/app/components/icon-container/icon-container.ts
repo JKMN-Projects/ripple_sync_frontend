@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './icon-container.scss',
 })
 export class IconContainer {
-  @Input() iconName: string = '';
-  @Input() shape: 'circle' | 'square' = 'circle';
+  iconName = input<string>('');
+  shape = input<'circle' | 'square'>('circle');
+  size = input<'lg' | 'sm' | 'md'>('md');
 }

@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .navbar {
   position: sticky;
   top: 0;
@@ -10,11 +12,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   width: 100%;
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+
+  .spacer {
+    flex-grow: 1;
+  }
 }
+
+.menu-button {
+  @include mat.icon-button-overrides((
+    icon-size: 32px,
+  ));
+
+  // Have to manually set the size to use the size from the overrides, as Angular Material does not apply it to the icon itself
+  .mat-icon {
+    color: #2D4261 !important;
+    width: var(--mat-icon-button-icon-size);
+    height: var(--mat-icon-button-icon-size);
+    font-size: var(--mat-icon-button-icon-size);
+  }
+}
+
 
 .navbar-brand {
   display: flex;

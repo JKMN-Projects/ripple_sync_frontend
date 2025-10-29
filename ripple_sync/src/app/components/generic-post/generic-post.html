@@ -3,7 +3,7 @@
 
         <mat-card-header>
             <mat-card-title style="width: 100%;">
-                <app-stack direction="row" justify="space-between"  >
+                <div class="stack stack--row stack--space-between"  >
                     <div>
                         <mat-chip-set>
                             <mat-chip>{{post().statusName}}</mat-chip>
@@ -14,7 +14,7 @@
                         <button matButton>Edit</button>
                         <button matButton>Delete</button>
                     </div>
-                </app-stack>
+                </div>
             </mat-card-title>
             <mat-card-subtitle>
                 <p>{{post().messageContent}}</p>
@@ -28,8 +28,7 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-footer class="card-footer">
-            <app-stack direction="row" justify="space-between">
-
+            <div class="stack stack--row stack--space-between">
                 <mat-chip-set aria-label="Platforms">
                     @for (platform of post().platforms; track $index)
                     {
@@ -38,7 +37,7 @@
                 </mat-chip-set>
 
                 <p>{{post().statusName}} {{post().timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</p>
-            </app-stack>
+            </div>
         </mat-card-footer>
     </div>
 </mat-card>
