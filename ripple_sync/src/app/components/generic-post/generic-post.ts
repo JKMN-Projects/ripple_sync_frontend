@@ -5,9 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostService } from '../../services/post.service';
-import { PostDto } from '../../interfaces/postDto';
-import { Stack } from "../stack/stack";
 import { MatDividerModule } from '@angular/material/divider';
+import { PostDto } from '../../interfaces/postDto';
+
 @Component({
   selector: 'app-generic-post',
   imports: [
@@ -16,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
     MatChipsModule,
     MatProgressSpinnerModule,
     DatePipe,
-    Stack,
     MatDividerModule,
   ],
   templateUrl: './generic-post.html',

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Stack } from './stack';
+import { VerticalNavbar } from './vertical-navbar';
 
-describe('Stack', () => {
-  let component: Stack;
-  let fixture: ComponentFixture<Stack>;
+describe('VerticalNavbar', () => {
+  let component: VerticalNavbar;
+  let fixture: ComponentFixture<VerticalNavbar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Stack]
+      imports: [VerticalNavbar]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Stack);
+    fixture = TestBed.createComponent(VerticalNavbar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

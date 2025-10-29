@@ -23,6 +23,7 @@ html {
 	@include mat.core-overrides((
 		app-background-color: #fff
 	));
+	box-sizing: border-box;
 }
 
 
@@ -141,4 +142,97 @@ h2[mat-dialog-title] {
   font-weight: 500;
   margin: 0;
   margin-top: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 300px;
+  padding: 1rem 0;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  background-color: #ffebee;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+mat-dialog-actions {
+  padding: 1rem 0 0 0;
+  gap: 0.5rem;
+
+  button {
+    min-width: 80px;
+  }
+
+  mat-spinner {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.stack {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	mat-divider {
+		width: 100%;
+	}
+
+	&.stack--row {
+		flex-direction: row;
+	}
+
+	&.stack--center {
+		justify-content: center;
+		align-items: center;
+	}
+
+	&.stack--space-between {
+		justify-content: space-between;
+	}
+	&.stack--space-around {
+		justify-content: space-around;
+	}
+	&.stack--space-evenly {
+		justify-content: space-evenly;
+	}
+
+	&.stack--align-center {
+		align-items: center;
+	}
+
+	&.stack--gap-xs {
+		gap: .25rem;
+	}
+	&.stack--gap-sm {
+		gap: .5rem;
+	}
+	&.stack--gap-lg {
+		gap: 2rem;
+	}
+	&.stack--gap-xl {
+		gap: 3rem;
+	}
 }

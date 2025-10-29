@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { Stack } from '../../components/stack/stack';
 import { MatCardModule } from '@angular/material/card';
 import { IconContainer } from "../../components/icon-container/icon-container";
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +14,6 @@ import { LoginModal } from '../../components/login-modal/login-modal';
     MatButton,
     MatGridListModule,
     MatCardModule,
-    Stack,
     IconContainer
 ],
   templateUrl: './home.html',

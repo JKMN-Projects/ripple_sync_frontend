@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 .icon-container {
     display: flex;
     align-items: center;
@@ -14,9 +15,22 @@
     mat-icon {
         color: inherit;
         font-size: inherit;
+        height: 1em;
+        width: 1em;
     }
 
     &.square {
         border-radius: 8px;
+    }
+
+    &.icon-container--sm {
+        width: 32px;
+        height: 32px;
+        font-size: 1.25rem;
+    }
+    &.icon-container--lg {
+        width: 64px;
+        height: 64px;
+        font-size: 2rem;
     }
 }

@@ -1,10 +1,10 @@
 <div style="padding: 4vh;">
-    <app-stack direction="row" justify="space-between">
+    <div class="stack stack--row stack--space-between">
         <h1 >Posts</h1>
         <button matButton="outlined" (click)="openUpsertPostModal(null, false)">+ New Post</button>
-    </app-stack>
+    </div>
     <div>
-        @for (post of posts; track post.id) {
+        @for (post of posts(); track post.id) {
         <app-generic-post [post]="post"  />
         }
     </div>
