@@ -34,7 +34,7 @@ export class TopNavbar {
     const dialogRef = this.dialog.open(LoginModal, {
       disableClose: false,
       maxHeight: '90vh',
-      panelClass: 'login-dialog-panel',
+      panelClass: 'dialog-panel--no-scroll',
     });
 
     dialogRef.afterClosed().subscribe(result => {
