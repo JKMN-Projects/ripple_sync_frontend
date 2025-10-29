@@ -3,6 +3,7 @@ import {  PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { CreatePostDto } from '../interfaces/create-post-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,24 @@ export class PostService {
         catchError((err) => {
           console.error('Error fetching integrations', err);
           return of([]);
+        })
+      )
+      .subscribe();
+  }
+
+  createPost(post: CreatePostDto) {
+    this.http.post<CreatePostDto>(environment.apiUrl, post, { observe: 'response' })
+      .pipe(
+        tap({
+          next: response => {
+            if (response.status === 201) {
+              this.getPostsByUser();
+            }
+          },
+        }),
+        catchError(err => {
+          console.error('Error creating user', err);
+          return of(null);
         })
       )
       .subscribe();

@@ -1,9 +1,14 @@
-<mat-drawer-container class="example-container">
-  <mat-drawer mode="over" [opened]="isSidebarOpen" (closed)="handleOnDrawerClosed()">
+@if (authService.isAuthenticated()) {
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened>
     <app-vertical-navbar></app-vertical-navbar>
-  </mat-drawer>
-  <mat-drawer-content>
-    <app-top-navbar></app-top-navbar>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <router-outlet />
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+}
+@else {
+<app-top-navbar></app-top-navbar>
+<router-outlet />
+}

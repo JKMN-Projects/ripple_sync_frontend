@@ -15,9 +15,11 @@
 }
 
 
-mat-drawer-container {
+mat-sidenav-container {
+  height: 100vh;
   @include mat.sidenav-overrides((
     container-width: 300px,
-    container-shape: .5rem,
+    container-shape: 0rem,
+    container-divider-color: var(--mat-divider-color, var(--mat-sys-outline-variant))
   ));
 }

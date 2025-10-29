@@ -4,6 +4,8 @@ import { TopNavbar } from './components/top-navbar/top-navbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidebarService } from './services/sidebar-service';
 import { VerticalNavbar } from "./components/vertical-navbar/vertical-navbar";
+import { CommonModule } from '@angular/common';
+import { Authentication } from './services/authentication';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,8 @@ import { VerticalNavbar } from "./components/vertical-navbar/vertical-navbar";
     RouterOutlet,
     TopNavbar,
     MatSidenavModule,
-    VerticalNavbar
+    VerticalNavbar,
+    CommonModule,
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -19,7 +22,8 @@ import { VerticalNavbar } from "./components/vertical-navbar/vertical-navbar";
 export class App implements OnInit {
   protected readonly title = signal('ripple_sync');
   private sidebarService = inject(SidebarService);
-  
+  authService = inject(Authentication);
+
   get isSidebarOpen() :boolean {
     return this.sidebarService.isOpen();
   }
@@ -30,7 +34,6 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO: Check authentication status on app init
+    this.authService.checkExpiresAt();
   }
-
 }
