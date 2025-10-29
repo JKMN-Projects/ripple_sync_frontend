@@ -23,9 +23,10 @@ html {
 	@include mat.core-overrides((
 		app-background-color: #fff
 	));
+}
+* {
 	box-sizing: border-box;
 }
-
 
 body {
 	// Default the application to a light color theme. This can be changed to

@@ -1,6 +1,38 @@
+mat-card {
+    padding: 0.5;
+    background-color: #ffff;
+}
+mat-divider {
+    margin: 0rem 1rem;
+}
 .card-footer {
     padding: 16px;
 }
 mat-card-header {
     display: block;
+}
+.status-chip{
+    font-size: medium;
+    font-weight: 600;
+    padding: 5px 15px;
+    align-self: center;
+    border-radius: 0.50rem;
+}
+
+.failed{
+    color:#742A2A;
+    background-color: #FED7D7;
+}
+.processing{
+    color:#7C2D12;
+    background-color: #FEEBC8;
+}
+.scheduled{
+    color:#2C5282;
+    background-color: #BEE3F8;
+}
+
+.posted{
+    color:#22543D;
+    background-color: #C6F6D5;
 }
