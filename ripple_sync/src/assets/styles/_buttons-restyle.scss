@@ -41,6 +41,47 @@ html {
 	));
 }
 
+.button--sm {
+	$button-rouding: .35rem;
+	$button-horizontal-padding: 1rem;
+	$button-height: 1.5rem;
+	$button-text-size: 0.75rem;
+	$button-text-weight: 500;
+	
+
+	@include mat.button-overrides((filled-container-shape: $button-rouding,
+			filled-container-height: $button-height,
+			filled-horizontal-padding: $button-horizontal-padding,
+			filled-label-text-size: $button-text-size,
+			filled-label-text-weight: $button-text-weight,
+
+			text-container-shape: $button-rouding,
+			text-container-height: $button-height,
+			text-horizontal-padding: $button-horizontal-padding,
+			text-label-text-size: $button-text-size,
+			text-label-text-weight: $button-text-weight,
+
+			protected-container-shape: $button-rouding,
+			protected-horizontal-padding: $button-horizontal-padding,
+			protected-container-height: $button-height,
+			protected-label-text-size: $button-text-size,
+			protected-label-text-weight: $button-text-weight,
+
+			tonal-container-shape: $button-rouding,
+			tonal-container-height: $button-height,
+			tonal-horizontal-padding: $button-horizontal-padding,
+			tonal-label-text-size: $button-text-size,
+			tonal-label-text-weight: $button-text-weight,
+
+			outlined-container-shape: $button-rouding,
+			outlined-container-height: $button-height,
+			outlined-horizontal-padding: $button-horizontal-padding,
+			outlined-label-text-size: $button-text-size,
+			outlined-label-text-weight: $button-text-weight,
+			outlined-outline-width: 1.5px,
+		));
+}
+
 
 .primary {
 	@include mat.button-overrides((

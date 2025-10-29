@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import {  PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,9 +13,13 @@ export class PostService {
   readonly posts = this.postsSignal.asReadonly();
 
   /// Retrieves all integrations from the API
-  getPostsByUser() {
+  getPostsByUser( filter?: null | string ) {
+      let params = new HttpParams();
+    if (filter) {
+      params = params.set('status', filter);
+    }
     this.http
-      .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, { observe: 'response' })
+      .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, { observe: 'response', params })
       .pipe(
         tap({
           next: (response) => {
