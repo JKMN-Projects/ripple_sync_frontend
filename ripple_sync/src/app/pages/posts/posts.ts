@@ -17,10 +17,20 @@ import { UpsertPost } from '../../components/upsert-post/upsert-post';
 })
 export class Posts implements OnInit {
   posts: PostDto[] = [];
+  dialog = inject(MatDialog)
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     this.postService.getPostsByUser();
+  }
+
+  openUpsertPostModal(post: PostDto | null, isEdit: boolean): void {
+    this.dialog.open(UpsertPost, {
+      disableClose: false,
+      maxHeight: '90vh',
+      panelClass: 'login-dialog-panel',
+      data: isEdit ? post : null
+    });
   }
 }

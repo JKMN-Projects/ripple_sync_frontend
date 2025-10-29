@@ -2,7 +2,7 @@ import { Component, effect, inject, OnInit, signal, ViewChild } from '@angular/c
 import { PostService } from '../../services/post.service';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Post } from '../../interfaces/post';
+import { PostDto } from '../../interfaces/postDto';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -41,7 +41,7 @@ enum TimestampTypes {
 })
 export class UpsertPost implements OnInit {
   private fb = inject(FormBuilder);
-  private data = inject<Post>(MAT_DIALOG_DATA);
+  private data = inject<PostDto>(MAT_DIALOG_DATA);
   private postService = inject(PostService);
   private integrationService = inject(Integration);
   private dialogRef = inject(MatDialogRef<UpsertPost>);
@@ -90,6 +90,8 @@ export class UpsertPost implements OnInit {
 
   constructor() {
     effect(() => {
+      console.log(this.integrationService.integrations()?.filter(i => i.connected == true) ?? null);
+
       this.integrations.set(
         this.integrationService.integrations()?.filter(i => i.connected == true) ?? null)
     })

@@ -43,7 +43,7 @@ export class PostService {
         tap({
           next: response => {
             if (response.status === 201) {
-              this.GetPosts();
+              this.getPostsByUser();
             }
           },
         }),
