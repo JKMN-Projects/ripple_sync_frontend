@@ -1,10 +1,5 @@
 <mat-toolbar class="navbar surface">
   <div class="navbar-content">
-    @if (!authService.isAuthenticated()) {
-    <button matIconButton class="menu-button" (click)="toggleDrawer()">
-      <mat-icon fontIcon="menu"></mat-icon>
-    </button>
-    }
     <div class="navbar-brand">
       <img src="Logo.png" alt="RippleSync Logo" class="brand-logo" />
       <a routerLink="/" class="brand-link">RippleSync</a>

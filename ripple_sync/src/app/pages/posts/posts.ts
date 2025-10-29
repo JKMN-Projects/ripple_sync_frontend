@@ -7,6 +7,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';import { MatDialog } from '@angular/material/dialog';
 import { UpsertPost } from '../../components/upsert-post/upsert-post';
+import { PostDto } from '../../interfaces/postDto';
 
 @Component({
   selector: 'app-posts',
@@ -39,15 +40,6 @@ export class Posts implements OnInit {
   }
   ngOnDestroy(): void {
     this.subscriptions?.unsubscribe();
-  }
-
-  openUpsertPostModal(post: PostDto | null, isEdit: boolean): void {
-    this.dialog.open(UpsertPost, {
-      disableClose: false,
-      maxHeight: '90vh',
-      panelClass: 'login-dialog-panel',
-      data: isEdit ? post : null
-    });
   }
 
   openUpsertPostModal(post: PostDto | null, isEdit: boolean): void {

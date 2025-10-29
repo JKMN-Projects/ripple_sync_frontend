@@ -34,10 +34,10 @@ export class Authentication {
       tap({
         next: response => {
           if (response.status === 200) {
-            console.log(response.body);
             this.userEmail.set(response.body?.email ?? '');
             this.isAuthenticated.set(true);
-            localStorage.setItem("expiresAt", response.body?.expiresAt.toString() ?? "")
+            localStorage.setItem("expiresAt", response.body?.expiresAt.toString() ?? "");
+            localStorage.setItem("email", response.body?.email.toString() ?? "");
           }
         },
         error: () => {
@@ -53,6 +53,7 @@ export class Authentication {
 
     if (new Date().getTime() < expiresAt) {
       this.isAuthenticated.set(true);
+      this.userEmail.set(localStorage.getItem("email") ?? "");
     }
     else {
       // Call refresh token endpoint and move this.logout to that method.
