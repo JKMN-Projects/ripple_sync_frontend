@@ -57,7 +57,7 @@ constructor() {
 
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
-              this.router.navigate(['/']); // Change route when post list component is implemented
+              this.router.navigate(['/posts']); // Change route when post list component is implemented
             }
           })
           break;
