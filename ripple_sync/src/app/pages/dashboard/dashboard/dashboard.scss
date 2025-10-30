@@ -30,6 +30,13 @@
     
     mat-card-content {
         margin-top: 1rem;
+
+        .tile-grid {
+            --rip-tile-grid-min-column-width: 150px;
+            &:not(:last-child) {
+                margin-bottom: 1.5rem;
+            }
+        }
     }
 
     .platform-metric-tile {

@@ -61,32 +61,36 @@
     <section id="PlatformMetrics">
         <h3>Platform performance</h3>
         <div class="tile-grid">
-            <mat-card class="tile secondary" appearance="outlined">
-                <mat-card-header>
-                    <mat-card-title>Facebook</mat-card-title>
-                <mat-card-subtitle>52 posts this period</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="tile-grid">
-                        <div class="platform-metric-tile tile">
-                            <div class="platform-metric-label">Reach</div>
-                            <div class="platform-metric-number">18.5k</div>
+            @for (item of [null, null]; track $index) {
+                <mat-card class="tile secondary" appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Facebook</mat-card-title>
+                        <mat-card-subtitle>52 posts this period</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="tile-grid">
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Reach</div>
+                                <div class="platform-metric-number">18.5k</div>
+                            </div>
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Engagement</div>
+                                <div class="platform-metric-number">1,432</div>
+                            </div>
                         </div>
-                        <div class="platform-metric-tile tile">
-                            <div class="platform-metric-label">Engagement</div>
-                            <div class="platform-metric-number">1,432</div>
+                        <div class="tile-grid">
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Followers</div>
+                                <div class="platform-metric-number">2,847</div>
+                            </div>
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Avg. engagement</div>
+                                <div class="platform-metric-number">27.5</div>
+                            </div>
                         </div>
-                        <div class="platform-metric-tile tile">
-                            <div class="platform-metric-label">Followers</div>
-                            <div class="platform-metric-number">2,847</div>
-                        </div>
-                        <div class="platform-metric-tile tile">
-                            <div class="platform-metric-label">Avg. engagement</div>
-                            <div class="platform-metric-number">27.5</div>
-                        </div>
-                    </div>
-                </mat-card-content>
-            </mat-card>
+                    </mat-card-content>
+                </mat-card>
+            }
         </div>
     </section>
 </section>
