@@ -75,9 +75,7 @@ export class LoginModal {
         email: this.emailControl?.value ?? "",
         password: this.passwordControl?.value ?? ""
       };
-
-      this.authService.isAuthenticated();
-
+      
       this.authService.login(login).subscribe({
         next: () => {
           this.isLoading.set(false);

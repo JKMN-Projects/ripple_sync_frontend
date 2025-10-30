@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>
+  <app-icon-container iconName="person_add" shape="square" ></app-icon-container>
+  Register
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="registerForm">
+    <div class="form-container stack">
+      @if (errorMessage()) {
+        <mat-error>{{ errorMessage() }}</mat-error>
+      }
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
+        @if (emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)) {
+          <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter your password"
+          autocomplete="current-password" />
+        @if (passwordControl?.invalid && (passwordControl?.dirty || passwordControl?.touched)) {
+          <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password"
+          autocomplete="current-password" />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
+    Cancel
+  </button>
+  <button matButton="filled" class="primary" [disabled]="isLoading() || registerForm.invalid" (click)="register()">
+    @if (isLoading()) {
+    <mat-spinner diameter="20"></mat-spinner>
+    } @else {
+    Register
+    }
+  </button>
+</mat-dialog-actions>
