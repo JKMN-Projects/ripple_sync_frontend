@@ -1,8 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
 import {  PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { CreatePostDto } from '../interfaces/create-post-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,13 @@ export class PostService {
   readonly posts = this.postsSignal.asReadonly();
 
   /// Retrieves all integrations from the API
-  getPostsByUser() {
+  getPostsByUser( filter?: null | string ) {
+      let params = new HttpParams();
+    if (filter) {
+      params = params.set('status', filter);
+    }
     this.http
-      .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, { observe: 'response' })
+      .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, { observe: 'response', params })
       .pipe(
         tap({
           next: (response) => {
@@ -31,6 +36,24 @@ export class PostService {
         catchError((err) => {
           console.error('Error fetching integrations', err);
           return of([]);
+        })
+      )
+      .subscribe();
+  }
+
+  createPost(post: CreatePostDto) {
+    this.http.post<CreatePostDto>(environment.apiUrl, post, { observe: 'response' })
+      .pipe(
+        tap({
+          next: response => {
+            if (response.status === 201) {
+              this.getPostsByUser();
+            }
+          },
+        }),
+        catchError(err => {
+          console.error('Error creating user', err);
+          return of(null);
         })
       )
       .subscribe();

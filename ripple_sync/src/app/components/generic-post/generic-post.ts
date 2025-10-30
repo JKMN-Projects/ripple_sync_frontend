@@ -22,10 +22,24 @@ import { PostDto } from '../../interfaces/postDto';
   styleUrl: './generic-post.scss',
 })
 export class GenericPost {
-  constructor() {}
   post = input.required<PostDto>();
 
   postService = inject(PostService);
 
   isLoading = signal(false);
+
+  isEditable(status: string): boolean {
+    const editableStatus = ['draft','scheduled'];
+    return !editableStatus.includes(status.toLowerCase());
+  }
+
+  isDeletable(status: string): boolean {
+    const deletableStatus = ['draft','scheduled'];
+    return !deletableStatus.includes(status.toLowerCase());
+  }
+
+  isRetryable(status: string): boolean {
+    const retryableStatus = ['failed'];
+    return !retryableStatus.includes(status.toLowerCase());
+  }
 }

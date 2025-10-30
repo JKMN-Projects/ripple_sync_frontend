@@ -1,26 +1,19 @@
 <mat-toolbar class="navbar surface">
   <div class="navbar-content">
-    @if (!authService.isAuthenticated()) {
-      <button matIconButton class="menu-button" (click)="toggleDrawer()">
-        <mat-icon fontIcon="menu"></mat-icon>
-      </button>
-    }
     <div class="navbar-brand">
       <img src="Logo.png" alt="RippleSync Logo" class="brand-logo" />
       <a routerLink="/" class="brand-link">RippleSync</a>
     </div>
     <div class="spacer"></div>
     <nav class="navbar-nav">
-      @if (!authService.isAuthenticated()) {
-        <div class="stack stack--row">
-          <button matButton="elevated" class="surface" (click)="openLoginModal()">
-            Login
-          </button>
-          <button matButton="filled" class="dark" (click)="openRegisterModal()">
-            Register
-          </button>
-        </div>
-      }
+      <div class="stack stack--row">
+        <button matButton="elevated" class="surface" (click)="openLoginModal()">
+          Login
+        </button>
+        <button matButton="filled" class="dark" (click)="openRegisterModal()">
+          Register
+        </button>
+      </div>
     </nav>
   </div>
 </mat-toolbar>

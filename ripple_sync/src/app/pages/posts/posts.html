@@ -1,8 +1,19 @@
 <div style="padding: 4vh;">
     <div class="stack stack--row stack--space-between">
         <h1 >Posts</h1>
-        <button matButton="outlined">+ New Post</button>
+        <button class="accent" matButton="filled" (click)="openUpsertPostModal(null, false)">+ New Post</button>
     </div>
+
+        <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"
+            [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()" >
+            <mat-button-toggle>All</mat-button-toggle>
+            <mat-button-toggle value="draft">Drafts</mat-button-toggle>
+            <mat-button-toggle value="scheduled">Scheduled</mat-button-toggle>
+            <mat-button-toggle value="processing">Processing</mat-button-toggle>
+            <mat-button-toggle value="posted">Posted</mat-button-toggle>
+            <mat-button-toggle value="failed">Failed</mat-button-toggle>
+        </mat-button-toggle-group>
+
     <div>
         @for (post of posts(); track post.id) {
         <app-generic-post [post]="post"  />

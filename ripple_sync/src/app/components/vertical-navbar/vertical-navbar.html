@@ -6,9 +6,9 @@
     <mat-divider></mat-divider>
     <ul>
         <li>
-            <a routerLink="" routerLinkActive="active-link">
-                <mat-icon fontIcon="home"></mat-icon>
-                Home
+            <a routerLink="/posts" routerLinkActive="active-link">
+                <mat-icon fontIcon="art_track"></mat-icon>
+                My Posts
             </a>
         </li>
         <li>
@@ -17,25 +17,20 @@
                 Dashboard
             </a>
         </li>
+
         <li>
-            <a routerLink="/my-posts" routerLinkActive="active-link">
-                <mat-icon fontIcon="art_track"></mat-icon>
-                My Posts
-            </a>
-        </li>
-        <li>
-            <a routerLink="/platforms" routerLinkActive="active-link">
+            <a routerLink="/integrations" routerLinkActive="active-link">
                 <mat-icon fontIcon="apps"></mat-icon>
-                Platforms
+                Integrations
             </a>
         </li>
     </ul>
+    <button matButton="filled" class="dark" (click)="logout()">Logout</button>
     <mat-divider></mat-divider>
     <div class="avatar-section stack stack--row stack--center stack--gap-sm">
         <app-icon-container iconName="person" size="sm"></app-icon-container>
         <div>{{ userEmail }}</div>
     </div>
     <mat-divider></mat-divider>
-    <button matButton="filled" class="dark" (click)="logout()">Logout</button>
     <button matButton="filled" class="error">Delete account</button>
 </nav>
