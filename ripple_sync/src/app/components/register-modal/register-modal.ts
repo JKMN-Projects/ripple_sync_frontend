@@ -3,9 +3,9 @@ import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@ang
 import { Authentication, RegisterRequest } from '../../services/authentication';
 import { MatDialogRef, MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatError, MatLabel, MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { IconContainer } from "../icon-container/icon-container";
-import { MatProgressSpinner, MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';

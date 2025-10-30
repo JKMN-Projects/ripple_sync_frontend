@@ -74,9 +74,7 @@ export class Authentication {
           }
         },
         error: (error) => {
-          console.error('Registration error:', error, error.error);
           const problemDetails = parseProblemDetails(error.error);
-          console.log('Parsed ProblemDetails:', problemDetails);
           if (error.status === 400 && problemDetails?.validationErrors) {
             this.registerState.update(state => ({ ...state, status: 'error', message: 'Some fields have validation errors', validationErrors: problemDetails.validationErrors || null }));
           }
