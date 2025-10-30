@@ -29,12 +29,12 @@ export class GenericPost {
   isLoading = signal(false);
 
   isEditable(status: string): boolean {
-    const editableStatus = ['scheduled'];
+    const editableStatus = ['draft','scheduled'];
     return !editableStatus.includes(status.toLowerCase());
   }
 
   isDeletable(status: string): boolean {
-    const deletableStatus = ['scheduled'];
+    const deletableStatus = ['draft','scheduled'];
     return !deletableStatus.includes(status.toLowerCase());
   }
 
