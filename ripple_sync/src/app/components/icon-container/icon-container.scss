@@ -6,6 +6,7 @@
     width: 48px;
     height: 48px;
     border-radius: 24px;
+    background-color: var(--mat-sys-primary);
 	background: linear-gradient(135deg, #3182CE -20%, #2C5282 100%);
     font-size: 1.5rem;
     text-align: center;
@@ -18,9 +19,11 @@
         width: 1em;
     }
 
+
     &.icon-container--no-gradient {
-        background: none;
-        background-color: var(--mat-sys-primary);
+        background: unset;
+        background-color: var(--mat-sys-primary-container);
+        color: var(--mat-sys-on-primary-container);
     }
 
     &.square {
@@ -38,8 +41,40 @@
         font-size: 2rem;
     }
     
-    &.success {
-        background-color: #48BB78;
-        color: var(--mat-sys-on-primary);
+    &.tertiary {
+    	background: linear-gradient( 135deg, transparent 15%, #00000026 115%);
+        background-color: var(--mat-sys-tertiary);
+        color: var(--mat-sys-on-tertiary);
+
+        &.icon-container--no-gradient {
+            background: unset;
+            background-color: var(--mat-sys-tertiary-container);
+            color: var(--mat-sys-on-tertiary-container);
+        }
     }
+    
+    &.error {
+    	background: linear-gradient( 135deg, transparent 15%, #00000026 115%);
+        background-color: var(--mat-sys-error);
+        color: var(--mat-sys-on-error);
+
+        &.icon-container--no-gradient {
+            background: unset;
+            background-color: var(--mat-sys-error-container);
+            color: var(--mat-sys-on-error-container);
+        }
+    }
+    
+    &.warn {
+    	background: linear-gradient( 135deg, transparent 15%, #00000026 115%);
+        background-color: var(--mat-sys-warn);
+        color: var(--mat-sys-on-warn);
+
+        &.icon-container--no-gradient {
+            background: unset;
+            background-color: var(--mat-sys-warn-container);
+            color: var(--mat-sys-on-warn-container);
+        }
+    }
+    
 }

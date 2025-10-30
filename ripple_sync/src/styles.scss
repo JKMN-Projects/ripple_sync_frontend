@@ -4,7 +4,8 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
-@use './assets/themes/_theme-colors.scss' as customTheme;
+// @use './assets/themes/_theme-colors.scss' as customTheme;
+@use './assets/themes/_newtheme-colors.scss' as customTheme;
 @use './assets/styles/buttons-restyle' as buttonsRestyle;
 @use './assets/styles/toolbar-restyle' as toolbarRestyle;
 @use './assets/styles/cards-restyle' as cardsRestyle;
@@ -13,21 +14,33 @@
 
 html {
 	@include mat.theme((
-			color: (
-				primary: customTheme.$primary-palette,
-				tertiary: customTheme.$tertiary-palette,
-			),
-			typography: Roboto,
-			density: 0,
-		));
+		color: (
+			primary: customTheme.$primary-palette,
+			tertiary: customTheme.$tertiary-palette,
+		),
+		typography: Roboto,
+		density: 0,
+	));
+	@include mat.theme-overrides((
+		tertiary-container: #C6F6D5,
+		tertiary-on-container: #22543D,
+		error-container: #FED7D7,
+		error-on-container: #742A2A,
+		primary-container: #BEE3F8,
+		primary-on-container: #2C5282,
+	));
+
+	--mat-sys-on-warn-container: #7C2D12;
+	--mat-sys-warn-container: #FEEBC8;
+
 
 	@include mat.core-overrides((
 		app-background-color: #fff,
 	));
-	
-  @include mat.divider-overrides((
-    color: var(--mat-sys-outline),
-  ));
+
+	@include mat.divider-overrides((
+		color: var(--mat-sys-outline),
+	));
 }
 * {
 	box-sizing: border-box;

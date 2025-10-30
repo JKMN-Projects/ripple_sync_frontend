@@ -1,12 +1,12 @@
 <div style="padding: 4vh;">
     <div class="stack stack--row stack--space-between">
         <h1 >Posts</h1>
-        <button class="accent" matButton="filled" (click)="openUpsertPostModal(null, false)">+ New Post</button>
+        <button class="primary" matButton="filled" (click)="openUpsertPostModal(null, false)">+ New Post</button>
     </div>
 
         <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"
             [hideSingleSelectionIndicator]="true">
-            <mat-button-toggle>All</mat-button-toggle>
+            <mat-button-toggle [value]="null">All</mat-button-toggle>
             <mat-button-toggle value="draft">Drafts</mat-button-toggle>
             <mat-button-toggle value="scheduled">Scheduled</mat-button-toggle>
             <mat-button-toggle value="processing">Processing</mat-button-toggle>

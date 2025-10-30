@@ -12,7 +12,7 @@
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
-                    <app-icon-container iconName="art_track" shape="square"></app-icon-container>
+                    <app-icon-container iconName="art_track" shape="square" class="primary" [noGradient]="true"></app-icon-container>
                     Total Posts
                 </mat-card-title>
             </mat-card-header>
@@ -24,19 +24,19 @@
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
-                    <app-icon-container iconName="social_distance" shape="square"></app-icon-container>
+                    <app-icon-container iconName="social_distance" shape="square" class="tertiary" [noGradient]="true"></app-icon-container>
                     Total Reach
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="total-metric-number">42,5</div>
+                <div class="total-metric-number">42,5k</div>
             </mat-card-content>
         </mat-card>
         
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
-                    <app-icon-container iconName="thumb_up" shape="square"></app-icon-container>
+                    <app-icon-container iconName="thumb_up" shape="square" class="error" [noGradient]="true"></app-icon-container>
                     Total Likes
                 </mat-card-title>
             </mat-card-header>
@@ -48,7 +48,7 @@
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
-                    <app-icon-container iconName="schedule" shape="square"></app-icon-container>
+                    <app-icon-container iconName="schedule" shape="square" class="warn" [noGradient]="true"></app-icon-container>
                     Scheduled Posts
                 </mat-card-title>
             </mat-card-header>

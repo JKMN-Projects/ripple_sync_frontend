@@ -22,7 +22,7 @@ export class Posts implements OnInit {
   posts = this.postsService.posts;
   private subscriptions = new Subscription();
 
-  filterControl = new FormControl('');
+  filterControl = new FormControl(null);
 
   ngOnInit(): void {
     this.postsService.getPostsByUser();
