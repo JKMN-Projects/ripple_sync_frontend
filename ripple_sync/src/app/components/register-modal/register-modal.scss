@@ -1,0 +1,51 @@
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 1rem;
+}
+.full-width {
+  width: 100%;
+}
+
+.form-container {
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  background-color: #ffebee;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+mat-dialog-actions {
+  gap: 0.5rem;
+  flex-direction: column-reverse;
+
+  mat-spinner {
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  button {
+    min-width: 80px;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  @media screen and (min-width: 400px) {
+    flex-direction: row;
+    justify-content: flex-end;
+
+    button {
+      width: auto;
+    }
+  }
+
+}
