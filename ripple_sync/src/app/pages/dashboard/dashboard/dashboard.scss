@@ -1,0 +1,49 @@
+#Dashboard {
+    padding: 2rem;
+}
+
+#TotalMetrics {
+
+    mat-card-title {
+        font-size: 1.25em;
+        font-weight: 500;
+    }
+    
+    .total-metric-number {
+        font-size: 3em;
+        font-weight: 800;
+        margin: 1rem 0;
+    }
+}
+
+#PlatformMetrics {
+    margin-top: 2rem;
+
+    .tile-grid {
+        gap: 1.5rem 1rem;
+    }
+
+    mat-card-subtitle {
+        font-size: 1em;
+        font-weight: 400;
+    }
+    
+    mat-card-content {
+        margin-top: 1rem;
+    }
+
+    .platform-metric-tile {
+        background-color: var(--mat-sys-inverse-on-surface);
+        padding: 1.5rem;
+        padding-bottom: 2rem;
+        font-size: 1rem;
+        line-height: 1.25em;
+        font-weight: 400;
+    }
+
+    .platform-metric-number {
+        font-size: 2em;
+        font-weight: 700;
+        margin-top: 1rem;
+    }
+}

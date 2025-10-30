@@ -5,7 +5,7 @@
     </div>
 
         <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"
-            [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()" >
+            [hideSingleSelectionIndicator]="true">
             <mat-button-toggle>All</mat-button-toggle>
             <mat-button-toggle value="draft">Drafts</mat-button-toggle>
             <mat-button-toggle value="scheduled">Scheduled</mat-button-toggle>

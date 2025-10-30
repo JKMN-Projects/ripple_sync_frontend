@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+html {
+    @include mat.button-toggle-overrides((
+        shape: .5rem,
+        background-color: #ffffff,
+        divider-color: var(--mat-divider-color, var(--mat-sys-outline-variant)),
+        selected-state-background-color: var(--mat-sys-primary),
+        selected-state-text-color: var(--mat-sys-on-primary),
+    ));
+}

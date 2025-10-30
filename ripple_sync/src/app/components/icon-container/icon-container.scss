@@ -10,13 +10,17 @@
     font-size: 1.5rem;
     text-align: center;
     color: var(--mat-sys-on-primary);
-    color: var(--mat-sys-surface-container);
     
     mat-icon {
         color: inherit;
         font-size: inherit;
         height: 1em;
         width: 1em;
+    }
+
+    &.icon-container--no-gradient {
+        background: none;
+        background-color: var(--mat-sys-primary);
     }
 
     &.square {
@@ -32,5 +36,10 @@
         width: 64px;
         height: 64px;
         font-size: 2rem;
+    }
+    
+    &.success {
+        background-color: #48BB78;
+        color: var(--mat-sys-on-primary);
     }
 }
