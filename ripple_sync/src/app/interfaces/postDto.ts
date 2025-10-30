@@ -2,7 +2,7 @@ export interface PostsByUserResponseDto{
   data: PostDto[]
 }
 export interface PostDto {
-  id: number;
+  postId: string;
   messageContent: string;
   statusName: string;
   mediaAttachment: string[];
