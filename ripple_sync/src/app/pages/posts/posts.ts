@@ -34,7 +34,7 @@ export class Posts implements OnInit {
     this.postsService.getPostsByUser();
     this.subscriptions.add(
       this.filterControl.valueChanges.subscribe((value) => {
-          this.postsService.getPostsByUser(value);
+          this.postsService.filterChangeSignal.set(value)
       })
     );
   }
