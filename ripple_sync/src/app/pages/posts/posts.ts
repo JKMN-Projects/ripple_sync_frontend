@@ -20,15 +20,9 @@ export class Posts implements OnInit {
   dialog = inject(MatDialog)
   postsService = inject(PostService);
   posts = this.postsService.posts;
-  hideSingleSelectionIndicator = signal(false);
   private subscriptions = new Subscription();
 
-  filterControl = new FormControl('');
-
-  toggleSingleSelectionIndicator() {
-    this.hideSingleSelectionIndicator.update((value) => !value);
-  }
-
+  filterControl = new FormControl(null);
 
   ngOnInit(): void {
     this.postsService.getPostsByUser();

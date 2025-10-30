@@ -40,9 +40,9 @@ nav {
                 }
                 
                 &.active-link{
-                    border-left-color: var(--mat-sys-tertiary);
-                    color: var(--mat-sys-tertiary);
-                    background-color: var(--mat-sys-tertiary-container);
+                    border-left-color: var(--mat-sys-primary);
+                    color: var(--mat-sys-primary);
+                    background-color: var(--mat-sys-primary-container);
                 }
             }
         }

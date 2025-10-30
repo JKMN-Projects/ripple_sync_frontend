@@ -59,38 +59,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tile-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    column-gap: 1rem;
-    row-gap: 1rem;
-
-    .tile {
-        height: 100%;
-        padding: .75rem;
-        border-radius: .5rem;
-
-        mat-card-header {
-            display: block;
-        }
-
-        mat-card-title {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            font-weight: 600;
-            font-size: 1.25rem;
-        }
-
-        mat-card-content {
-            font-size: .875rem;
-            color: #4A5568;
-            margin-top: .5rem;
-        }
-    }
-}
-
 .feature-tile {
     text-align: left;
 }

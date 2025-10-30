@@ -1,7 +1,8 @@
-<div class="icon-container" 
+<div class="icon-container {{ class() }}" 
     [class.square]="shape() === 'square'"
     [class.icon-container--sm]="size() === 'sm'"
-    [class.icon-container--lg]="size() === 'lg'">
+    [class.icon-container--lg]="size() === 'lg'"
+    [class.icon-container--no-gradient]="noGradient()">
     @if (iconName()) {
     <mat-icon fontIcon="{{ iconName() }}"></mat-icon>
     } 
