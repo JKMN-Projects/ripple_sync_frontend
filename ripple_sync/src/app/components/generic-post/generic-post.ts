@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,14 +27,18 @@ export class GenericPost {
   postService = inject(PostService);
 
   isLoading = signal(false);
+  errorMessage = signal<string | null>(null);
 
+  DeletePost() {
+    this.postService.deletePost(this.post().postId)
+  }
   isEditable(status: string): boolean {
-    const editableStatus = ['scheduled'];
+    const editableStatus = ['draft', 'scheduled'];
     return !editableStatus.includes(status.toLowerCase());
   }
 
   isDeletable(status: string): boolean {
-    const deletableStatus = ['scheduled'];
+    const deletableStatus = ['draft', 'scheduled'];
     return !deletableStatus.includes(status.toLowerCase());
   }
 

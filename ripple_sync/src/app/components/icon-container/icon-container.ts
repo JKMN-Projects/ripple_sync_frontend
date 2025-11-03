@@ -11,4 +11,6 @@ export class IconContainer {
   iconName = input<string>('');
   shape = input<'circle' | 'square'>('circle');
   size = input<'lg' | 'sm' | 'md'>('md');
+  noGradient = input<boolean>(false);
+  class = input<string>('');
 }

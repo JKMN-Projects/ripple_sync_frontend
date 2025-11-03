@@ -20,19 +20,24 @@ mat-card-header {
 }
 
 .failed{
-    color:#742A2A;
-    background-color: #FED7D7;
+    color: var(--mat-sys-on-error-container);
+    background-color: var(--mat-sys-error-container);
 }
 .processing{
-    color:#7C2D12;
-    background-color: #FEEBC8;
+    color: var(--mat-sys-on-warn-container);
+    background-color: var(--mat-sys-warn-container);
 }
 .scheduled{
-    color:#2C5282;
-    background-color: #BEE3F8;
+    color: var(--mat-sys-on-primary-container);
+    background-color: var(--mat-sys-primary-container);
 }
 
 .posted{
-    color:#22543D;
-    background-color: #C6F6D5;
+    color: var(--mat-sys-on-tertiary-container);
+    background-color: var(--mat-sys-tertiary-container);
+}
+
+.draft {
+    color: var(--mat-sys-on-secondary-container);
+    background-color: var(--mat-sys-secondary-container);
 }

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../login-modal/login-modal';
 import { SidebarService } from '../../services/sidebar-service';
+import { RegisterModal } from '../register-modal/register-modal';
 
 @Component({
   selector: 'app-top-navbar',
@@ -40,6 +41,20 @@ export class TopNavbar {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.router.navigate(['/posts']); // Change route when post list component is implemented
+      }
+    })
+  }
+
+  openRegisterModal(): void {
+    const dialogRef = this.dialog.open(RegisterModal, {
+      disableClose: false,
+      maxHeight: '90vh',
+      panelClass: 'dialog-panel--no-scroll',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate(['/']); // Change route when post list component is implemented
       }
     })
   }

@@ -1,0 +1,96 @@
+<section id="Dashboard">
+    <div class="stack stack--row stack--space-between">
+        <h1>Dashboard</h1>
+
+        <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"
+            [hideSingleSelectionIndicator]="true">
+            <mat-button-toggle value="today">Today</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+
+    <section id="TotalMetrics" class="tile-grid">
+        <mat-card class="tile secondary" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    <app-icon-container iconName="art_track" shape="square" class="primary" [noGradient]="true"></app-icon-container>
+                    Total Posts
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="total-metric-number">142</div>
+            </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="tile secondary" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    <app-icon-container iconName="social_distance" shape="square" class="tertiary" [noGradient]="true"></app-icon-container>
+                    Total Reach
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="total-metric-number">42,5k</div>
+            </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="tile secondary" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    <app-icon-container iconName="thumb_up" shape="square" class="error" [noGradient]="true"></app-icon-container>
+                    Total Likes
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="total-metric-number">3,842</div>
+            </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="tile secondary" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    <app-icon-container iconName="schedule" shape="square" class="warn" [noGradient]="true"></app-icon-container>
+                    Scheduled Posts
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="total-metric-number">18</div>
+            </mat-card-content>
+        </mat-card>
+    </section>
+
+    <section id="PlatformMetrics">
+        <h3>Platform performance</h3>
+        <div class="tile-grid">
+            @for (item of [null, null]; track $index) {
+                <mat-card class="tile secondary" appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Facebook</mat-card-title>
+                        <mat-card-subtitle>52 posts this period</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="tile-grid">
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Reach</div>
+                                <div class="platform-metric-number">18.5k</div>
+                            </div>
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Engagement</div>
+                                <div class="platform-metric-number">1,432</div>
+                            </div>
+                        </div>
+                        <div class="tile-grid">
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Followers</div>
+                                <div class="platform-metric-number">2,847</div>
+                            </div>
+                            <div class="platform-metric-tile tile">
+                                <div class="platform-metric-label">Avg. engagement</div>
+                                <div class="platform-metric-number">27.5</div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            }
+        </div>
+    </section>
+</section>
