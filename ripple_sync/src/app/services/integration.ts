@@ -16,12 +16,24 @@ export interface IntegrationDto {
   imageUrl: string;
 }
 
+export interface ConnectedIntegrationsResponseDto {
+  data: Array<ConnectedIntegrationDto>;
+}
+
+export interface ConnectedIntegrationDto {
+  userPlatformIntegrationId: string;
+  platformName: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class Integration {
   private integrationsSignal = signal<IntegrationDto[] | null>(null);
   readonly integrations = this.integrationsSignal.asReadonly();
+
+  private userItegrationsSignal = signal<ConnectedIntegrationDto[] | null>(null);
+  readonly userIntegrations = this.userItegrationsSignal.asReadonly();
 
   http = inject(HttpClient)
 
@@ -38,6 +50,31 @@ export class Integration {
           error: (error) => {
             console.error('Failed to load integrations:', error);
             this.integrationsSignal.set([]);
+          }
+        })
+        ,
+        catchError(err => {
+          console.error('Error fetching integrations', err);
+          return of([]);
+        }),
+      )
+      .subscribe();
+  }
+
+  GetUserIntegrations() {
+    this.http.get<ConnectedIntegrationsResponseDto>(`${environment.apiUrl}/integrations/user`, { observe: 'response' })
+      .pipe(
+        tap({
+          next: response => {
+            if (response.status === 200) {
+              console.log(response.body?.data);
+
+              this.userItegrationsSignal.set(response.body?.data ?? []);
+            }
+          },
+          error: (error) => {
+            console.error('Failed to load integrations:', error);
+            this.userItegrationsSignal.set([]);
           }
         })
         ,

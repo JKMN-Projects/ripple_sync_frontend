@@ -41,8 +41,20 @@ export class PostService {
       .subscribe();
   }
 
-  createPost(post: CreatePostDto) {
-    this.http.post<CreatePostDto>(environment.apiUrl, post, { observe: 'response' })
+  createPost(messageContent: string, files: File[], timestamp: number | null, integrationIds: number[]) {
+    const formData = new FormData();
+    formData.append("MessageContent", messageContent);
+    formData.append("Timestamp", timestamp != null ? timestamp.toString() : "");
+
+    integrationIds.forEach(id => {
+      formData.append("IntegrationIds", id.toString());
+    })
+
+    files.forEach(file => {
+      formData.append("Files", file, file.name);
+    })
+
+    this.http.post(environment.apiUrl + "/posts", formData, { observe: 'response' })
       .pipe(
         tap({
           next: response => {

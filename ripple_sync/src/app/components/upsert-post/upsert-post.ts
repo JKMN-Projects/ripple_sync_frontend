@@ -70,7 +70,7 @@ export class UpsertPost implements OnInit {
   postFormGroup = this.fb.group({
     message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
     media: new FormControl<Array<string> | null>(new Array<string>()),
-    platforms: new FormControl<Array<string> | null>(null, [Validators.required]),
+    platforms: new FormControl<Array<IntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(null),
     timestamp: new FormControl<number | null>(null)
   })
@@ -213,14 +213,6 @@ export class UpsertPost implements OnInit {
     return '';
   }
 
-  submit() {
-
-  }
-
-  cancel(): void {
-    this.dialogRef.close();
-  }
-
   onFileSelect(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
@@ -251,21 +243,46 @@ export class UpsertPost implements OnInit {
   private handleFiles(fileList: FileList): void {
     const acceptedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-    Array.from(fileList).forEach(file => {
-      if (acceptedTypes.includes(file.type)) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const result = e.target?.result as string;
-          this.files.update(arr => [...arr, file]);
-          this.previews.update(arr => [...arr, result]);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+    if (fileList.length + this.files().length > 4) {
+      alert("Maximum 4 attachments allowed");
+    }
+    else {
+      Array.from(fileList).forEach(file => {
+        if (acceptedTypes.includes(file.type)) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const result = e.target?.result as string;
+            this.files.update(arr => [...arr, file]);
+            this.previews.update(arr => [...arr, result]);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
   }
 
   removeFile(index: number): void {
     this.files.update(arr => arr.filter((_, i) => i !== index));
     this.previews.update(arr => arr.filter((_, i) => i !== index));
+  }
+
+  submit() {
+    let integrationIds = new Array<number>();
+
+    (this.platformsControl?.value as IntegrationDto[]).forEach(integration => {
+      integrationIds.push(integration.platformId);
+    });
+
+    this.postService.createPost(
+      this.messageControl?.value ?? "",
+      this.files(),
+      this.timestampControl?.value || null,
+      integrationIds);
+
+      this.cancel();
+  }
+
+  cancel(): void {
+    this.dialogRef.close();
   }
 }
