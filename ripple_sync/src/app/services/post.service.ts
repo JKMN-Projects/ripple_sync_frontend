@@ -1,9 +1,8 @@
-import { computed, effect, inject, Injectable, resource, signal } from '@angular/core';
-import {  PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
-import { BehaviorSubject, catchError, Observable, of, single, tap } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponseBase } from '@angular/common/http';
+import { PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
+import { inject, Injectable, resource, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { CreatePostDto } from '../interfaces/create-post-dto';
+import { catchError, of, tap } from 'rxjs';
 
 export interface DeletePostResponseState {
   status: 'success' | 'loading' | 'error' | null;
@@ -65,9 +64,20 @@ export class PostService {
     });
   }
 
-  createPost(post: CreatePostDto) {
-    this.http
-      .post<CreatePostDto>(environment.apiUrl, post, { observe: 'response' })
+  createPost(messageContent: string, files: File[], timestamp: number | null, integrationIds: string[]) {
+    const formData = new FormData();
+    formData.append("MessageContent", messageContent);
+    formData.append("Timestamp", timestamp != null ? timestamp.toString() : "");
+
+    integrationIds.forEach(id => {
+      formData.append("IntegrationIds", id.toString());
+    })
+
+    files.forEach(file => {
+      formData.append("Files", file, file.name);
+    })
+
+    this.http.post(environment.apiUrl + "/posts", formData, { observe: 'response' })
       .pipe(
         tap({
           next: (response) => {

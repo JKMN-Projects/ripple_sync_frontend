@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Integration, IntegrationDto } from '../../services/integration';
+import { ConnectedIntegrationDto, Integration, IntegrationDto } from '../../services/integration';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateAdapter, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
@@ -54,7 +54,7 @@ export class UpsertPost implements OnInit {
 
   readonly timestampTypes = TimestampTypes;
 
-  integrations = signal<IntegrationDto[] | null>([]);
+  integrations = this.integrationService.userIntegrations;
   showDatePicker = signal(false);
   formattedScheduledDate = signal('');
   files = signal<File[]>([]);
@@ -70,7 +70,7 @@ export class UpsertPost implements OnInit {
   postFormGroup = this.fb.group({
     message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
     media: new FormControl<Array<string> | null>(new Array<string>()),
-    platforms: new FormControl<Array<string> | null>(null, [Validators.required]),
+    platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(null),
     timestamp: new FormControl<number | null>(null)
   })
@@ -95,15 +95,8 @@ export class UpsertPost implements OnInit {
     return this.postFormGroup.get("timestamp");
   }
 
-  constructor() {
-    effect(() => {
-      this.integrations.set(
-        this.integrationService.integrations()?.filter(i => i.connected == true) ?? null)
-    })
-  }
-
   ngOnInit(): void {
-    this.integrationService.getIntegrations();
+    this.integrationService.getUserIntegrations();
 
     if (this.checkIfEdit()) {
       this.assignFormValues();
@@ -213,14 +206,6 @@ export class UpsertPost implements OnInit {
     return '';
   }
 
-  submit() {
-
-  }
-
-  cancel(): void {
-    this.dialogRef.close();
-  }
-
   onFileSelect(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
@@ -251,21 +236,46 @@ export class UpsertPost implements OnInit {
   private handleFiles(fileList: FileList): void {
     const acceptedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-    Array.from(fileList).forEach(file => {
-      if (acceptedTypes.includes(file.type)) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const result = e.target?.result as string;
-          this.files.update(arr => [...arr, file]);
-          this.previews.update(arr => [...arr, result]);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+    if (fileList.length + this.files().length > 4) {
+      alert("Maximum 4 attachments allowed");
+    }
+    else {
+      Array.from(fileList).forEach(file => {
+        if (acceptedTypes.includes(file.type)) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const result = e.target?.result as string;
+            this.files.update(arr => [...arr, file]);
+            this.previews.update(arr => [...arr, result]);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
   }
 
   removeFile(index: number): void {
     this.files.update(arr => arr.filter((_, i) => i !== index));
     this.previews.update(arr => arr.filter((_, i) => i !== index));
+  }
+
+  submit() {
+    let integrationIds = new Array<string>();
+
+    (this.platformsControl?.value as ConnectedIntegrationDto[]).forEach(integration => {
+      integrationIds.push(integration.userPlatformIntegrationId);
+    });
+
+    this.postService.createPost(
+      this.messageControl?.value ?? "",
+      this.files(),
+      this.timestampControl?.value || null,
+      integrationIds);
+
+      // this.cancel();
+  }
+
+  cancel(): void {
+    this.dialogRef.close();
   }
 }
