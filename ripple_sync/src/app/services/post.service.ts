@@ -108,6 +108,7 @@ export class PostService {
         }),
         catchError((err) => {
           console.error('Error deleting post', err);
+          alert("Error while deleting post")
           return of(null);
         })
       )
