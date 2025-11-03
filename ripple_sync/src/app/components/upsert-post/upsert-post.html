@@ -46,8 +46,8 @@
 
       <h3>Select platforms</h3>
       <mat-chip-listbox formControlName="platforms" multiple>
-        @for (integration of integrations(); track integration?.platformId) {
-        <mat-chip-option [value]="integration">{{ integration.name }}</mat-chip-option>
+        @for (integration of integrations(); track integration?.userPlatformIntegrationId) {
+        <mat-chip-option [value]="integration">{{ integration.platFormName }}</mat-chip-option>
         }
       </mat-chip-listbox>
 

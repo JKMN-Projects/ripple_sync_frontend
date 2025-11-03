@@ -22,7 +22,7 @@ export interface ConnectedIntegrationsResponseDto {
 
 export interface ConnectedIntegrationDto {
   userPlatformIntegrationId: string;
-  platformName: string;
+  platFormName: string;
 }
 
 @Injectable({
@@ -32,8 +32,8 @@ export class Integration {
   private integrationsSignal = signal<IntegrationDto[] | null>(null);
   readonly integrations = this.integrationsSignal.asReadonly();
 
-  private userItegrationsSignal = signal<ConnectedIntegrationDto[] | null>(null);
-  readonly userIntegrations = this.userItegrationsSignal.asReadonly();
+  private userIntegrationsSignal = signal<ConnectedIntegrationDto[] | null>(null);
+  readonly userIntegrations = this.userIntegrationsSignal.asReadonly();
 
   http = inject(HttpClient)
 
@@ -61,20 +61,18 @@ export class Integration {
       .subscribe();
   }
 
-  GetUserIntegrations() {
+  getUserIntegrations() {
     this.http.get<ConnectedIntegrationsResponseDto>(`${environment.apiUrl}/integrations/user`, { observe: 'response' })
       .pipe(
         tap({
           next: response => {
             if (response.status === 200) {
-              console.log(response.body?.data);
-
-              this.userItegrationsSignal.set(response.body?.data ?? []);
+              this.userIntegrationsSignal.set(response.body?.data ?? []);
             }
           },
           error: (error) => {
             console.error('Failed to load integrations:', error);
-            this.userItegrationsSignal.set([]);
+            this.userIntegrationsSignal.set([]);
           }
         })
         ,

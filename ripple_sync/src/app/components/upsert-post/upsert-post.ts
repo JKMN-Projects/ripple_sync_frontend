@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Integration, IntegrationDto } from '../../services/integration';
+import { ConnectedIntegrationDto, Integration, IntegrationDto } from '../../services/integration';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateAdapter, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
@@ -54,7 +54,7 @@ export class UpsertPost implements OnInit {
 
   readonly timestampTypes = TimestampTypes;
 
-  integrations = signal<IntegrationDto[] | null>([]);
+  integrations = this.integrationService.userIntegrations;
   showDatePicker = signal(false);
   formattedScheduledDate = signal('');
   files = signal<File[]>([]);
@@ -70,7 +70,7 @@ export class UpsertPost implements OnInit {
   postFormGroup = this.fb.group({
     message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
     media: new FormControl<Array<string> | null>(new Array<string>()),
-    platforms: new FormControl<Array<IntegrationDto> | null>(null, [Validators.required]),
+    platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(null),
     timestamp: new FormControl<number | null>(null)
   })
@@ -95,15 +95,8 @@ export class UpsertPost implements OnInit {
     return this.postFormGroup.get("timestamp");
   }
 
-  constructor() {
-    effect(() => {
-      this.integrations.set(
-        this.integrationService.integrations()?.filter(i => i.connected == true) ?? null)
-    })
-  }
-
   ngOnInit(): void {
-    this.integrationService.getIntegrations();
+    this.integrationService.getUserIntegrations();
 
     if (this.checkIfEdit()) {
       this.assignFormValues();
@@ -267,10 +260,10 @@ export class UpsertPost implements OnInit {
   }
 
   submit() {
-    let integrationIds = new Array<number>();
+    let integrationIds = new Array<string>();
 
-    (this.platformsControl?.value as IntegrationDto[]).forEach(integration => {
-      integrationIds.push(integration.platformId);
+    (this.platformsControl?.value as ConnectedIntegrationDto[]).forEach(integration => {
+      integrationIds.push(integration.userPlatformIntegrationId);
     });
 
     this.postService.createPost(
@@ -279,7 +272,7 @@ export class UpsertPost implements OnInit {
       this.timestampControl?.value || null,
       integrationIds);
 
-      this.cancel();
+      // this.cancel();
   }
 
   cancel(): void {
