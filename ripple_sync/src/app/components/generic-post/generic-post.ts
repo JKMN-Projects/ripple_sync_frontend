@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostService } from '../../services/post.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { PostDto } from '../../interfaces/postDto';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-generic-post',
@@ -22,6 +23,7 @@ import { PostDto } from '../../interfaces/postDto';
   styleUrl: './generic-post.scss',
 })
 export class GenericPost {
+  url = environment.apiUrl + "/posts/";
   post = input.required<PostDto>();
 
   postService = inject(PostService);

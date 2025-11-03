@@ -2,13 +2,14 @@ import { HttpClient, HttpParams, HttpResponseBase } from '@angular/common/http';
 import { PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { inject, Injectable, resource, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, firstValueFrom, forkJoin, map, Observable, of, tap } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 export interface DeletePostResponseState {
   status: 'success' | 'loading' | 'error' | null;
   message: string | null;
 }
-interface PostParams{
+interface PostParams {
   statusFilter: string | null
 }
 
@@ -16,12 +17,11 @@ interface PostParams{
   providedIn: 'root',
 })
 export class PostService {
-  public filterChangeSignal = signal<string | null>(null);
-  deleteState = signal<DeletePostResponseState>({
-    status: null,
-    message: null,
-  });
+  filterChangeSignal = signal<string | null>(null);
+  deleteState = signal<{ status: string | null; message: string | null }>({ status: null, message: null });
+
   http = inject(HttpClient);
+  sanitizer = inject(DomSanitizer);
 
   postsSignal = resource({
     params: () => ({ statusFilter: this.filterChangeSignal() }),
@@ -30,13 +30,11 @@ export class PostService {
 
   readonly posts = this.postsSignal.asReadonly();
 
-  /// Retrieves all integrations from the API
-  getPostsByUser(filter?: PostParams) : Promise<PostDto[]> {
+  getPostsByUser(filter?: { statusFilter?: string | null }): Promise<PostDto[]> {
     return new Promise((resolve, reject) => {
       let params = new HttpParams();
-      if (filter?.statusFilter) {
-        params = params.set('status', filter.statusFilter);
-      }
+      if (filter?.statusFilter) params = params.set('status', filter.statusFilter);
+
       this.http
         .get<PostsByUserResponseDto>(`${environment.apiUrl}/posts/byUser`, {
           observe: 'response',
@@ -45,17 +43,15 @@ export class PostService {
         .pipe(
           tap({
             next: (response) => {
-              if (response.status === 200) {
-                resolve(response.body?.data ?? [])
-              }
+              if (response.status === 200) resolve(response.body?.data ?? []);
             },
             error: (error) => {
-              console.error('Failed to load integrations:', error);
+              console.error('Failed to load posts:', error);
               reject(error);
             },
           }),
           catchError((err) => {
-            console.error('Error fetching integrations', err);
+            console.error('Error fetching posts', err);
             reject([]);
             return [];
           })
@@ -93,6 +89,7 @@ export class PostService {
       )
       .subscribe();
   }
+
   deletePost(postId: string) {
     this.http
       .delete<HttpResponseBase>(`${environment.apiUrl}/posts/${encodeURIComponent(postId)}`, {
@@ -102,7 +99,7 @@ export class PostService {
         tap({
           next: (response) => {
             if (response.status === 204) {
-              this.postsSignal.reload();
+              this.postsSignal.reload(); // reload posts (and images)
             }
           },
         }),

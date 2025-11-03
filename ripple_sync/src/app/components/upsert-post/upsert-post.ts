@@ -72,7 +72,7 @@ export class UpsertPost implements OnInit {
     media: new FormControl<Array<string> | null>(new Array<string>()),
     platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(null),
-    timestamp: new FormControl<number | null>(null)
+    timestamp: new FormControl<number | null>(null, [Validators.required])
   })
 
   get messageControl() {
@@ -177,7 +177,7 @@ export class UpsertPost implements OnInit {
 
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
-    this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
+    // this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
     // this.platformsControl?.setValue() // Find platform in integration list
     this.timestampControl?.setValue(this.data.timestamp);
 
@@ -272,7 +272,7 @@ export class UpsertPost implements OnInit {
       this.timestampControl?.value || null,
       integrationIds);
 
-      // this.cancel();
+      this.cancel();
   }
 
   cancel(): void {

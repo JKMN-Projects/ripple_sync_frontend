@@ -70,7 +70,7 @@ export class Authentication {
       tap({
         next: response => {
           if (response.ok) {
-            this.registerState.update(state => ({ ...state, status: 'success', message: null, validationErrors: null }) );
+            this.registerState.update(state => ({ ...state, status: 'success', message: null, validationErrors: null }));
           }
         },
         error: (error) => {
@@ -94,6 +94,7 @@ export class Authentication {
     if (new Date().getTime() < expiresAt) {
       this.isAuthenticated.set(true);
       this.userEmail.set(localStorage.getItem("email") ?? "");
+      this.router.navigate(["/posts"]);
     }
     else {
       // Call refresh token endpoint and move this.logout to that method.
