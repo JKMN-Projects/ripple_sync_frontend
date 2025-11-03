@@ -24,9 +24,8 @@ interface StatsForPlatform{
   providedIn: 'root'
 })
 export class DashboardService {
-  private _dashboardData = httpResource<DashboardTotal>(() => `${environment.apiUrl}/dashboard/total`, {
-    // parse: (res: DashboardTotal) => res
-  });
+  private _dashboardData = httpResource<DashboardTotal>(() => `${environment.apiUrl}/dashboard/total`);
+  
   get dashboardData() {
     return this._dashboardData.asReadonly();
   }
