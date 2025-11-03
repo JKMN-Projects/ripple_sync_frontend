@@ -17,7 +17,17 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="total-metric-number">142</div>
+                <div class="total-metric-number">
+                    @if (dashboardData.isLoading()) {
+                        <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+                    }
+                    @else if (dashboardData.hasValue()) {
+                        {{ dashboardData.value().publishedPosts }}
+                    } 
+                    @else {
+                        N/A
+                    }
+                </div>
             </mat-card-content>
         </mat-card>
         
@@ -29,7 +39,17 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="total-metric-number">42,5k</div>
+                <div class="total-metric-number">
+                    @if (dashboardData.isLoading()) {
+                        <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+                    }
+                    @else if (dashboardData.hasValue()) {
+                        {{ dashboardData.value().totalReach }}
+                    } 
+                    @else {
+                        N/A
+                    }
+                </div>
             </mat-card-content>
         </mat-card>
         
@@ -41,7 +61,17 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="total-metric-number">3,842</div>
+                <div class="total-metric-number">
+                    @if (dashboardData.isLoading()) {
+                        <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+                    }
+                    @else if (dashboardData.hasValue()) {
+                        {{ dashboardData.value().totalLikes }}
+                    } 
+                    @else {
+                        N/A
+                    }
+                </div>
             </mat-card-content>
         </mat-card>
         
@@ -53,7 +83,17 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="total-metric-number">18</div>
+                <div class="total-metric-number">
+                    @if (dashboardData.isLoading()) {
+                        <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+                    }
+                    @else if (dashboardData.hasValue()) {
+                        {{ dashboardData.value().scheduledPosts }}
+                    } 
+                    @else {
+                        N/A
+                    }
+                </div>
             </mat-card-content>
         </mat-card>
     </section>
@@ -61,35 +101,40 @@
     <section id="PlatformMetrics">
         <h3>Platform performance</h3>
         <div class="tile-grid">
-            @for (item of [null, null]; track $index) {
-                <mat-card class="tile secondary" appearance="outlined">
-                    <mat-card-header>
-                        <mat-card-title>Facebook</mat-card-title>
-                        <mat-card-subtitle>52 posts this period</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div class="tile-grid">
-                            <div class="platform-metric-tile tile">
-                                <div class="platform-metric-label">Reach</div>
-                                <div class="platform-metric-number">18.5k</div>
+            @if (dashboardData.isLoading()) {
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            } 
+            @else if (dashboardData.hasValue()) {
+                @for (item of dashboardData.value().statsForPlatforms; track $index) {
+                    <mat-card class="tile secondary" appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>{{ item.platform }}</mat-card-title>
+                            <mat-card-subtitle>{{ item.publishedPosts }} posts this period</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="tile-grid">
+                                <div class="platform-metric-tile tile">
+                                    <div class="platform-metric-label">Reach</div>
+                                    <div class="platform-metric-number">{{ item.reach }}</div>
+                                </div>
+                                <div class="platform-metric-tile tile">
+                                    <div class="platform-metric-label">Engagement</div>
+                                    <div class="platform-metric-number">{{ item.engagement }}</div>
+                                </div>
                             </div>
-                            <div class="platform-metric-tile tile">
-                                <div class="platform-metric-label">Engagement</div>
-                                <div class="platform-metric-number">1,432</div>
+                            <div class="tile-grid">
+                                <div class="platform-metric-tile tile">
+                                    <div class="platform-metric-label">Likes</div>
+                                    <div class="platform-metric-number">{{ item.likes }}</div>
+                                </div>
+                                <div class="platform-metric-tile tile">
+                                    <div class="platform-metric-label">Avg. engagement</div>
+                                    <div class="platform-metric-number">{{ item.averageEngagement }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="tile-grid">
-                            <div class="platform-metric-tile tile">
-                                <div class="platform-metric-label">Followers</div>
-                                <div class="platform-metric-number">2,847</div>
-                            </div>
-                            <div class="platform-metric-tile tile">
-                                <div class="platform-metric-label">Avg. engagement</div>
-                                <div class="platform-metric-number">27.5</div>
-                            </div>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
+                        </mat-card-content>
+                    </mat-card>
+                }
             }
         </div>
     </section>
