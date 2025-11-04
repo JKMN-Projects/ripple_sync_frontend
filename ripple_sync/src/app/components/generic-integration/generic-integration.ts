@@ -30,9 +30,9 @@ export class GenericIntegration {
     this.isLoading.set(true);
 
     if (currentIntegration.connected) {
-      this.integrationService.disconnectIntegration(currentIntegration.platformId)
+      this.integrationService.disconnect(currentIntegration.platformId)
     } else {
-      this.integrationService.connectIntegration(currentIntegration.platformId, ":)");
+      this.integrationService.connect(currentIntegration.platformId);
     }
 
     this.isLoading.set(false);

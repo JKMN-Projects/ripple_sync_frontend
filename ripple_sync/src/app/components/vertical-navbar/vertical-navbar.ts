@@ -29,4 +29,7 @@ export class VerticalNavbar {
   logout(): void {
     this.authenticationService.logout();
   }
+  deleteAccount(): void {
+    this.authenticationService.deleteAccount();
+  }
 }

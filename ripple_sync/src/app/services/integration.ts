@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -46,13 +46,8 @@ export class Integration {
             if (response.status === 200) {
               this.integrationsSignal.set(response.body?.data ?? []);
             }
-          },
-          error: (error) => {
-            console.error('Failed to load integrations:', error);
-            this.integrationsSignal.set([]);
           }
-        })
-        ,
+        }),
         catchError(err => {
           console.error('Error fetching integrations', err);
           return of([]);
@@ -69,10 +64,6 @@ export class Integration {
             if (response.status === 200) {
               this.userIntegrationsSignal.set(response.body?.data ?? []);
             }
-          },
-          error: (error) => {
-            console.error('Failed to load integrations:', error);
-            this.userIntegrationsSignal.set([]);
           }
         })
         ,
@@ -84,30 +75,16 @@ export class Integration {
       .subscribe();
   }
 
-  connectIntegration(platformId: number, accessToken: string) {
-    interface ConnectIntegrationReq {
-      platformId: number;
-      accessToken: string;
-    }
-
-    let connectReq: ConnectIntegrationReq = {
-      platformId,
-      accessToken
-    }
-
-    this.http.post(`${environment.apiUrl}/integrations`, connectReq, { observe: 'response' })
+  connect(platformId: number) {
+    this.http.get<{redirectUrl:string}>(`${environment.apiUrl}/oauth/initiate/${platformId}`, { observe: 'response' })
       .pipe(
         tap({
           next: response => {
-            if (response.status === 201) {
-              this.getIntegrations();
+            if (response.status === 200 && response.body?.redirectUrl != undefined) {
+              window.location.href = response.body?.redirectUrl;
             }
-          },
-          error: (error) => {
-            console.error('Failed to connect integration:', error);
           }
-        })
-        ,
+        }),
         catchError(err => {
           console.error('Error connecting integration', err);
           return of([]);
@@ -116,7 +93,7 @@ export class Integration {
       .subscribe();
   }
 
-  disconnectIntegration(platformId: number) {
+  disconnect(platformId: number) {
     this.http.delete(`${environment.apiUrl}/integrations/${platformId}`, { observe: 'response' })
       .pipe(
         tap({
@@ -124,12 +101,8 @@ export class Integration {
             if (response.status === 204) {
               this.getIntegrations();
             }
-          },
-          error: (error) => {
-            console.error('Failed to disconnect integration:', error);
           }
-        })
-        ,
+        }),
         catchError(err => {
           console.error('Error disconnecting integration', err);
           return of([]);
