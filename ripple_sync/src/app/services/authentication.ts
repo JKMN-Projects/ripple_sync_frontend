@@ -109,12 +109,16 @@ export class Authentication {
       )
       .subscribe();
   }
+
+
+
   checkExpiresAt() {
     const expiresAt = Number.parseInt(localStorage.getItem('expiresAt') ?? '0');
 
     if (new Date().getTime() < expiresAt) {
       this.isAuthenticated.set(true);
       this.userEmail.set(localStorage.getItem('email') ?? '');
+      this.router.navigate(["/posts"]);
     } else {
       // Call refresh token endpoint and move this.logout to that method.
       this.logout();

@@ -1,40 +1,48 @@
 <mat-card class="secondary" appearance="outlined" style="margin-bottom: 1rem;">
-    <mat-card-header>
-        <mat-card-title style="width: 100%;">
-            <div class="stack stack--row stack--space-between"  >
-                <div class="status-chip {{ post().statusName.toLowerCase() }}">{{post().statusName}}</div>
-                <div class="stack stack--row stack--gap-sm">
-                    <button class="button--sm primary" matButton="outlined" [disabled]="isRetryable(post().statusName)" >Retry</button>
-                    <button class="button--sm primary" matButton="outlined" [disabled]="isEditable(post().statusName)">Edit</button>
-                    <button class="button--sm error"matButton="outlined" [disabled]="isDeletable(post().statusName)" (click)="DeletePost()">@if (isLoading()) {
-                    <mat-spinner diameter="20"></mat-spinner>
-                    } @else {
-                    Delete
-                    }</button>
-                </div>
-            </div>
-        </mat-card-title>
-        <mat-card-subtitle>
-            <p>{{post().messageContent}}</p>
-        </mat-card-subtitle>
-
-    </mat-card-header>
-    <mat-card-content>
-        @for (media of post().mediaAttachment; track $index) {
-        <img src="{{media}}" width="100" height="100">
-        }
-    </mat-card-content>
-    <mat-divider></mat-divider>
-    <mat-card-footer class="card-footer">
-        <div class="stack stack--row stack--space-between">
-            <mat-chip-set aria-label="Platforms">
-                @for (platform of post().platforms; track $index)
-                {
-                <mat-chip>{{platform}}</mat-chip>
-                }
-            </mat-chip-set>
-
-            <p>{{post().statusName}} {{post().timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+  <mat-card-header>
+    <mat-card-title style="width: 100%;">
+      <div class="stack stack--row stack--space-between">
+        <div class="status-chip {{ post().statusName.toLowerCase() }}">{{post().statusName}}</div>
+        <div class="stack stack--row stack--gap-sm">
+          <button class="button--sm primary" matButton="outlined"
+            [disabled]="isRetryable(post().statusName)">Retry</button>
+          <button class="button--sm primary" matButton="outlined"
+            [disabled]="isEditable(post().statusName)" (click)="openUpsertPostModal(post())">Edit</button>
+          <button class="button--sm error" matButton="outlined" [disabled]="isDeletable(post().statusName)"
+            (click)="openConfirmationDialog(post())">@if (isLoading()) {
+            <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+            Delete
+            }</button>
         </div>
-    </mat-card-footer>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>{{post().messageContent}}</p>
+    </mat-card-subtitle>
+
+  </mat-card-header>
+  <mat-card-content>
+    @if (post().mediaIds.length > 0) {
+    @for (id of post().mediaIds; track $index) {
+    <img [src]="url + id" width="100" height="100">
+    }
+    }
+    @else {
+    <p style="color: gray; font-style: italic;">No media attachments</p>
+    }
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="card-footer">
+    <div class="stack stack--row stack--space-between">
+      <mat-chip-set aria-label="Platforms">
+        @for (platform of post().platforms; track $index)
+        {
+        <mat-chip>{{platform}}</mat-chip>
+        }
+      </mat-chip-set>
+
+      <p>{{post().statusName}} {{post().timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+    </div>
+  </mat-card-footer>
 </mat-card>

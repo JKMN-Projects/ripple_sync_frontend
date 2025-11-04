@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +9,7 @@ import { Authentication, LoginRequest } from '../../services/authentication';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { environment } from '../../../environments/environment';
 import { IconContainer } from "../icon-container/icon-container";
+import { formErrorMessage } from '../../utility/form-error-message';
 
 @Component({
   selector: 'app-login-modal',
@@ -46,24 +47,8 @@ export class LoginModal {
     return this.loginForm.get('password');
   }
 
-  getEmailErrorMessage(): string {
-    if (this.emailControl?.hasError('required')) {
-      return 'Email is required';
-    }
-    if (this.emailControl?.hasError('email')) {
-      return 'Please enter a valid email address';
-    }
-    return '';
-  }
-
-  getPasswordErrorMessage(): string {
-    if (this.passwordControl?.hasError('required')) {
-      return 'Password is required';
-    }
-    if (this.passwordControl?.hasError('minlength')) {
-      return 'Password must be at least 6 characters';
-    }
-    return '';
+  getErrorMessage(control: AbstractControl | undefined | null) {
+    return formErrorMessage(control);
   }
 
   login() {
@@ -75,7 +60,7 @@ export class LoginModal {
         email: this.emailControl?.value ?? "",
         password: this.passwordControl?.value ?? ""
       };
-      
+
       this.authService.login(login).subscribe({
         next: () => {
           this.isLoading.set(false);

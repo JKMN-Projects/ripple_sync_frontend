@@ -1,7 +1,7 @@
 <div style="padding: 4vh;">
     <div class="stack stack--row stack--space-between">
         <h1 >Posts</h1>
-        <button class="primary" matButton="filled" (click)="openUpsertPostModal(null, false)">+ New Post</button>
+        <button class="primary" matButton="filled" (click)="openUpsertPostModal()">+ New Post</button>
     </div>
 
         <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"

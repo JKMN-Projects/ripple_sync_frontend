@@ -1,6 +1,6 @@
 import { Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { PostDto } from '../../interfaces/postDto';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ import { DateTime } from 'luxon';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { formErrorMessage } from '../../utility/form-error-message';
 
 enum TimestampTypes {
   Now = 1,
@@ -54,7 +55,7 @@ export class UpsertPost implements OnInit {
 
   readonly timestampTypes = TimestampTypes;
 
-  integrations = this.integrationService.userIntegrations;
+  integrations = signal<ConnectedIntegrationDto[] | null>([]).asReadonly();
   showDatePicker = signal(false);
   formattedScheduledDate = signal('');
   files = signal<File[]>([]);
@@ -72,7 +73,7 @@ export class UpsertPost implements OnInit {
     media: new FormControl<Array<string> | null>(new Array<string>()),
     platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(null),
-    timestamp: new FormControl<number | null>(null)
+    timestamp: new FormControl<number | null>(null, [Validators.required])
   })
 
   get messageControl() {
@@ -95,13 +96,24 @@ export class UpsertPost implements OnInit {
     return this.postFormGroup.get("timestamp");
   }
 
+  constructor() {
+    effect(() => {
+      this.integrations = this.integrationService.userIntegrations;
+      if (this.checkIfEdit() && this.integrations() != null && this.integrations()!.length > 0) {
+        this.platformsControl?.setValue(this.integrations()?.filter(item => this.data.platforms.includes(item.platFormName)) ?? null);
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.integrationService.getUserIntegrations();
-
     if (this.checkIfEdit()) {
       this.assignFormValues();
     }
   }
+
+  compareIntegrations = (a: ConnectedIntegrationDto, b: ConnectedIntegrationDto) =>
+    a && b && a.platFormName === b.platFormName;
 
   onChipSelect(type: TimestampTypes) {
     this.timestampTypeControl?.setValue(type);
@@ -177,9 +189,11 @@ export class UpsertPost implements OnInit {
 
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
-    this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
-    // this.platformsControl?.setValue() // Find platform in integration list
+    // this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
+
+    // This should be reworked
     this.timestampControl?.setValue(this.data.timestamp);
+    this.timestampTypeControl?.setValue(this.data.timestamp != undefined && this.data.timestamp != null && this.data.timestamp > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
 
     if (this.data.timestamp) {
       const dateTime = DateTime.fromMillis(this.data.timestamp);
@@ -196,14 +210,8 @@ export class UpsertPost implements OnInit {
     return timestamp ? DateTime.fromMillis(timestamp).toJSDate() : null;
   }
 
-  getMessageErrorMessage(): string {
-    if (this.messageControl?.hasError('required')) {
-      return 'Message is required';
-    }
-    if (this.messageControl?.hasError('minLength')) {
-      return 'Must contain atleast 1 character';
-    }
-    return '';
+  getErrorMessage(control: AbstractControl | undefined | null): string {
+    return formErrorMessage(control);
   }
 
   onFileSelect(event: Event): void {
@@ -266,13 +274,23 @@ export class UpsertPost implements OnInit {
       integrationIds.push(integration.userPlatformIntegrationId);
     });
 
-    this.postService.createPost(
-      this.messageControl?.value ?? "",
-      this.files(),
-      this.timestampControl?.value || null,
-      integrationIds);
+    if (this.checkIfEdit()) {
+      this.postService.updatePost(
+        this.data.postId,
+        this.messageControl?.value ?? "",
+        this.files(),
+        this.timestampControl?.value || null,
+        integrationIds);
+    }
+    else {
+      this.postService.createPost(
+        this.messageControl?.value ?? "",
+        this.files(),
+        this.timestampControl?.value || null,
+        integrationIds);
+    }
 
-      // this.cancel();
+    this.cancel();
   }
 
   cancel(): void {
