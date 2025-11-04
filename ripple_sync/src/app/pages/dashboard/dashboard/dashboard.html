@@ -105,7 +105,7 @@
                 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             } 
             @else if (dashboardData.hasValue()) {
-                @for (item of dashboardData.value().statsForPlatforms; track $index) {
+                @for (item of dashboardData.value().totalStatsForPlatforms; track item.platform) {
                     <mat-card class="tile secondary" appearance="outlined">
                         <mat-card-header>
                             <mat-card-title>{{ item.platform }}</mat-card-title>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="platform-metric-tile tile">
                                     <div class="platform-metric-label">Avg. engagement</div>
-                                    <div class="platform-metric-number">{{ item.averageEngagement }}</div>
+                                    <div class="platform-metric-number">{{ item.averageEngagement.toFixed(2) }}</div>
                                 </div>
                             </div>
                         </mat-card-content>

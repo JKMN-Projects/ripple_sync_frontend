@@ -7,7 +7,7 @@ interface DashboardTotal {
   scheduledPosts: number;
   totalReach: number;
   totalLikes: number;
-  statsForPlatforms: StatsForPlatform[];
+  totalStatsForPlatforms: Array<StatsForPlatform>;
 }
 
 interface StatsForPlatform{
