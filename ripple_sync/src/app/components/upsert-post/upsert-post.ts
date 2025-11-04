@@ -178,7 +178,7 @@ export class UpsertPost implements OnInit {
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
     // this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
-    // this.platformsControl?.setValue() // Find platform in integration list
+    this.platformsControl?.setValue(this.integrations()?.filter(item => this.data.platforms.includes(item.platFormName)) ?? null) // This should be reworked
     this.timestampControl?.setValue(this.data.timestamp);
 
     if (this.data.timestamp) {
@@ -272,7 +272,7 @@ export class UpsertPost implements OnInit {
       this.timestampControl?.value || null,
       integrationIds);
 
-      this.cancel();
+    this.cancel();
   }
 
   cancel(): void {

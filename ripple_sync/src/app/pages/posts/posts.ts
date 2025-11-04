@@ -36,12 +36,12 @@ export class Posts implements OnInit {
     this.subscriptions?.unsubscribe();
   }
 
-  openUpsertPostModal(post: PostDto | null, isEdit: boolean): void {
+  openUpsertPostModal(): void {
     this.dialog.open(UpsertPost, {
       disableClose: false,
       maxHeight: '90vh',
       panelClass: 'login-dialog-panel',
-      data: isEdit ? post : null
+      data: null
     });
   }
 }

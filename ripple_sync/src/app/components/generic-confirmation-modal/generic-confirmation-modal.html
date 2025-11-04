@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>
+  {{title()}}
+</h2>
+
+<mat-dialog-content>
+  {{content()}}
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton="outlined" type="button" (click)="closeModal(false)">
+    {{noButton()}}
+  </button>
+  <button matButton="filled" class="primary" (click)="closeModal(true)">
+    {{yesButton()}}
+  </button>
+</mat-dialog-actions>

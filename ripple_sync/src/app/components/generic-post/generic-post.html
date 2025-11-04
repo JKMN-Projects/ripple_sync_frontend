@@ -7,9 +7,9 @@
           <button class="button--sm primary" matButton="outlined"
             [disabled]="isRetryable(post().statusName)">Retry</button>
           <button class="button--sm primary" matButton="outlined"
-            [disabled]="isEditable(post().statusName)">Edit</button>
+            [disabled]="isEditable(post().statusName)" (click)="openUpsertPostModal(post())">Edit</button>
           <button class="button--sm error" matButton="outlined" [disabled]="isDeletable(post().statusName)"
-            (click)="DeletePost()">@if (isLoading()) {
+            (click)="openConfirmationDialog(post())">@if (isLoading()) {
             <mat-spinner diameter="20"></mat-spinner>
             } @else {
             Delete
