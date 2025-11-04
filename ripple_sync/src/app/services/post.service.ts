@@ -43,7 +43,10 @@ export class PostService {
         .pipe(
           tap({
             next: (response) => {
-              if (response.status === 200) resolve(response.body?.data ?? []);
+              if (response.status === 200) {
+                resolve(response.body?.data ?? []);
+                this.postsSignal.reload();
+              }
             },
             error: (error) => {
               console.error('Failed to load posts:', error);
@@ -61,24 +64,34 @@ export class PostService {
   }
 
   createPost(messageContent: string, files: File[], timestamp: number | null, integrationIds: string[]) {
-    const formData = new FormData();
-    formData.append("MessageContent", messageContent);
-    formData.append("Timestamp", timestamp != null ? timestamp.toString() : "");
-
-    integrationIds.forEach(id => {
-      formData.append("IntegrationIds", id.toString());
-    })
-
-    files.forEach(file => {
-      formData.append("Files", file, file.name);
-    })
+    const formData = this.setFormData(messageContent, files, timestamp, integrationIds);
 
     this.http.post(environment.apiUrl + "/posts", formData, { observe: 'response' })
       .pipe(
         tap({
           next: (response) => {
             if (response.status === 201) {
-              this.getPostsByUser();
+              this.postsSignal.reload();
+            }
+          },
+        }),
+        catchError((err) => {
+          console.error('Error creating user', err);
+          return of(null);
+        })
+      )
+      .subscribe();
+  }
+
+  updatePost(postId: string, messageContent: string, files: File[], timestamp: number | null, integrationIds: string[]) {
+    const formData = this.setFormData(messageContent, files, timestamp, integrationIds, postId);
+
+    this.http.put(environment.apiUrl + "/posts", formData, { observe: 'response' })
+      .pipe(
+        tap({
+          next: (response) => {
+            if (response.status === 201) {
+              this.postsSignal.reload();
             }
           },
         }),
@@ -99,7 +112,7 @@ export class PostService {
         tap({
           next: (response) => {
             if (response.status === 204) {
-              this.postsSignal.reload(); // reload posts (and images)
+              this.postsSignal.reload();
             }
           },
         }),
@@ -109,5 +122,26 @@ export class PostService {
         })
       )
       .subscribe();
+  }
+
+  private setFormData(messageContent: string, files: File[], timestamp: number | null, integrationIds: string[], postId?: string) {
+    const formData = new FormData();
+
+    if (postId != undefined) {
+      formData.append("PostId", postId);
+    }
+
+    formData.append("MessageContent", messageContent);
+    formData.append("Timestamp", timestamp != null ? timestamp.toString() : "");
+
+    integrationIds.forEach(id => {
+      formData.append("IntegrationIds", id.toString());
+    })
+
+    files.forEach(file => {
+      formData.append("Files", file, file.name);
+    })
+
+    return formData;
   }
 }

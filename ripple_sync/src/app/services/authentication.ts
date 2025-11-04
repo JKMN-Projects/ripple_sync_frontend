@@ -88,6 +88,9 @@ export class Authentication {
       })
     ).subscribe();
   }
+
+
+
   checkExpiresAt() {
     const expiresAt = Number.parseInt(localStorage.getItem("expiresAt") ?? "0");
 

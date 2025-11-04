@@ -7,14 +7,13 @@
         <mat-label>Message content</mat-label>
         <textarea matInput formControlName="message" placeholder="Enter a message"></textarea>
         @if (messageControl?.invalid && (messageControl?.dirty || messageControl?.touched)) {
-        <mat-error>{{ getMessageErrorMessage() }}</mat-error>
+        <mat-error>{{ getErrorMessage(messageControl) }}</mat-error>
         }
       </mat-form-field>
 
       <mat-card class="upload-card full-width">
         <div class="drop-zone" [class.dragging]="isDragging()" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
           (dragleave)="onDragLeave($event)">
-          <mat-icon class="upload-icon">cloud_upload</mat-icon>
           <p>Drag & drop your images here</p>
           <p><strong>or</strong></p>
 
@@ -45,7 +44,7 @@
       </mat-card>
 
       <h3>Select platforms</h3>
-      <mat-chip-listbox formControlName="platforms" multiple>
+      <mat-chip-listbox formControlName="platforms" multiple [compareWith]="compareIntegrations">
         @for (integration of integrations(); track integration?.userPlatformIntegrationId) {
         <mat-chip-option [value]="integration">{{ integration.platFormName }}</mat-chip-option>
         }

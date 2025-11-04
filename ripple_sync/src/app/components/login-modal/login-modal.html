@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-  <app-icon-container iconName="login" shape="square" ></app-icon-container>
+  <app-icon-container iconName="login" shape="square"></app-icon-container>
   Login
 </h2>
 
@@ -9,18 +9,14 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
-        @if (emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)) {
-          <mat-error>{{ getEmailErrorMessage() }}</mat-error>
-        }
+        <mat-error>{{ getErrorMessage(emailControl) }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" placeholder="Enter your password"
           autocomplete="current-password" />
-        @if (passwordControl?.invalid && (passwordControl?.dirty || passwordControl?.touched)) {
-          <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
-        }
+        <mat-error>{{ getErrorMessage(passwordControl) }}</mat-error>
       </mat-form-field>
     </div>
   </form>
