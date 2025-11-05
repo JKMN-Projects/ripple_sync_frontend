@@ -20,11 +20,8 @@ const attemptRefresh = (authService: Authentication, req: HttpRequest<any>, next
         return next(req);
       }),
       catchError(err => {
-        logDebug("Token refresh failed or retrying original request failed.", err);
-        if(err.status === 400 || err.status === 401) {
-          logDebug("Refresh token invalid or expired. Logging out user.");
-          authService.logout();
-        }
+        logDebug("Refresh token request failed. Logging out user.");
+        authService.logout();
         refreshInProgress = false;
         return throwError(() => err);
       })
