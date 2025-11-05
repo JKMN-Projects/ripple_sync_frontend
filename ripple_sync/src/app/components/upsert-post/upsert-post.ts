@@ -1,22 +1,23 @@
-import { Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { PostService } from '../../services/post.service';
+import { MatNativeDateModule, NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ConnectedIntegrationDto, Integration } from '../../services/integration';
+import { AiFloatingChatComponent } from '../ai-floating-chat/ai-floating-chat';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { formErrorMessage } from '../../utility/form-error-message';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { PostService } from '../../services/post.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { PostDto } from '../../interfaces/postDto';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { ConnectedIntegrationDto, Integration, IntegrationDto } from '../../services/integration';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, NativeDateAdapter, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
+import { Subscription } from 'rxjs';
 import { DateTime } from 'luxon';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatCardModule } from '@angular/material/card';
-import { formErrorMessage } from '../../utility/form-error-message';
-import { AiFloatingChatComponent } from '../ai-floating-chat/ai-floating-chat';
 
 enum TimestampTypes {
   Now = 1,
@@ -54,12 +55,11 @@ export class UpsertPost implements OnInit {
   private postService = inject(PostService);
   private integrationService = inject(Integration);
   private dialogRef = inject(MatDialogRef<UpsertPost>);
+  private subscriptions = new Subscription();
 
+  readonly minDate = new Date();
   readonly timestampTypes = TimestampTypes;
 
-  get integrations() {
-    return this.integrationService.userIntegrations;
-  }
   showDatePicker = signal(false);
   formattedScheduledDate = signal('');
   files = signal<File[]>([]);
@@ -76,9 +76,13 @@ export class UpsertPost implements OnInit {
     message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
     media: new FormControl<Array<string> | null>(new Array<string>()),
     platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
-    timestampType: new FormControl<TimestampTypes | null>(null),
-    timestamp: new FormControl<number | null>(null, [Validators.required])
+    timestampType: new FormControl<TimestampTypes | null>(this.timestampTypes.Now, [Validators.required]),
+    timestamp: new FormControl<number | null>(null)
   })
+
+  get integrations() {
+    return this.integrationService.userIntegrations;
+  }
 
   get messageControl() {
     return this.postFormGroup.get("message");
@@ -113,6 +117,20 @@ export class UpsertPost implements OnInit {
     if (this.checkIfEdit()) {
       this.assignFormValues();
     }
+
+    this.subscriptions.add(this.timestampTypeControl?.valueChanges.subscribe(value => {
+      if (value == this.timestampTypes.Draft) {
+        this.platformsControl?.removeValidators(Validators.required);
+        this.platformsControl?.setValue(null);
+        this.platformsControl?.updateValueAndValidity();
+        this.platformsControl?.disable();
+      }
+      else if (value == this.timestampTypes.Now || value == this.timestampTypes.Scheduled) {
+        this.platformsControl?.enable();
+        this.platformsControl?.addValidators(Validators.required);
+        this.platformsControl?.updateValueAndValidity();
+      }
+    }))
   }
 
   compareIntegrations = (a: ConnectedIntegrationDto, b: ConnectedIntegrationDto) =>
@@ -192,20 +210,13 @@ export class UpsertPost implements OnInit {
 
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
-    // this.mediaControl?.setValue(this.data.mediaAttachment ?? new Array<string>());
-
-    // This should be reworked
     this.timestampControl?.setValue(this.data.timestamp);
-    this.timestampTypeControl?.setValue(this.data.timestamp != undefined && this.data.timestamp != null && this.data.timestamp > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
+    this.timestampTypeControl?.setValue(this.data.timestamp > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
 
     if (this.data.timestamp) {
       const dateTime = DateTime.fromMillis(this.data.timestamp);
       this.formattedScheduledDate.set(dateTime.toFormat('MMM dd, yyyy HH:mm'));
     }
-  }
-
-  getTimestamp(): number | null {
-    return this.timestampControl?.value ?? null;
   }
 
   getSelectedDate(): Date | null {

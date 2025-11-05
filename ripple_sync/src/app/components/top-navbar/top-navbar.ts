@@ -28,7 +28,7 @@ import { RegisterModal } from '../register-modal/register-modal';
 export class TopNavbar {
   private dialog = inject(MatDialog);
   private router = inject(Router);
-  authService = inject(Authentication);
+  private authService = inject(Authentication);
   private sidebarService = inject(SidebarService);
 
   openLoginModal(): void {
@@ -40,7 +40,7 @@ export class TopNavbar {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.router.navigate(['/posts']); // Change route when post list component is implemented
+        this.router.navigate(['/posts']);
       }
     })
   }
@@ -54,7 +54,7 @@ export class TopNavbar {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.router.navigate(['/']); // Change route when post list component is implemented
+        this.router.navigate(['/']);
       }
     })
   }

@@ -18,8 +18,8 @@ interface ChatMessage {
   styleUrls: ['./ai-floating-chat.scss']
 })
 export class AiFloatingChatComponent {
-  fb = inject(FormBuilder);
-  http = inject(HttpClient);
+  private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
 
   open = signal(true);
   loading = signal(false);
