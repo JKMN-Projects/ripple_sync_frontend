@@ -55,7 +55,9 @@ export class UpsertPost implements OnInit {
 
   readonly timestampTypes = TimestampTypes;
 
-  integrations = signal<ConnectedIntegrationDto[] | null>([]).asReadonly();
+  get integrations() {
+    return this.integrationService.userIntegrations;
+  }
   showDatePicker = signal(false);
   formattedScheduledDate = signal('');
   files = signal<File[]>([]);
@@ -98,7 +100,6 @@ export class UpsertPost implements OnInit {
 
   constructor() {
     effect(() => {
-      this.integrations = this.integrationService.userIntegrations;
       if (this.checkIfEdit() && this.integrations() != null && this.integrations()!.length > 0) {
         this.platformsControl?.setValue(this.integrations()?.filter(item => this.data.platforms.includes(item.platFormName)) ?? null);
       }

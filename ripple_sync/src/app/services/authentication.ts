@@ -132,6 +132,9 @@ export class Authentication {
       );
   }
 
+  get tokenExpiryTime(): number {
+    return Number.parseInt(localStorage.getItem('expiresAt') ?? '-1');
+  }
 
   checkExpiresAt() {
     const expiresAt = Number.parseInt(localStorage.getItem('expiresAt') ?? '0');
@@ -145,16 +148,19 @@ export class Authentication {
       this.logout();
     }
   }
+  
   private removeLocalStorage(): void {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('expiresAt');
     localStorage.removeItem('email');
   }
+
   logout(): void {
     this.isAuthenticated.set(false);
     this.router.navigate(['/']);
     this.removeLocalStorage();
   }
+
   deleteAccount(): void {
     this.registerState.set({ status: 'loading', message: null, validationErrors: null });
     this.http
