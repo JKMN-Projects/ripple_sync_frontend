@@ -1,0 +1,30 @@
+<div class="chat-toggle" (click)="toggle()">
+  @if (!open()) {
+    💬
+  } @else {
+    ✖
+  }
+</div>
+
+@if (open()) {
+  <div class="chat-window">
+    <div class="messages">
+      @for (msg of messages(); track $index) {
+        <div class="message" [class.user]="msg.sender === 'user'" [class.ai]="msg.sender === 'system'">
+          <div class="bubble">{{ msg.text }}</div>
+        </div>
+      }
+
+      @if (loading()) {
+        <div class="message ai">
+          <div class="bubble loading">...</div>
+        </div>
+      }
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="send()" class="input-area">
+      <textarea formControlName="userMessage" rows="2" placeholder="Type your message..."></textarea>
+      <button type="submit" [disabled]="loading() || form.invalid">Send</button>
+    </form>
+  </div>
+}
