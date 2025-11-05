@@ -43,7 +43,7 @@ export class Integration {
       .pipe(
         tap({
           next: response => {
-            if (response.status === 200) {
+            if (response.ok) {
               this.integrationsSignal.set(response.body?.data ?? []);
             }
           }
@@ -61,7 +61,7 @@ export class Integration {
       .pipe(
         tap({
           next: response => {
-            if (response.status === 200) {
+            if (response.ok) {
               this.userIntegrationsSignal.set(response.body?.data ?? []);
             }
           }
@@ -80,7 +80,7 @@ export class Integration {
       .pipe(
         tap({
           next: response => {
-            if (response.status === 200 && response.body?.redirectUrl != undefined) {
+            if (response.ok && response.body?.redirectUrl != undefined) {
               window.location.href = response.body?.redirectUrl;
             }
           }
@@ -98,7 +98,7 @@ export class Integration {
       .pipe(
         tap({
           next: response => {
-            if (response.status === 204) {
+            if (response.ok) {
               this.getIntegrations();
             }
           }

@@ -6,6 +6,7 @@ import { SidebarService } from './services/sidebar-service';
 import { VerticalNavbar } from "./components/vertical-navbar/vertical-navbar";
 import { CommonModule } from '@angular/common';
 import { Authentication } from './services/authentication';
+import { AiFloatingChatComponent } from './components/ai-floating-chat/ai-floating-chat';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ import { Authentication } from './services/authentication';
     TopNavbar,
     MatSidenavModule,
     VerticalNavbar,
-    CommonModule,
+    CommonModule
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

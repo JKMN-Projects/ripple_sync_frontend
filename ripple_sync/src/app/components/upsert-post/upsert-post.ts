@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { formErrorMessage } from '../../utility/form-error-message';
+import { AiFloatingChatComponent } from '../ai-floating-chat/ai-floating-chat';
 
 enum TimestampTypes {
   Now = 1,
@@ -38,6 +39,7 @@ enum TimestampTypes {
     MatIconModule,
     MatDividerModule,
     MatCardModule,
+    AiFloatingChatComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: NativeDateAdapter },

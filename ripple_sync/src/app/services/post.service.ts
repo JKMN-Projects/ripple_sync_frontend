@@ -43,7 +43,7 @@ export class PostService {
         .pipe(
           tap({
             next: (response) => {
-              if (response.status === 200) {
+              if (response.ok) {
                 resolve(response.body?.data ?? []);
                 this.postsSignal.reload();
               }
@@ -70,7 +70,7 @@ export class PostService {
       .pipe(
         tap({
           next: (response) => {
-            if (response.status === 201) {
+            if (response.ok) {
               this.postsSignal.reload();
             }
           },
@@ -90,7 +90,7 @@ export class PostService {
       .pipe(
         tap({
           next: (response) => {
-            if (response.status === 201) {
+            if (response.ok) {
               this.postsSignal.reload();
             }
           },
@@ -111,7 +111,7 @@ export class PostService {
       .pipe(
         tap({
           next: (response) => {
-            if (response.status === 204) {
+            if (response.ok) {
               this.postsSignal.reload();
             }
           },
