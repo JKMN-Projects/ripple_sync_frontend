@@ -112,7 +112,7 @@ export class Authentication {
       .subscribe();
   }
 
-  refreshToken() {
+  refreshToken(): Observable<AuthenticationResponse> {
     const payload = {
       refreshToken: localStorage.getItem('refreshToken') ?? '',
     };
@@ -159,6 +159,7 @@ export class Authentication {
     this.isAuthenticated.set(false);
     this.router.navigate(['/']);
     this.removeLocalStorage();
+    this.http.post(`${environment.apiUrl}/authentication/logout`, {}).subscribe();
   }
 
   deleteAccount(): void {
