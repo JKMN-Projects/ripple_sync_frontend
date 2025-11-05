@@ -3,11 +3,14 @@ import { inject } from '@angular/core';
 import { Authentication } from './services/authentication';
 import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
 import { DateTime } from 'luxon';
+import { environment } from '../environments/environment';
 
 let refreshInProgress = false;
 
 const logDebug = (message: string, ...optionalParams: any[]) => {
-  console.debug("[RefreshTokenInterceptor] " + message, ...optionalParams);
+  if(!environment.production) {
+    console.debug("[RefreshTokenInterceptor] " + message, ...optionalParams);
+  }
 }
 
 const attemptRefresh = (authService: Authentication, req: HttpRequest<any>, next: HttpHandlerFn) => {
