@@ -23,6 +23,7 @@ export interface RegisterResponseState {
 export interface AuthenticationResponse {
   email: string;
   expiresAt: number;
+  refreshToken: string;
 }
 
 @Injectable({
@@ -52,6 +53,7 @@ export class Authentication {
             if (response.ok) {
               this.userEmail.set(response.body?.email ?? '');
               this.isAuthenticated.set(true);
+              localStorage.setItem('refreshToken', response.body?.refreshToken.toString() ?? '');
               localStorage.setItem('expiresAt', response.body?.expiresAt.toString() ?? '');
               localStorage.setItem('email', response.body?.email.toString() ?? '');
             }
@@ -110,7 +112,29 @@ export class Authentication {
       .subscribe();
   }
 
+  refreshToken() {
+    const payload = {
+      refreshToken: localStorage.getItem('refreshToken') ?? '',
+    };
+    return this.http
+      .post<AuthenticationResponse>(`${environment.apiUrl}/authentication/refresh`, payload, { observe: 'response' })
+      .pipe(
+        tap((response) => {
+          if (response.ok) {
+            this.userEmail.set(response.body?.email ?? '');
+            this.isAuthenticated.set(true);
+            localStorage.setItem('refreshToken', response.body?.refreshToken.toString() ?? '');
+            localStorage.setItem('expiresAt', response.body?.expiresAt.toString() ?? '');
+            localStorage.setItem('email', response.body?.email.toString() ?? '');
+          }
+        }),
+        map((response) => response.body as AuthenticationResponse)
+      );
+  }
 
+  get tokenExpiryTime(): number {
+    return Number.parseInt(localStorage.getItem('expiresAt') ?? '-1');
+  }
 
   checkExpiresAt() {
     const expiresAt = Number.parseInt(localStorage.getItem('expiresAt') ?? '0');
@@ -124,15 +148,19 @@ export class Authentication {
       this.logout();
     }
   }
+  
   private removeLocalStorage(): void {
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('expiresAt');
     localStorage.removeItem('email');
   }
+
   logout(): void {
     this.isAuthenticated.set(false);
     this.router.navigate(['/']);
     this.removeLocalStorage();
   }
+
   deleteAccount(): void {
     this.registerState.set({ status: 'loading', message: null, validationErrors: null });
     this.http
