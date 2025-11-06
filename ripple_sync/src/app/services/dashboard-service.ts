@@ -17,6 +17,7 @@ interface StatsForPlatform{
   likes: number;
   engagement: number;
   averageEngagement: number;
+  isSimulated: boolean;
 }
 
 

@@ -32,6 +32,8 @@ html {
 
 	--mat-sys-on-warn-container: #7C2D12;
 	--mat-sys-warn-container: #FEEBC8;
+	--mat-sys-on-warn: #FFFFFF;
+	--mat-sys-warn: #D97706;
 
 
 	@include mat.core-overrides((

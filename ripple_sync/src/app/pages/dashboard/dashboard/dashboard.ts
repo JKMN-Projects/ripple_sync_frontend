@@ -6,6 +6,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DashboardService } from '../../../services/dashboard-service';
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
+import { MatIcon } from "@angular/material/icon";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,9 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
     MatButtonToggleModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatIcon,
+    MatTooltipModule
 ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',

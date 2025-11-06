@@ -2,6 +2,18 @@
     padding: 2rem;
 }
 
+.simulated-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1.5rem;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    color: var(--mat-sys-warn);
+    font-size: 1.75em;
+    cursor: help;
+}
+
 #TotalMetrics {
 
     mat-card-title {

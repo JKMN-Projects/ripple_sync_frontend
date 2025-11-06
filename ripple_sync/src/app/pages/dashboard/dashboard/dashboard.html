@@ -112,6 +112,11 @@
                             <mat-card-subtitle>{{ item.publishedPosts }} posts this period</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
+                            @if (item.isSimulated) {
+                                <div class="simulated-icon" matTooltip="This data is either fully or partially simulated and may not reflect actual performance.">
+                                    <mat-icon fontIcon="info"></mat-icon>
+                                </div>
+                            }
                             <div class="tile-grid">
                                 <div class="platform-metric-tile tile">
                                     <div class="platform-metric-label">Reach</div>
