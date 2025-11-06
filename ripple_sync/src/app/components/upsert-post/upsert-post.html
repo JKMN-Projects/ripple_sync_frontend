@@ -43,13 +43,6 @@
 
       </mat-card>
 
-      <h3>Select platforms</h3>
-      <mat-chip-listbox formControlName="platforms" multiple [compareWith]="compareIntegrations">
-        @for (integration of integrations(); track integration?.userPlatformIntegrationId) {
-        <mat-chip-option [value]="integration">{{ integration.platFormName }}</mat-chip-option>
-        }
-      </mat-chip-listbox>
-
       <h3>Publishing options</h3>
       <mat-chip-listbox formControlName="timestampType">
         @for (option of timestampOptions; track option.value) {
@@ -67,7 +60,8 @@
       <div class="date-time-picker-container">
         <mat-form-field appearance="outline" class="date-picker">
           <mat-label>Select date</mat-label>
-          <input matInput [matDatepicker]="picker" [value]="getSelectedDate()" (dateChange)="onDateTimeChange($event)">
+          <input matInput [min]="minDate" [matDatepicker]="picker" [value]="getSelectedDate()"
+            (dateChange)="onDateTimeChange($event)">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -78,6 +72,14 @@
         </mat-form-field>
       </div>
       }
+
+      <h3>Select platforms</h3>
+      <mat-chip-listbox formControlName="platforms" multiple [compareWith]="compareIntegrations">
+        @for (integration of integrations(); track integration?.userPlatformIntegrationId) {
+        <mat-chip-option [value]="integration">{{ integration.platFormName }}</mat-chip-option>
+        }
+      </mat-chip-listbox>
+
     </div>
   </form>
 </mat-dialog-content>
