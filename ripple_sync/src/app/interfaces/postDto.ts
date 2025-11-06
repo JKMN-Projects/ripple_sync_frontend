@@ -8,6 +8,6 @@ export interface PostDto {
   messageContent: string;
   statusName: string;
   mediaIds: string[];
-  timestamp: number;
+  timestampUnix: number;
   platforms: string[];
 }

@@ -210,11 +210,11 @@ export class UpsertPost implements OnInit {
 
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
-    this.timestampControl?.setValue(this.data.timestamp);
-    this.timestampTypeControl?.setValue(this.data.timestamp > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
+    this.timestampControl?.setValue(this.data.timestampUnix);
+    this.timestampTypeControl?.setValue(this.data.timestampUnix > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
 
-    if (this.data.timestamp) {
-      const dateTime = DateTime.fromMillis(this.data.timestamp);
+    if (this.data.timestampUnix) {
+      const dateTime = DateTime.fromMillis(this.data.timestampUnix);
       this.formattedScheduledDate.set(dateTime.toFormat('MMM dd, yyyy HH:mm'));
     }
   }
