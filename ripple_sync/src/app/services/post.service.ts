@@ -76,7 +76,7 @@ export class PostService {
           },
         }),
         catchError((err) => {
-          console.error('Error creating user', err);
+          console.error('Error creating post', err);
           return of(null);
         })
       )
@@ -96,7 +96,7 @@ export class PostService {
           },
         }),
         catchError((err) => {
-          console.error('Error creating user', err);
+          console.error('Error updating post', err);
           return of(null);
         })
       )

@@ -77,7 +77,7 @@ export class UpsertPost implements OnInit {
     media: new FormControl<Array<string> | null>(new Array<string>()),
     platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(this.timestampTypes.Now, [Validators.required]),
-    timestamp: new FormControl<number | null>(null)
+    timestamp: new FormControl<number | null>(DateTime.now().toMillis())
   })
 
   get integrations() {
