@@ -48,7 +48,7 @@ constructor() {
       switch (this.authService.registerState().status) {
         case 'success':
           this.dialogRef.close(true);
-          
+
           const dialogRef = this.dialog.open(LoginModal, {
             disableClose: false,
             maxHeight: '90vh',
@@ -57,7 +57,7 @@ constructor() {
 
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
-              this.router.navigate(['/posts']); // Change route when post list component is implemented
+              this.router.navigate(['/posts']);
             }
           })
           break;
@@ -88,7 +88,7 @@ constructor() {
 
     return null;
   }
-  
+
   get emailControl() {
     return this.registerForm.get('email');
   }

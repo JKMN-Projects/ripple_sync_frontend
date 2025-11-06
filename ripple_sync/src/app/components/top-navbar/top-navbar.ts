@@ -21,7 +21,7 @@ import { RegisterModal } from '../register-modal/register-modal';
     MatIconModule,
     MatMenuModule,
     MatDialogModule
-],
+  ],
   templateUrl: './top-navbar.html',
   styleUrl: './top-navbar.scss',
 })
