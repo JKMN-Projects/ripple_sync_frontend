@@ -219,6 +219,10 @@ export class UpsertPost implements OnInit {
     }
     else {
       this.timestampTypeControl?.setValue(this.timestampTypes.Draft);
+      this.platformsControl?.removeValidators(Validators.required);
+      this.platformsControl?.setValue(null);
+      this.platformsControl?.updateValueAndValidity();
+      this.platformsControl?.disable();
     }
 
     if (this.data.timestampUnix) {
