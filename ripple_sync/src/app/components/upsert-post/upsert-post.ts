@@ -213,6 +213,14 @@ export class UpsertPost implements OnInit {
     this.timestampControl?.setValue(this.data.timestamp);
     this.timestampTypeControl?.setValue(this.data.timestamp > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
 
+    if (this.data.timestamp > 0) {
+      this.timestampTypeControl?.setValue(this.timestampTypes.Scheduled);
+      this.showDatePicker.set(true);
+    }
+    else {
+      this.timestampTypeControl?.setValue(this.timestampTypes.Draft);
+    }
+
     if (this.data.timestamp) {
       const dateTime = DateTime.fromMillis(this.data.timestamp);
       this.formattedScheduledDate.set(dateTime.toFormat('MMM dd, yyyy HH:mm'));
@@ -284,9 +292,11 @@ export class UpsertPost implements OnInit {
   submit() {
     let integrationIds = new Array<string>();
 
-    (this.platformsControl?.value as ConnectedIntegrationDto[]).forEach(integration => {
-      integrationIds.push(integration.userPlatformIntegrationId);
-    });
+    if (this.platformsControl?.enabled) {
+      (this.platformsControl?.value as ConnectedIntegrationDto[]).forEach(integration => {
+        integrationIds.push(integration.userPlatformIntegrationId);
+      });
+    }
 
     if (this.checkIfEdit()) {
       this.postService.updatePost(

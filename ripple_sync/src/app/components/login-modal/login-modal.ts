@@ -22,7 +22,7 @@ import { formErrorMessage } from '../../utility/form-error-message';
     MatButtonModule,
     MatProgressSpinnerModule,
     IconContainer
-],
+  ],
   templateUrl: './login-modal.html',
   styleUrl: './login-modal.scss',
 })

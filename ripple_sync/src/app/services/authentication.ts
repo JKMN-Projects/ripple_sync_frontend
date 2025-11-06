@@ -30,7 +30,8 @@ export interface AuthenticationResponse {
   providedIn: 'root',
 })
 export class Authentication {
-  router = inject(Router);
+  private router = inject(Router);
+  private http = inject(HttpClient);
 
   isAuthenticated = signal<boolean>(false);
   userEmail = signal<string>('');
@@ -39,8 +40,6 @@ export class Authentication {
     message: null,
     validationErrors: null,
   });
-
-  constructor(private http: HttpClient) {}
 
   login(credentials: LoginRequest): Observable<AuthenticationResponse> {
     return this.http
@@ -137,9 +136,7 @@ export class Authentication {
   }
 
   checkExpiresAt() {
-    const expiresAt = Number.parseInt(localStorage.getItem('expiresAt') ?? '0');
-
-    if (new Date().getTime() < expiresAt) {
+    if (new Date().getTime() < this.tokenExpiryTime) {
       this.isAuthenticated.set(true);
       this.userEmail.set(localStorage.getItem('email') ?? '');
       this.router.navigate(["/posts"]);
@@ -148,7 +145,7 @@ export class Authentication {
       this.logout();
     }
   }
-  
+
   private removeLocalStorage(): void {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('expiresAt');
