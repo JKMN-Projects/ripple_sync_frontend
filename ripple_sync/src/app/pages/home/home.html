@@ -17,10 +17,10 @@
                 <h5>Manage all your social media accounts in one place</h5>
                 <mat-grid-list cols="5" rowHeight="100px" gutterSize="16px">
                     <!-- TODO: Replace with actual platforms -->
-                    @for (platform of ['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'TikTok', 'YouTube']; track $index) {
+                    @for (platform of platforms(); track $index) {
                         <mat-grid-tile>
                             <div class="platform-tile">
-                                <span>{{ platform }}</span>
+                                <span>{{ platform.name }}</span>
                             </div>
                         </mat-grid-tile>
                     }
@@ -91,7 +91,7 @@
             </div>
         </section>
         <section>
-            
+
             <div class="section-content">
                 <h2>Simple Workflow</h2>
                 <h5>Get started in minutes with our intuitive platform</h5>

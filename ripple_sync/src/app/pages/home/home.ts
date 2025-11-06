@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../../components/login-modal/login-modal';
+import { PlatformService } from '../../services/platform';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,23 @@ import { LoginModal } from '../../components/login-modal/login-modal';
     MatGridListModule,
     MatCardModule,
     IconContainer
-],
+  ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {
+export class Home implements OnInit {
   private dialog = inject(MatDialog);
   private router = inject(Router);
-  authService = inject(Authentication);
+  private authService = inject(Authentication);
+  private platformService = inject(PlatformService);
+
+  get platforms() {
+    return this.platformService.platforms;
+  }
+
+  ngOnInit(): void {
+    this.platformService.getPlatforms();
+  }
 
   openLoginModal(): void {
     const dialogRef = this.dialog.open(LoginModal, {
