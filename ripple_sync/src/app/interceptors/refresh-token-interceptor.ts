@@ -1,9 +1,9 @@
-import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Authentication } from './services/authentication';
-import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
+import { Authentication } from '../services/authentication';
+import { catchError, switchMap, throwError } from 'rxjs';
 import { DateTime } from 'luxon';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 let refreshInProgress = false;
 
@@ -47,7 +47,7 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(catchError(error => {
     logDebug("Intercepted error:", error);
     if(
-      isRefreshableRequest && 
+      isRefreshableRequest &&
       error instanceof HttpErrorResponse &&
       error.status === 401
     ) {

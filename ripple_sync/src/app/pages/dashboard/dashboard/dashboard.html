@@ -4,7 +4,7 @@
 
         <mat-button-toggle-group [formControl]="filterControl" class="filter-box" name="filterOptions" aria-label="Filter Options"
             [hideSingleSelectionIndicator]="true">
-            <mat-button-toggle value="today">Today</mat-button-toggle>
+            <mat-button-toggle [value]="'All time'">All time</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
 
@@ -23,14 +23,14 @@
                     }
                     @else if (dashboardData.hasValue()) {
                         {{ dashboardData.value().publishedPosts }}
-                    } 
+                    }
                     @else {
                         N/A
                     }
                 </div>
             </mat-card-content>
         </mat-card>
-        
+
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
@@ -45,14 +45,14 @@
                     }
                     @else if (dashboardData.hasValue()) {
                         {{ dashboardData.value().totalReach }}
-                    } 
+                    }
                     @else {
                         N/A
                     }
                 </div>
             </mat-card-content>
         </mat-card>
-        
+
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
@@ -67,14 +67,14 @@
                     }
                     @else if (dashboardData.hasValue()) {
                         {{ dashboardData.value().totalLikes }}
-                    } 
+                    }
                     @else {
                         N/A
                     }
                 </div>
             </mat-card-content>
         </mat-card>
-        
+
         <mat-card class="tile secondary" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
@@ -89,7 +89,7 @@
                     }
                     @else if (dashboardData.hasValue()) {
                         {{ dashboardData.value().scheduledPosts }}
-                    } 
+                    }
                     @else {
                         N/A
                     }
@@ -103,7 +103,7 @@
         <div class="tile-grid">
             @if (dashboardData.isLoading()) {
                 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-            } 
+            }
             @else if (dashboardData.hasValue()) {
                 @for (item of dashboardData.value().totalStatsForPlatforms; track item.platform) {
                     <mat-card class="tile secondary" appearance="outlined">
