@@ -103,6 +103,26 @@ export class PostService {
       .subscribe();
   }
 
+  retryPost(postId: string) {
+    this.http.post(`${environment.apiUrl}/posts/${encodeURIComponent(postId)}/retry`, {}, { observe: 'response' })
+      // .pipe(
+      //   tap({
+      //     next: (response) => {
+      //       if (response.ok) {
+      //         this.postsSignal.reload();
+      //       }
+      //     },
+      //   }),
+      //   catchError((err) => {
+      //     console.error('Error retrying post', err);
+      //     return of(null);
+      //   })
+      // )
+      .subscribe(event => {
+        this.postsSignal.reload();
+      });
+  }
+
   deletePost(postId: string) {
     this.http
       .delete<HttpResponseBase>(`${environment.apiUrl}/posts/${encodeURIComponent(postId)}`, {

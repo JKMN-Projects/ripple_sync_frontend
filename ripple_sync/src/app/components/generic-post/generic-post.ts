@@ -79,6 +79,10 @@ export class GenericPost implements OnDestroy {
     }))
   }
 
+  retryPost(post: PostDto): void {
+    this.postService.retryPost(post.postId);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
