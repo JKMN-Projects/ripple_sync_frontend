@@ -22,8 +22,6 @@ export class PlatformService {
       {
         next: (response => {
           if (response.ok) {
-            console.log(response.body);
-
             this.platformsSignal.set(response.body?.data ?? []);
           }
         }),

@@ -19,6 +19,12 @@
         <mat-error>{{ getErrorMessage(passwordControl) }}</mat-error>
       </mat-form-field>
     </div>
+
+    @if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+    }
   </form>
 </mat-dialog-content>
 

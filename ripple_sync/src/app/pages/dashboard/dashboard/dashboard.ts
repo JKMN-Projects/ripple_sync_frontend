@@ -25,23 +25,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard implements OnInit, OnDestroy{
-  filterControl = new FormControl('today');
+  filterControl = new FormControl('All time');
   private subscriptions = new Subscription();
   private dashboardService = inject(DashboardService);
 
   get dashboardData() {
     return this.dashboardService.dashboardData;
   }
-  
+
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.filterControl.valueChanges.subscribe((value) => {
-        console.log('[Subscription] Filter changed to:', value);
-      })
-    );
     this.dashboardService.reloadDashboardData();
   }
-  
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

@@ -2,8 +2,8 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { credentialsInterceptor } from './credentials-interceptor';
-import { refreshTokenInterceptor } from './refresh-token-interceptor';
+import { credentialsInterceptor } from './interceptors/credentials-interceptor';
+import { refreshTokenInterceptor } from './interceptors/refresh-token-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
