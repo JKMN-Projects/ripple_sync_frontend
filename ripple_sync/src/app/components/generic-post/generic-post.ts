@@ -45,7 +45,7 @@ export class GenericPost implements OnDestroy {
   }
 
   isDeletable(status: string): boolean {
-    const deletableStatus = ['draft', 'scheduled', 'failed'];
+    const deletableStatus = ['draft', 'scheduled', 'posted', 'failed'];
     return !deletableStatus.includes(status.toLowerCase());
   }
 
@@ -65,7 +65,8 @@ export class GenericPost implements OnDestroy {
 
   openConfirmationDialog(post: PostDto) {
     const confirmationContent: GenericConfirmation = {
-      content: "Are you sure you want to delete this post? This will only delete the post in RippleSync, not on external social media platforms."
+      content: "Are you sure you want to delete this post?<br><br>This will only delete the post in RippleSync, not on external social media platforms."
+      // content: "Are you sure you want to delete this post?\nThis will only delete the post in RippleSync, not on external social media platforms."
     }
 
     const confirmationDialog = this.dialog.open(GenericConfirmationModal, {
