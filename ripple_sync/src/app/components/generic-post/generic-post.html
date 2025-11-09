@@ -5,7 +5,7 @@
         <div class="status-chip {{ post().statusName.toLowerCase() }}">{{post().statusName}}</div>
         <div class="stack stack--row stack--gap-sm">
           <button class="button--sm primary" matButton="outlined"
-            [disabled]="isRetryable(post().statusName)">Retry</button>
+            [disabled]="isRetryable(post().statusName)" (click)="retryPost(post())">Retry</button>
           <button class="button--sm primary" matButton="outlined"
             [disabled]="isEditable(post().statusName)" (click)="openUpsertPostModal(post())">Edit</button>
           <button class="button--sm error" matButton="outlined" [disabled]="isDeletable(post().statusName)"
