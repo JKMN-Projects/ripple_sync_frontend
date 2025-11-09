@@ -1,0 +1,51 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button mat-icon-button (click)="changeMonth(-1)">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h2>{{ displayedMonth() | date:'MMMM y' }}</h2>
+    <button mat-icon-button (click)="changeMonth(1)">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <div class="calendar-grid">
+    @for (day of daysInMonth(); track day) {
+    <div class="calendar-day" [class.today]="isToday(day)" [class.outside-month]="!isCurrentMonth(day)"
+      (mouseenter)="showTooltip($event.currentTarget, day)" (mouseleave)="hideTooltip()">
+      <div class="date-header">
+        <span class="weekday">{{ day | date:'EEE' }}</span>
+        <span class="date-label">{{ day.getDate() }}</span>
+      </div>
+
+      @if (postsForDate(day).length > 0) {
+      <div class="post-indicator">
+        @if (postsForDate(day).length === 1) {
+        <div class="single-post">
+          <div class="time">{{ getTimeOfDay(postsForDate(day)[0]) }}</div>
+          <div class="platforms">
+            @for (platform of postsForDate(day)[0].platforms; track platform) {
+            <span class="platform">{{ platform }}</span>
+            }
+          </div>
+          <div class="message-preview">
+            {{ truncateMessage(postsForDate(day)[0].messageContent) }}
+          </div>
+        </div>
+        } @else {
+        <div class="multi-post">
+          +{{ postsForDate(day).length }} posts
+        </div>
+        }
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
+
+<ng-template #tooltipTemplate let-text>
+  <div class="custom-tooltip-content">
+    <pre>{{ text }}</pre>
+  </div>
+</ng-template>
