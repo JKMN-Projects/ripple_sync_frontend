@@ -4,10 +4,10 @@
       <div class="stack stack--row stack--space-between">
         <div class="status-chip {{ post().statusName.toLowerCase() }}">{{post().statusName}}</div>
         <div class="stack stack--row stack--gap-sm">
-          <button class="button--sm primary" matButton="outlined"
-            [disabled]="isRetryable(post().statusName)" (click)="retryPost(post())">Retry</button>
-          <button class="button--sm primary" matButton="outlined"
-            [disabled]="isEditable(post().statusName)" (click)="openUpsertPostModal(post())">Edit</button>
+          <button class="button--sm primary" matButton="outlined" [disabled]="isRetryable(post().statusName)"
+            (click)="retryPost(post())">Retry</button>
+          <button class="button--sm primary" matButton="outlined" [disabled]="isEditable(post().statusName)"
+            (click)="openUpsertPostModal(post())">Edit</button>
           <button class="button--sm error" matButton="outlined" [disabled]="isDeletable(post().statusName)"
             (click)="openConfirmationDialog(post())">@if (isLoading()) {
             <mat-spinner diameter="20"></mat-spinner>
@@ -38,7 +38,7 @@
       <mat-chip-set aria-label="Platforms">
         @for (platform of post().platforms; track $index)
         {
-        <mat-chip>{{platform}}</mat-chip>
+          <mat-chip (click)="getExternalUrl(platform)">{{platform}}</mat-chip>
         }
       </mat-chip-set>
 
