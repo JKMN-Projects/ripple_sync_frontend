@@ -108,8 +108,6 @@ export class Calendar implements OnInit {
       )
       .join('\n\n');
 
-    console.log(temp);
-
     return temp;
   }
 
