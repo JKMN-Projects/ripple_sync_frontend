@@ -1,36 +1,43 @@
 <nav class="stack">
-    <div class="brand-section stack stack--row stack--gap-sm stack--align-center">
-        <img src="Logo.png" alt="RippleSync Logo" class="logo" />
-        <h4>RippleSync</h4>
-    </div>
-    <mat-divider></mat-divider>
-    <ul>
-        <li>
-            <a routerLink="/posts" routerLinkActive="active-link">
-                <mat-icon fontIcon="art_track"></mat-icon>
-                My Posts
-            </a>
-        </li>
-        <li>
-            <a routerLink="/dashboard" routerLinkActive="active-link">
-                <mat-icon fontIcon="dashboard"></mat-icon>
-                Dashboard
-            </a>
-        </li>
+  <div class="brand-section stack stack--row stack--gap-sm stack--align-center">
+    <img src="Logo.png" alt="RippleSync Logo" class="logo" />
+    <h4>RippleSync</h4>
+  </div>
+  <mat-divider></mat-divider>
+  <ul>
+    <li>
+      <a routerLink="/posts" routerLinkActive="active-link">
+        <mat-icon fontIcon="art_track"></mat-icon>
+        My Posts
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon fontIcon="dashboard"></mat-icon>
+        Dashboard
+      </a>
+    </li>
 
-        <li>
-            <a routerLink="/integrations" routerLinkActive="active-link">
-                <mat-icon fontIcon="apps"></mat-icon>
-                Integrations
-            </a>
-        </li>
-    </ul>
-    <button matButton="filled" class="dark" (click)="logout()">Logout</button>
-    <mat-divider></mat-divider>
-    <div class="avatar-section stack stack--row stack--center stack--gap-sm">
-        <app-icon-container iconName="person" size="sm"></app-icon-container>
-        <div>{{ userEmail }}</div>
-    </div>
-    <mat-divider></mat-divider>
-    <button matButton="filled" class="error" (click)="deleteAccount()">Delete account</button>
+    <li>
+      <a routerLink="/integrations" routerLinkActive="active-link">
+        <mat-icon fontIcon="apps"></mat-icon>
+        Integrations
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/calendar" routerLinkActive="active-link">
+        <mat-icon fontIcon="calendar_month"></mat-icon>
+        Calendar
+      </a>
+    </li>
+  </ul>
+  <button matButton="filled" class="dark" (click)="logout()">Logout</button>
+  <mat-divider></mat-divider>
+  <div class="avatar-section stack stack--row stack--center stack--gap-sm">
+    <app-icon-container iconName="person" size="sm"></app-icon-container>
+    <div>{{ userEmail }}</div>
+  </div>
+  <mat-divider></mat-divider>
+  <button matButton="filled" class="error" (click)="deleteAccount()">Delete account</button>
 </nav>
