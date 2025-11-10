@@ -106,7 +106,7 @@ export class UpsertPost implements OnInit {
 
   constructor() {
     effect(() => {
-      if (this.checkIfEdit() && this.integrations() != null && this.integrations()!.length > 0) {
+      if (this.checkIfEdit() && this.integrations() != null && this.integrations()!.length > 0 && this.data.platforms?.length > 0) {
         this.platformsControl?.setValue(this.integrations()?.filter(item => this.data.platforms.includes(item.platFormName)) ?? null);
       }
     })

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Authentication } from '../../services/authentication';
 import { LoginModal } from '../../components/login-modal/login-modal';
 import { PlatformService } from '../../services/platform';
+import { RegisterModal } from '../../components/register-modal/register-modal';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +45,20 @@ export class Home implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.router.navigate(['/posts']);
+      }
+    })
+  }
+
+  openRegisterModal(): void {
+    const dialogRef = this.dialog.open(RegisterModal, {
+      disableClose: false,
+      maxHeight: '90vh',
+      panelClass: 'dialog-panel--no-scroll',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate(['/']);
       }
     })
   }
