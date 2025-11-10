@@ -13,6 +13,7 @@ import { UpsertPost } from '../upsert-post/upsert-post';
 import { GenericConfirmation } from '../../interfaces/generic-confirmation';
 import { GenericConfirmationModal } from '../generic-confirmation-modal/generic-confirmation-modal';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-generic-post',
@@ -31,8 +32,9 @@ export class GenericPost implements OnDestroy {
   url = environment.apiUrl + "/posts/";
   post = input.required<PostDto>();
 
-  postService = inject(PostService);
-  dialog = inject(MatDialog);
+  private postService = inject(PostService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
@@ -85,5 +87,39 @@ export class GenericPost implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  getExternalUrl(platformName: string) {
+    let temp = "";
+    let compare = platformName.toLowerCase();
+    compare = compare.trim();
+
+    switch (compare) {
+      case "x":
+        temp = "https://www.x.com";
+        break;
+      case "linkedin":
+        temp = "https://www.linkedin.com";
+        break;
+      case "facebook":
+        temp = "https://www.facebook.com";
+        break;
+      case "instagram":
+        temp = "https://www.instagram.com";
+        break;
+      case "threads":
+        temp = "https://www.threads.com";
+        break;
+      case "fakeplatform":
+        temp = environment.production ? "https://www.api.ripplesync.dk/fakeplatform" : "https://localhost:7275/fakeplatform";
+        break;
+      default:
+        temp = "";
+        break;
+    }
+
+    if (temp.length > 0) {
+      window.open(temp);
+    }
   }
 }
