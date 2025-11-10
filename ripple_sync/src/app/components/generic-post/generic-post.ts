@@ -65,7 +65,7 @@ export class GenericPost implements OnDestroy {
 
   openConfirmationDialog(post: PostDto) {
     const confirmationContent: GenericConfirmation = {
-      content: "Are you sure you want to delete this post? This will only delete the post in RippleSync, not on external social media platforms."
+      content: "Are you sure you want to delete this post?\n\nThis will only delete the post on RippleSync, not on external social media platforms."
     }
 
     const confirmationDialog = this.dialog.open(GenericConfirmationModal, {
