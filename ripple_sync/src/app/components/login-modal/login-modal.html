@@ -32,7 +32,7 @@
   <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
     Cancel
   </button>
-  <button matButton="filled" class="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
+  <button matButton="filled" type="submit" class="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
     @if (isLoading()) {
     <mat-spinner diameter="20"></mat-spinner>
     } @else {
