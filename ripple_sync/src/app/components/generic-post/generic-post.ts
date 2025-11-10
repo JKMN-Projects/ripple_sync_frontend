@@ -90,36 +90,36 @@ export class GenericPost implements OnDestroy {
   }
 
   getExternalUrl(platformName: string) {
-    let temp = "";
+    let url = "";
     let compare = platformName.toLowerCase();
     compare = compare.trim();
 
     switch (compare) {
       case "x":
-        temp = "https://www.x.com";
+        url = "https://www.x.com";
         break;
       case "linkedin":
-        temp = "https://www.linkedin.com";
+        url = "https://www.linkedin.com";
         break;
       case "facebook":
-        temp = "https://www.facebook.com";
+        url = "https://www.facebook.com";
         break;
       case "instagram":
-        temp = "https://www.instagram.com";
+        url = "https://www.instagram.com";
         break;
       case "threads":
-        temp = "https://www.threads.com";
+        url = "https://www.threads.com";
         break;
       case "fakeplatform":
-        temp = environment.production ? "https://www.api.ripplesync.dk/fakeplatform" : "https://localhost:7275/fakeplatform";
+        url = environment.production ? "https://www.api.ripplesync.dk/fakeplatform" : "https://localhost:7275/fakeplatform";
         break;
       default:
-        temp = "";
+        url = "";
         break;
     }
 
-    if (temp.length > 0) {
-      window.open(temp);
+    if (url.length > 0) {
+      window.open(url);
     }
   }
 }
