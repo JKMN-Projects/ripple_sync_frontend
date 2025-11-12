@@ -156,8 +156,11 @@ export class Authentication {
   private checkUrl(): boolean {
     switch (this.router.url) {
       case "https://ripplesync.dk":
+      case "https://ripplesync.dk/":
       case "https://www.ripplesync.dk":
+      case "https://www.ripplesync.dk/":
       case "https://localhost:4200":
+      case "https://localhost:4200/":
         return true;
       default:
         return false;
