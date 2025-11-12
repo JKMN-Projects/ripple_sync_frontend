@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 let refreshInProgress = false;
 
-const logDebug = (message: string, ...optionalParams: any[]) => {
+export const logDebug = (message: string, ...optionalParams: any[]) => {
   if(!environment.production) {
     console.debug("[RefreshTokenInterceptor] " + message, ...optionalParams);
   }

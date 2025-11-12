@@ -3,8 +3,8 @@
   Login
 </h2>
 
+<form [formGroup]="loginForm">
 <mat-dialog-content>
-  <form [formGroup]="loginForm">
     <div class="form-container">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
@@ -25,18 +25,18 @@
       {{ errorMessage() }}
     </div>
     }
-  </form>
-</mat-dialog-content>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
-    Cancel
-  </button>
-  <button matButton="filled" type="submit" class="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
-    @if (isLoading()) {
-    <mat-spinner diameter="20"></mat-spinner>
-    } @else {
-    Login
-    }
-  </button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button matButton="outlined" type="button" (click)="cancel()" [disabled]="isLoading()">
+      Cancel
+    </button>
+    <button matButton="filled" type="submit" class="primary" [disabled]="isLoading() || loginForm.invalid" (click)="login()">
+      @if (isLoading()) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        Login
+      }
+    </button>
+  </mat-dialog-actions>
+</form>

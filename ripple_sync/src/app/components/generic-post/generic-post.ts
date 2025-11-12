@@ -111,7 +111,7 @@ export class GenericPost implements OnDestroy {
         url = "https://www.threads.com";
         break;
       case "fakeplatform":
-        url = environment.production ? "https://www.api.ripplesync.dk/fakeplatform" : "https://localhost:7275/fakeplatform";
+        url = environment.production ? "https://api.ripplesync.dk/fakeplatform" : "https://localhost:7275/fakeplatform";
         break;
       default:
         url = "";

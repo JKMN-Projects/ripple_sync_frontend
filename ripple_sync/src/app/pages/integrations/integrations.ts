@@ -1,6 +1,6 @@
-import { Component, effect, inject, Inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { GenericIntegration } from '../../components/generic-integration/generic-integration';
-import { Integration, IntegrationDto } from '../../services/integration';
+import { Integration } from '../../services/integration';
 
 @Component({
   selector: 'app-integrations',
