@@ -1,9 +1,10 @@
 import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { parseProblemDetails, ProblemDetails } from '../interfaces/problemDetails';
 import { Router } from '@angular/router';
+import { logDebug } from '../interceptors/refresh-token-interceptor';
 
 export interface LoginRequest {
   email: string;
@@ -139,10 +140,27 @@ export class Authentication {
     if (new Date().getTime() < this.tokenExpiryTime) {
       this.isAuthenticated.set(true);
       this.userEmail.set(localStorage.getItem('email') ?? '');
-      this.router.navigate(["/posts"]);
-    } else {
-      // Call refresh token endpoint and move this.logout to that method.
-      this.logout();
+      if (this.checkUrl()) {
+        this.router.navigate(["/posts"]);
+      }
+    }
+    else {
+      this.refreshToken().subscribe(x => {
+        if (x.refreshToken.length == 0) {
+          this.logout();
+        }
+      })
+    }
+  }
+
+  private checkUrl(): boolean {
+    switch (this.router.url) {
+      case "https://ripplesync.dk":
+      case "https://www.ripplesync.dk":
+      case "https://localhost:4200":
+        return true;
+      default:
+        return false;
     }
   }
 

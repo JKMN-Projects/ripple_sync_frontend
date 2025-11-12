@@ -85,10 +85,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()">
+  <button matButton="outlined" type="button" (click)="cancel()">
     Cancel
   </button>
-  <button mat-raised-button color="primary" [disabled]="postFormGroup.invalid" (click)="submit()">
+  <button matButton="filled" class="primary" [disabled]="postFormGroup.invalid" (click)="submit()">
     Save
   </button>
 </mat-dialog-actions>

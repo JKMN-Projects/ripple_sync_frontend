@@ -3,8 +3,8 @@
   Register
 </h2>
 
+<form [formGroup]="registerForm">
 <mat-dialog-content>
-  <form [formGroup]="registerForm">
     <div class="form-container stack">
       @if (errorMessage()) {
         <mat-error>{{ errorMessage() }}</mat-error>
@@ -32,18 +32,18 @@
           autocomplete="current-password" />
       </mat-form-field>
     </div>
-  </form>
-</mat-dialog-content>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
-    Cancel
-  </button>
-  <button matButton="filled" class="primary" [disabled]="isLoading() || registerForm.invalid" (click)="register()">
-    @if (isLoading()) {
-    <mat-spinner diameter="20"></mat-spinner>
-    } @else {
-    Register
-    }
-  </button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button matButton="outlined" type="button" class="" (click)="cancel()" [disabled]="isLoading()">
+      Cancel
+    </button>
+    <button matButton="filled" type="submit" class="primary" [disabled]="isLoading() || registerForm.invalid" (click)="register()">
+      @if (isLoading()) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        Register
+      }
+    </button>
+  </mat-dialog-actions>
+</form>
