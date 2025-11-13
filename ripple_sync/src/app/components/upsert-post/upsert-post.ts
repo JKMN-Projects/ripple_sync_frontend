@@ -116,7 +116,7 @@ export class UpsertPost implements OnInit {
     if (this.checkIfEdit()) {
       this.assignFormValues();
     }
-    else if (this.data.timestampUnix > 0) {
+    else if (this.data != undefined && this.data?.timestampUnix > 0) {
       this.setTimestampFormValue();
     }
 
