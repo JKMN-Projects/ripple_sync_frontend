@@ -81,7 +81,7 @@ export class Integration {
         tap({
           next: response => {
             if (response.ok && response.body?.redirectUrl != undefined) {
-              window.location.href = response.body?.redirectUrl;
+              window.location.href = response.body.redirectUrl;
             }
           }
         }),
