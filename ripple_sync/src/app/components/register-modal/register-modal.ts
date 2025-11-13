@@ -119,7 +119,7 @@ constructor() {
       return 'Password is required';
     }
     if (this.passwordControl?.hasError('minlength')) {
-      return 'Password must be at least 6 characters';
+      return 'Password must be at least 8 characters';
     }
     if (this.confirmPasswordControl?.hasError('passwordMismatch')) {
       return 'Passwords do not match';
