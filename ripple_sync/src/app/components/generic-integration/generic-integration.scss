@@ -123,21 +123,21 @@
   border-radius: 24px !important;
   text-transform: none;
 
-  &.disconnect-button {
-    background-color: #EC4899 !important;
-    color: white !important;
-
-    &:hover:not(:disabled) {
-      background-color: #DB2777 !important;
-    }
-  }
-
-  &.connect-button {
+  &:not(.connected) {
     background-color: #3182CE !important;
     color: white !important;
 
     &:hover:not(:disabled) {
       background-color: #2C5282 !important;
+    }
+  }
+
+  &.connected {
+    background-color: #B91C24 !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: #b12c32 !important;
     }
   }
 

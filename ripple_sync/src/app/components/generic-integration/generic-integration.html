@@ -20,7 +20,7 @@
   <mat-card-actions>
     <button 
       mat-flat-button
-      [color]="integration().connected ? 'connected' : 'disconnected'"
+      [class.connected]="integration().connected"
       [disabled]="isLoading()"
       (click)="onToggleConnection()"
       class="action-button">
