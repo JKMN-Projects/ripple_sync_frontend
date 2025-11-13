@@ -2,8 +2,8 @@ import { HttpClient, HttpParams, HttpResponseBase } from '@angular/common/http';
 import { PostDto, PostsByUserResponseDto } from '../interfaces/postDto';
 import { inject, Injectable, resource, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { catchError, firstValueFrom, forkJoin, map, Observable, of, tap } from 'rxjs';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { catchError, of, tap } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface DeletePostResponseState {
   status: 'success' | 'loading' | 'error' | null;
