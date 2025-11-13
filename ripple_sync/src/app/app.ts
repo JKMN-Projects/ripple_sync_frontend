@@ -15,7 +15,8 @@ import { AiFloatingChatComponent } from './components/ai-floating-chat/ai-floati
     TopNavbar,
     MatSidenavModule,
     VerticalNavbar,
-    CommonModule
+    CommonModule,
+    AiFloatingChatComponent,
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

@@ -9,6 +9,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DateTime } from 'luxon';
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import { UpsertPost } from '../../components/upsert-post/upsert-post';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-calendar',
@@ -31,6 +33,7 @@ export class Calendar implements OnInit {
   private overlay = inject(Overlay);
   private viewContainerRef = inject(ViewContainerRef);
   private postService = inject(PostService);
+  private dialog = inject(MatDialog);
 
   today = new Date();
   currentMonth = signal(this.today.getMonth());
@@ -158,5 +161,23 @@ export class Calendar implements OnInit {
   hideTooltip() {
     this.overlayRef?.dispose();
     this.overlayRef = undefined;
+  }
+
+  openUpsertPostModal(date: Date): void {
+    let post: PostDto = {
+      postId: "",
+      mediaIds: [],
+      messageContent: "",
+      platforms: [],
+      statusName: "",
+      timestampUnix: DateTime.fromJSDate(date).toMillis()
+    }
+
+    this.dialog.open(UpsertPost, {
+      disableClose: true,
+      maxHeight: '90vh',
+      panelClass: 'login-dialog-panel',
+      data: post
+    });
   }
 }

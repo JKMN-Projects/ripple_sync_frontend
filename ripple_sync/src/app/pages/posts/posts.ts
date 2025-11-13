@@ -17,10 +17,10 @@ import { PostDto } from '../../interfaces/postDto';
   styleUrl: './posts.scss',
 })
 export class Posts implements OnInit {
-  dialog = inject(MatDialog)
-  postsService = inject(PostService);
-  posts = this.postsService.posts;
+  private dialog = inject(MatDialog)
+  private postsService = inject(PostService);
   private subscriptions = new Subscription();
+  posts = this.postsService.posts;
 
   filterControl = new FormControl(this.postsService.filterChangeSignal());
 
@@ -32,13 +32,14 @@ export class Posts implements OnInit {
       })
     );
   }
+
   ngOnDestroy(): void {
     this.subscriptions?.unsubscribe();
   }
 
   openUpsertPostModal(): void {
     this.dialog.open(UpsertPost, {
-      disableClose: false,
+      disableClose: true,
       maxHeight: '90vh',
       panelClass: 'login-dialog-panel',
       data: null

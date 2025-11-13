@@ -40,7 +40,6 @@ enum TimestampTypes {
     MatIconModule,
     MatDividerModule,
     MatCardModule,
-    AiFloatingChatComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: NativeDateAdapter },
@@ -73,7 +72,7 @@ export class UpsertPost implements OnInit {
   ];
 
   postFormGroup = this.fb.group({
-    message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1)]),
+    message: new FormControl<string | null>(null, [Validators.required, Validators.minLength(1), Validators.maxLength(260)]),
     media: new FormControl<Array<string> | null>(new Array<string>()),
     platforms: new FormControl<Array<ConnectedIntegrationDto> | null>(null, [Validators.required]),
     timestampType: new FormControl<TimestampTypes | null>(this.timestampTypes.Now, [Validators.required]),
@@ -116,6 +115,9 @@ export class UpsertPost implements OnInit {
     this.integrationService.getUserIntegrations();
     if (this.checkIfEdit()) {
       this.assignFormValues();
+    }
+    else if (this.data.timestampUnix > 0) {
+      this.setTimestampFormValue();
     }
 
     this.subscriptions.add(this.timestampTypeControl?.valueChanges.subscribe(value => {
@@ -205,11 +207,15 @@ export class UpsertPost implements OnInit {
   }
 
   checkIfEdit() {
-    return this.data != null && this.data != undefined;
+    return this.data != null && this.data != undefined && this.data.postId.length > 0;
   }
 
   assignFormValues() {
     this.messageControl?.setValue(this.data.messageContent ?? "");
+    this.setTimestampFormValue();
+  }
+
+  setTimestampFormValue() {
     this.timestampControl?.setValue(this.data.timestampUnix);
     this.timestampTypeControl?.setValue(this.data.timestampUnix > 0 ? this.timestampTypes.Scheduled : this.timestampTypes.Draft);
 

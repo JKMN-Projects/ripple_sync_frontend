@@ -5,7 +5,10 @@
     <div class="form-container">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Message content</mat-label>
-        <textarea matInput formControlName="message" placeholder="Enter a message"></textarea>
+        <textarea maxlength="260" matInput formControlName="message" placeholder="Enter a message"></textarea>
+        <mat-hint align="end">{{
+          messageControl?.value?.length || 0
+          }}/260</mat-hint>
         @if (messageControl?.invalid && (messageControl?.dirty || messageControl?.touched)) {
         <mat-error>{{ getErrorMessage(messageControl) }}</mat-error>
         }
@@ -74,12 +77,16 @@
       }
 
       <h3>Select platforms</h3>
+      @if(integrations() != undefined && integrations() != null && integrations()!.length > 0) {
       <mat-chip-listbox formControlName="platforms" multiple [compareWith]="compareIntegrations">
         @for (integration of integrations(); track integration?.userPlatformIntegrationId) {
         <mat-chip-option [value]="integration">{{ integration.platFormName }}</mat-chip-option>
         }
       </mat-chip-listbox>
-
+      }
+      @else {
+      <p class="placeholder-text">No platforms integrated yet. Only drafts can be made.</p>
+      }
     </div>
   </form>
 </mat-dialog-content>
@@ -92,5 +99,3 @@
     Save
   </button>
 </mat-dialog-actions>
-
-<app-ai-floating-chat></app-ai-floating-chat>

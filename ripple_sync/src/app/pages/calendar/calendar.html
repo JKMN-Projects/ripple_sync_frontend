@@ -12,7 +12,7 @@
   <div class="calendar-grid">
     @for (day of daysInMonth(); track day) {
     <div class="calendar-day" [class.today]="isToday(day)" [class.outside-month]="!isCurrentMonth(day)"
-      (mouseenter)="showTooltip($event.currentTarget, day)" (mouseleave)="hideTooltip()">
+      (mouseenter)="showTooltip($event.currentTarget, day)" (mouseleave)="hideTooltip()" (click)="openUpsertPostModal(day)">
       <div class="date-header">
         <span class="weekday">{{ day | date:'EEE' }}</span>
         <span class="date-label">{{ day.getDate() }}</span>

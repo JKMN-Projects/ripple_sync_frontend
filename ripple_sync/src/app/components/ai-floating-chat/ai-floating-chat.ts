@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -17,9 +17,10 @@ interface ChatMessage {
   templateUrl: './ai-floating-chat.html',
   styleUrls: ['./ai-floating-chat.scss']
 })
-export class AiFloatingChatComponent {
+export class AiFloatingChatComponent implements AfterViewInit {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
+  private elementRef = inject(ElementRef);
 
   open = signal(true);
   loading = signal(false);
@@ -30,6 +31,10 @@ export class AiFloatingChatComponent {
   form = this.fb.group({
     userMessage: ['', Validators.required],
   });
+
+  ngAfterViewInit(): void {
+    document.body.appendChild(this.elementRef.nativeElement);
+  }
 
   toggle() {
     this.open.update(v => !v);

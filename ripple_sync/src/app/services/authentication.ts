@@ -1,10 +1,10 @@
 import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { catchError, map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { parseProblemDetails, ProblemDetails } from '../interfaces/problemDetails';
 import { Router } from '@angular/router';
-import { logDebug } from '../interceptors/refresh-token-interceptor';
+import { Location } from '@angular/common';
 
 export interface LoginRequest {
   email: string;
@@ -31,6 +31,7 @@ export interface AuthenticationResponse {
   providedIn: 'root',
 })
 export class Authentication {
+  private location = inject(Location);
   private router = inject(Router);
   private http = inject(HttpClient);
 
@@ -154,13 +155,9 @@ export class Authentication {
   }
 
   private checkUrl(): boolean {
-    switch (this.router.url) {
-      case "https://ripplesync.dk":
-      case "https://ripplesync.dk/":
-      case "https://www.ripplesync.dk":
-      case "https://www.ripplesync.dk/":
-      case "https://localhost:4200":
-      case "https://localhost:4200/":
+    switch (this.location.path()) {
+      case "":
+      case "/":
         return true;
       default:
         return false;
