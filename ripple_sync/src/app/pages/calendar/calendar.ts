@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
     MatCardModule,
     MatTooltipModule,
     OverlayModule,
-    PortalModule,
+    PortalModule
   ],
   templateUrl: './calendar.html',
   styleUrl: './calendar.scss',
@@ -48,7 +48,6 @@ export class Calendar implements OnInit {
     const month = this.currentMonth();
 
     const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
 
     const start = new Date(firstDayOfMonth);
     const dayOfWeek = (start.getDay() + 6) % 7;
@@ -69,6 +68,7 @@ export class Calendar implements OnInit {
   });
 
   ngOnInit(): void {
+    this.postService.filterChangeSignal.set(null);
     this.postService.getPostsByUser();
   }
 

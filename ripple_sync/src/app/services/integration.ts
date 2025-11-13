@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpResponseBase } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface IntegrationResponseDto {
