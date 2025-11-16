@@ -92,15 +92,10 @@ Update environment.prod.ts as needed for your production environment.
 ### 📡 Backend Integration
 
 RippleSync Frontend communicates with the Backend through the following API groups:
-
-Authentication → /api/authentication
-
-Post Management → /api/post
-
-Platform Integrations → /api/integration
-
-Analytics Dashboard → /api/dashboard/total
-
+- Authentication → `/api/authentication`
+- Post Management → `/api/post`
+- Platform Integrations → `/api/integration`
+- Analytics Dashboard → `/api/dashboard/total`
 Ensure CORS and environment settings match your backend configuration.
 
 
