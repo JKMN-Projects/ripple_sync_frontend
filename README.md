@@ -1,7 +1,7 @@
 # RippleSync Frontend
 
-[![Build & Test](https://github.com/JKMN-Projects/ripple_sync_backend/actions/workflows/build-docker-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_backend/actions/workflows/build-docker-image.yml)
-[![Tests](https://github.com/JKMN-Projects/ripple_sync_backend/actions/workflows/main.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_backend/actions/workflows/main.yml)
+[![Build & Test](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml)
+[![Tests](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml)
 
 A powerful and intuitive Angular web client for **RippleSync**, the cross-platform social media management platform.  
 Designed for scheduling, publishing, and analyzing content across multiple social media channels.
@@ -45,8 +45,9 @@ Designed for scheduling, publishing, and analyzing content across multiple socia
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
+```
 src/
 ├── app/
 │ ├── components/ # Independent components, reusable
@@ -59,6 +60,7 @@ src/
 ├── assets/ # Icons, images, fonts, static files, styles for global components
 ├── environments/ # environment.ts and environment.prod.ts
 └── styles.scss # Global SCSS styles
+```
 
 ---
 
