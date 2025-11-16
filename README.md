@@ -1,7 +1,6 @@
 # RippleSync Frontend
 
-[![Build & Test](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml)
-[![Tests](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml)
+[![Docker Image CI](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-image.yml)
 
 A powerful and intuitive Angular web client for **RippleSync**, the cross-platform social media management platform.  
 Designed for scheduling, publishing, and analyzing content across multiple social media channels.
