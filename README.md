@@ -35,8 +35,6 @@ Designed for scheduling, publishing, and analyzing content across multiple socia
 
 ## 📋 Prerequisites
 
-- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [Docker](https://www.docker.com/get-started) (for containerized deployment)
 - [**Node.js** ≥ 24](https://nodejs.org/en/download)
 - **npm**
 - [**Angular CLI** ≥ 20](https://www.npmjs.com/package/@angular/cli)
