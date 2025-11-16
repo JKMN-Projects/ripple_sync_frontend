@@ -1,7 +1,6 @@
 # RippleSync Frontend
 
-[![Build & Test](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-docker-image.yml)
-[![Tests](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/main.yml)
+[![Docker Image CI](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-image.yml/badge.svg)](https://github.com/JKMN-Projects/ripple_sync_frontend/actions/workflows/build-image.yml)
 
 A powerful and intuitive Angular web client for **RippleSync**, the cross-platform social media management platform.  
 Designed for scheduling, publishing, and analyzing content across multiple social media channels.
@@ -20,7 +19,7 @@ Designed for scheduling, publishing, and analyzing content across multiple socia
   Login and session handling through JWT tokens issued by the RippleSync Backend.
 
 - **Responsive & Mobile-First**  
-  Clean, modern UI built to work seamlessly on desktop and mobile.
+  Clean, modern UI built to work seamlessly on desktop.
 
 - **Media Upload Support**  
   Upload and attach images/videos when composing posts.
@@ -98,8 +97,6 @@ RippleSync Frontend communicates with the Backend through the following API grou
 - Analytics Dashboard → `/api/dashboard/total`
 
 Ensure CORS and environment settings match your backend configuration.
-
-
 
 ## 📝 License
 
