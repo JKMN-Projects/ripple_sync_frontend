@@ -131,7 +131,12 @@ h6 {
   min-width: 300px;
   padding: 1rem 0;
 }
-
+.mat-mdc-form-field-subscript-wrapper::before{
+	content: none !important;
+}
+.mat-mdc-form-field-error-wrapper {
+	position: static !important;
+}
 .error-message {
   color: #f44336;
   font-size: 0.875rem;
