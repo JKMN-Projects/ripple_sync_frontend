@@ -96,6 +96,7 @@ RippleSync Frontend communicates with the Backend through the following API grou
 - Post Management → `/api/post`
 - Platform Integrations → `/api/integration`
 - Analytics Dashboard → `/api/dashboard/total`
+
 Ensure CORS and environment settings match your backend configuration.
 
 
