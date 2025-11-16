@@ -19,7 +19,7 @@ Designed for scheduling, publishing, and analyzing content across multiple socia
   Login and session handling through JWT tokens issued by the RippleSync Backend.
 
 - **Responsive & Mobile-First**  
-  Clean, modern UI built to work seamlessly on desktop and mobile.
+  Clean, modern UI built to work seamlessly on desktop.
 
 - **Media Upload Support**  
   Upload and attach images/videos when composing posts.
@@ -97,8 +97,6 @@ RippleSync Frontend communicates with the Backend through the following API grou
 - Analytics Dashboard → `/api/dashboard/total`
 
 Ensure CORS and environment settings match your backend configuration.
-
-
 
 ## 📝 License
 
